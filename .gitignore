@@ -1,0 +1,38 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.eggs/
+build/
+dist/
+
+# Environments
+.venv/
+venv/
+.env
+
+# uv
+.uv/
+
+# Tooling caches
+.mypy_cache/
+.ruff_cache/
+.pytest_cache/
+.hypothesis/
+htmlcov/
+.coverage
+.coverage.*
+
+# SQLite store (runtime data; history lives outside git)
+*.db
+*.sqlite
+*.sqlite3
+data/*.db
+
+# Generated reports
+reports/
+
+# OS / editor
+.DS_Store
+.idea/
+.vscode/
