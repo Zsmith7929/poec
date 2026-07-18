@@ -26,3 +26,14 @@ class Maturity(BaseModel):
     volatility: float
     history_density: float
     score: float
+
+
+class Mod(BaseModel):
+    id: str
+    name: str
+    weight: int
+    group: str
+    tags: list[str]
+    domain: str
+    generation_type: str
+    required_level: int = 0

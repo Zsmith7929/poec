@@ -1,0 +1,7 @@
+{
+  "source": "https://repoe-fork.github.io/mods.min.json",
+  "base_items_source": "https://repoe-fork.github.io/base_items.min.json",
+  "fetched_at": "2026-07-18T00:00:00Z",
+  "files": ["mods.min.json", "base_items.min.json"],
+  "note": "Reduced Phase-0 snapshot; re-snapshot full data per patch-day runbook."
+}
