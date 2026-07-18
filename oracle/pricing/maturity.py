@@ -10,7 +10,8 @@ def maturity_signals(
     vols: list[float] = []
     for series in recent_values:
         if len(series) >= 2 and statistics.mean(series):
-            vols.append(statistics.pstdev(series) / statistics.mean(series))
+            mean = statistics.mean(series)
+            vols.append(statistics.pstdev(series) / abs(mean))
     volatility = statistics.mean(vols) if vols else 1.0
     history_density = min(history_len / 30.0, 1.0)
     depth_norm = min(median_depth / 100.0, 1.0)

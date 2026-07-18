@@ -14,7 +14,7 @@ def test_aggregate_rejects_single_outlier() -> None:
 def test_aggregate_never_returns_raw_minimum() -> None:
     values = [1.0, 5.0, 5.0, 5.0, 5.0]
     res = aggregate(values, percentile=0.15, outlier_z=3.0)
-    assert res.value >= 1.0
+    assert res.value == 5.0  # raw minimum 1.0 must be rejected as an outlier
 
 
 @given(st.floats(min_value=0, max_value=1), st.integers(0, 100), st.floats(0, 1))
