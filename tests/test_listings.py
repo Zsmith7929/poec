@@ -1,4 +1,3 @@
-
 from oracle.models import ItemSpec, ModFilter
 from oracle.pricing.listings import TRADE_SITE_BASE, DeepLinkResolver
 
@@ -39,6 +38,21 @@ def test_resolve_builds_deeplink_without_http() -> None:
     assert "TestLeagueA" in quote.deep_link
     assert quote.chaos_value is None
     assert quote.source == "unresolved"
+
+
+def test_resolve_returns_residual_instructions_for_unencodable_filters() -> None:
+    resolver = DeepLinkResolver(FakeObsRepo(), ttl_seconds=3600)
+    spec = ItemSpec(
+        base="Titanium Spirit Shield",
+        ilvl=86,
+        influence="Shaper",
+        mod_filters=[ModFilter(stat_id="life", min_value=None)],
+    )
+    quote = resolver.resolve(spec, "TestLeagueA")
+    joined = " ".join(quote.residual_instructions)
+    assert quote.residual_instructions
+    assert "Set influence filter: Shaper" in joined
+    assert "Add mod filter: life (no min value set)" in joined
 
 
 def test_observed_price_round_trip_and_reuse() -> None:
