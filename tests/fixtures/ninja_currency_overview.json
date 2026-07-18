@@ -1,0 +1,6 @@
+{"lines": [
+  {"currencyTypeName": "Divine Orb", "chaosEquivalent": 180.0,
+   "receive": {"count": 42}},
+  {"currencyTypeName": "Exalted Orb", "chaosEquivalent": 12.5,
+   "receive": {"count": 300}}
+]}
