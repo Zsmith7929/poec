@@ -275,6 +275,41 @@ def test_thin_margin_ranks_below_firm_even_with_bigger_absolute_margin() -> None
     assert next(r for r in rows if r.transform_id == "thin").margin_confidence == "thin"
 
 
+def test_cross_surface_margin_flagged_thin() -> None:
+    # input on the exchange (DivinationCard, transacted), output on stash (RewardUnique,
+    # ask) -> the margin mixes surfaces and is flagged thin even well above the % floor.
+    t = Transform(
+        id="xs",
+        name="xs",
+        inputs=[PriceRef(category="DivinationCard", key="C")],
+        output=PriceRef(category="RewardUnique", key="U"),
+        pricing_mode="auto",
+    )  # type: ignore[arg-type]
+    auto = {
+        ("DivinationCard", "C"): _bracket(100.0, 100.0, 100.0),
+        ("RewardUnique", "U"): _bracket(1000.0, 1000.0, 1000.0),  # margin 900 -> 900%
+    }
+    engine = ScanEngine(
+        TransformRegistry([t], "v"), StubResolver(auto, _auto(0, 0, 0)), _settings(), clock=_clock
+    )
+    row = engine.scan("L")[0]
+    assert row.margin_pct is not None and row.margin_pct > 0.20  # far above the floor
+    assert row.margin_confidence == "thin"  # ...but flagged: cross-surface (ADR-0008)
+
+
+def test_same_surface_high_margin_stays_firm() -> None:
+    # both legs on the exchange (currency vendor recipe shape) -> firm.
+    t = _t("same", "Currency", "Chaos Orb", "Fragment", "F")
+    auto = {
+        ("Currency", "Chaos Orb"): _bracket(100.0, 100.0, 100.0),
+        ("Fragment", "F"): _bracket(300.0, 300.0, 300.0),
+    }
+    engine = ScanEngine(
+        TransformRegistry([t], "v"), StubResolver(auto, _auto(0, 0, 0)), _settings(), clock=_clock
+    )
+    assert engine.scan("L")[0].margin_confidence == "firm"
+
+
 def test_min_margin_override() -> None:
     t = _t("thin", "Currency", "Chaos Orb", "Fossil", "A")
     auto = {
