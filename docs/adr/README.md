@@ -12,3 +12,4 @@ pointer at that spot.
 | [0003](0003-transforms-must-be-grounded.md) | Transforms must be grounded, never fabricated | Accepted | 2026-07-19 |
 | [0004](0004-scanner-surfaces-candidates.md) | The scanner surfaces candidates for human judgment, not exact EV | Accepted | 2026-07-19 |
 | [0005](0005-demand-signals-tradeability.md) | Demand/tradeability is distinct from confidence and supply | Accepted | 2026-07-19 |
+| [0006](0006-divcard-reward-class.md) | Divination card → reward transform class | Accepted | 2026-07-19 |

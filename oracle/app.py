@@ -5,6 +5,11 @@ from oracle.config import Settings, load_settings
 from oracle.gamedata.service import GameDataService
 from oracle.http.client import HttpClient
 from oracle.league.service import LeagueService
+from oracle.metadata.divination_cards import (
+    DEFAULT_DIVINATION_CARDS_PATH,
+    expand_divination_cards,
+    load_divination_cards,
+)
 from oracle.metadata.vendor_recipes import (
     DEFAULT_VENDOR_RECIPES_PATH,
     expand_vendor_recipes,
@@ -52,13 +57,19 @@ def build_services(settings: Settings | None = None) -> Services:
     # poedb metadata (ADR-0001/0003). Combined into one registry for the engine.
     base_registry = load_registry(DEFAULT_TRANSFORMS_PATH)
     vendor_doc, vendor_version = load_vendor_recipes(DEFAULT_VENDOR_RECIPES_PATH)
-    all_transforms = base_registry.transforms + expand_vendor_recipes(vendor_doc)
+    divcard_doc, divcard_version = load_divination_cards(DEFAULT_DIVINATION_CARDS_PATH)
+    all_transforms = (
+        base_registry.transforms
+        + expand_vendor_recipes(vendor_doc)
+        + expand_divination_cards(divcard_doc)
+    )
     ids = [t.id for t in all_transforms]
     if len(ids) != len(set(ids)):
         dupes = sorted({i for i in ids if ids.count(i) > 1})
         raise ValueError(f"transform id collision across sources: {dupes}")
     combined = TransformRegistry(
-        all_transforms, version=f"{base_registry.version}+{vendor_version}"
+        all_transforms,
+        version=f"{base_registry.version}+{vendor_version}+{divcard_version}",
     )
     scan_resolver = PriceResolver(price, resolver, settings.pricing.min_sample_depth)
     engine = ScanEngine(combined, scan_resolver, settings.scanner)
