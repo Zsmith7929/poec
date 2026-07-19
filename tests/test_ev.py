@@ -148,3 +148,18 @@ def test_evaluate_all_clears_cache_once_and_sorts_by_ev_net() -> None:
     rows = EvEngine(resolver, clock=_clock).evaluate_all([lo, hi], "TestLeagueA")
     assert resolver.cleared == 1
     assert [r.table_id for r in rows] == ["hi", "lo"]
+
+
+def test_evaluate_fills_bankroll_note_when_bankroll_given() -> None:
+    table = _table(service_cost=2.0)
+    resolver = StubResolver(
+        {
+            ("Currency", "Vaal Orb"): _p(3.0),
+            ("U", "Jackpot"): _p(200.0),
+            ("U", "Brick"): _p(20.0),
+        }
+    )
+    row = EvEngine(resolver, clock=_clock).evaluate(table, "TestLeagueA", bankroll=100.0)
+    assert "affords" in row.bankroll_note
+    row_none = EvEngine(resolver, clock=_clock).evaluate(table, "TestLeagueA")
+    assert row_none.bankroll_note == ""

@@ -3,6 +3,7 @@ from collections.abc import Callable
 from datetime import UTC, datetime
 from typing import Protocol
 
+from oracle.scanner import bankroll as bankroll_math
 from oracle.scanner.models import PriceRef
 from oracle.scanner.resolve import ResolvedPrice
 from oracle.scanner.t2_models import EvRow, OddsTable, OutcomeEv
@@ -86,6 +87,12 @@ class EvEngine:
         if total > 0 and unresolved > 0:
             confidence *= (total - unresolved) / total
 
+        attempt_cost = input_cost + table.service_cost
+        outcome_pairs = [(p, v) for p, v in resolved_prices]
+        net_dist = bankroll_math.net_profit_distribution(outcome_pairs, attempt_cost)
+        single_loss = bankroll_math.prob_single_attempt_loss(net_dist)
+        note = bankroll_math.bankroll_note(attempt_cost, single_loss, bankroll)
+
         return EvRow(
             table_id=table.id,
             name=table.name,
@@ -98,7 +105,7 @@ class EvEngine:
             per_outcome=per_outcome,
             liquidity=liquidity,
             confidence=confidence,
-            bankroll_note="",
+            bankroll_note=note,
             source=resolved_input.source,
             deep_link=deep_link,
             unresolved_outcomes=unresolved,
