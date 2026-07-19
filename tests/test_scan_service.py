@@ -45,7 +45,7 @@ class NullDeepLink:
             spec_hash="h",
             league=league,
             chaos_value=None,
-            deep_link="https://www.pathofexile.com/trade/search/x?q=x",
+            deep_link="https://example.com/trade?q=x",
             residual_instructions=[],
             source="unresolved",
             observed_ts=None,
@@ -76,9 +76,12 @@ def test_scan_detects_known_shield_margin(tmp_path: Path) -> None:
 def test_scan_persists_rows(tmp_path: Path) -> None:
     svc = _service(tmp_path)
     svc.run("SynthLeague")
-    # repo is internal; re-run and assert files accumulate + persistence didn't raise
-    report, _, _ = svc.run("SynthLeague")
-    assert report.rule_version.startswith("sha256:")
+    # Verify rows were actually written to the DB via a real round-trip
+    repo = ScanResultRepo(connect(str(tmp_path / "t.db")))
+    persisted = repo.recent("SynthLeague", limit=50)
+    shield_rows = [r for r in persisted if r["transform_id"] == "synthetic_shaper_shield"]
+    assert shield_rows, "expected at least one persisted row for synthetic_shaper_shield"
+    assert shield_rows[0]["margin"] == 65.0
 
 
 def test_same_scan_runs_against_second_league_no_code_change(tmp_path: Path) -> None:

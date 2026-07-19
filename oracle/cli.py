@@ -76,7 +76,7 @@ def link(
 @app.command()
 def scan(
     league: str = typer.Option(...),
-    min_margin: float = typer.Option(None, "--min-margin"),
+    min_margin: float | None = typer.Option(None, "--min-margin"),
     as_json: bool = typer.Option(False, "--json"),
 ) -> None:
     """Run the Tier-1 scanner for a league; write report files and print the table."""
