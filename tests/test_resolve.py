@@ -47,6 +47,70 @@ class FakePriceService:
                     ts=now,
                 )
             ],
+            "BaseType": [
+                Price(
+                    key="Titanium Spirit Shield",
+                    league=league,
+                    category=category,
+                    chaos_value=12.0,
+                    sample_depth=30,
+                    source="ninja:BaseType",
+                    confidence=0.8,
+                    ts=now,
+                    variant=None,
+                    ilvl=84,
+                ),
+                Price(
+                    key="Titanium Spirit Shield",
+                    league=league,
+                    category=category,
+                    chaos_value=250.0,
+                    sample_depth=8,
+                    source="ninja:BaseType",
+                    confidence=0.7,
+                    ts=now,
+                    variant="Shaper",
+                    ilvl=84,
+                ),
+                Price(
+                    key="Titanium Spirit Shield",
+                    league=league,
+                    category=category,
+                    chaos_value=900.0,
+                    sample_depth=50,  # deliberately the MOST liquid line
+                    source="ninja:BaseType",
+                    confidence=0.7,
+                    ts=now,
+                    variant="Crusader/Redeemer",
+                    ilvl=84,
+                ),
+            ],
+            "UniqueAccessory": [
+                Price(
+                    key="Watcher's Eye",
+                    league=league,
+                    category=category,
+                    chaos_value=100.0,
+                    sample_depth=3,
+                    source="ninja:UniqueAccessory",
+                    confidence=0.6,
+                    ts=now,
+                    variant="Wrath",
+                    ilvl=None,
+                ),
+                Price(
+                    key="Watcher's Eye",
+                    league=league,
+                    category=category,
+                    chaos_value=300.0,
+                    sample_depth=40,
+                    source="ninja:UniqueAccessory",
+                    confidence=0.8,
+                    ts=now,
+                    variant="Zealotry",
+                    ilvl=None,
+                ),
+            ],
         }
         return table.get(category, [])
 
@@ -122,6 +186,51 @@ def test_resolve_verify_observed_returns_value_scaled() -> None:
     res = r.resolve_verify(ref, "L")
     assert res.chaos_value == 100.0
     assert res.source == "user-observed"
+
+
+def test_resolve_auto_plain_base_matches_no_influence_variant() -> None:
+    svc = FakePriceService()
+    r = _resolver(svc, _quote(None, "unresolved"))
+    ref = PriceRef(category="BaseType", key="Titanium Spirit Shield", ilvl=84)
+    res = r.resolve_auto(ref, "L")
+    assert res.chaos_value == 12.0  # plain (variant None) line, not an influenced one
+
+
+def test_resolve_auto_influenced_base_matches_variant_and_ilvl() -> None:
+    svc = FakePriceService()
+    r = _resolver(svc, _quote(None, "unresolved"))
+    ref = PriceRef(category="BaseType", key="Titanium Spirit Shield", influence="shaper", ilvl=84)
+    res = r.resolve_auto(ref, "L")
+    assert res.chaos_value == 250.0  # the Shaper ilvl-84 line specifically
+
+
+def test_resolve_auto_base_no_variant_match_is_missing() -> None:
+    svc = FakePriceService()
+    r = _resolver(svc, _quote(None, "unresolved"))
+    ref = PriceRef(category="BaseType", key="Titanium Spirit Shield", influence="shaper", ilvl=99)
+    res = r.resolve_auto(ref, "L")
+    assert res.chaos_value is None  # no Shaper at ilvl 99 -> never fabricates
+    assert res.source.startswith("missing:")
+
+
+def test_resolve_auto_base_no_influence_no_ilvl_matches_plain_not_most_liquid() -> None:
+    # A BaseType ref with neither influence nor ilvl must resolve to the PLAIN variant,
+    # never collapse to the most-liquid line (here Crusader/Redeemer at depth 50, 900c).
+    svc = FakePriceService()
+    r = _resolver(svc, _quote(None, "unresolved"))
+    ref = PriceRef(category="BaseType", key="Titanium Spirit Shield")
+    res = r.resolve_auto(ref, "L")
+    assert res.chaos_value == 12.0  # plain line, not the more-liquid influenced 900c one
+
+
+def test_resolve_auto_name_only_unique_picks_most_liquid_variant() -> None:
+    svc = FakePriceService()
+    r = _resolver(svc, _quote(None, "unresolved"))
+    ref = PriceRef(category="UniqueAccessory", key="Watcher's Eye")
+    res = r.resolve_auto(ref, "L")
+    # name-only ref collapses variants to the most-liquid line (Zealotry, depth 40).
+    assert res.chaos_value == 300.0
+    assert res.liquidity == 40
 
 
 def test_clear_cache_forces_refetch() -> None:

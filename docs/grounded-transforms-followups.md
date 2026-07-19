@@ -26,33 +26,39 @@ the deferred classes below are **feasible**, not blocked — they just need the 
 call the stash endpoint. The currency-vendor-recipe work in PR #5 is unaffected
 (currency prices via the exchange endpoint, correctly).
 
-## Deferred transform classes (feasible; need stash-endpoint pricing support)
+## Stash-endpoint price support — DONE (follow-up PR to #5)
 
-Blocked only on adding stash-endpoint support to the price layer (see next section),
-not on any missing data:
+Implemented: `NinjaClient.stash_overview` + parser (`StashLine` with variant/ilvl),
+`PriceService` routing (`STASH_TYPES` → stash; currency-like → exchange), `Price`
+gains `variant`/`ilvl` with a variant-qualified `storage_key()`, and the resolver does
+variant-aware matching (base-type refs match influence-set + ilvl; name-only refs like
+uniques collapse to the most-liquid variant). Verified live on Standard: Headhunter
+13,570c; the flagship `crusader_shield_base_influence` auto-prices end-to-end (plain
+Titanium ilvl84 10c + Crusader's Exalted Orb → Crusader base, +4,129c / 360% — a
+selection-biased *candidate* per ADR-0004, not guaranteed profit).
 
-- **Influence base flips.** `BaseType` feed carries plain and influenced variants
-  (distinguished by `detailsId`). Needs variant-aware keying (name + influence + ilvl →
-  `detailsId`) since the current resolver keys by name alone. Pricing is selection-
-  biased — surfaced for human judgment (ADR-0004).
-- **Div-card → reward.** Harvest de-risked (poedb `Divination_Cards`, 459 cards, set
-  size + reward; House of Mirrors = 9 → Mirror verified). Rewards that are uniques
-  (Headhunter etc.) are now priceable via the stash endpoint; reward→category routing
-  is the remaining work.
+- Fixed while wiring this: the flagship seed had used the **defunct** "Shaper's Orb"
+  (a recollection error — the very failure mode ADR-0003 targets). Replaced with the
+  Conqueror exalt (Crusader's Exalted Orb), which is real and in the currency feed.
 
-## Next enabling work: stash-endpoint price support
+## Now-feasible transform classes (data + pricing both available)
 
-The tool currently calls only the exchange overview (currency-like feeds). To unlock the
-classes above (and future phases that assume unique/base/gem pricing):
+- **Influence base flips** — the flagship works; generalizing to more bases/influences
+  is a data-authoring pass (enumerate base × influence × ilvl from the `BaseType` feed,
+  or hand-author high-value ones). Pricing is selection-biased — surfaced for judgment.
+- **Div-card → reward** — uniques now price. Remaining work: harvest the poedb
+  `Divination_Cards` metadata (set size + reward) and add a card→reward expander that
+  routes the reward to the right stash category (Unique*/Currency).
 
-- Add a `stash_overview(league, type)` path to `NinjaClient` with its own parser for the
-  inline-`lines` shape (name/chaosValue/listingCount/detailsId), keeping the existing
-  exchange parser for currency-like types.
-- Route categories to the right endpoint in `PriceService` (Currency/Fragment/
-  DivinationCard → exchange; Unique*/BaseType/SkillGem → stash).
-- For base types, key on the `detailsId` variant (influence + ilvl), not just name.
-- This is the highest-leverage single addition: it lights up uniques, bases, gems, the
-  flagship, influence flips, and div-card→unique rewards.
+## Notes / smaller follow-ups
+
+- Stash prices skip the historical percentile aggregate benefits only as history
+  accumulates; variant-qualified `storage_key()` keeps base variants from sharing a
+  series in `price_snapshots` (no schema change needed).
+- Maturity's `recent_depths` now also sees stash `listingCount`s (slightly broadens the
+  league-wide signal); acceptable, revisit in Phase 6 if it skews false-positive tuning.
+- Runes/Oils in the vendor-recipe file still price as `missing:` (separate ninja feeds);
+  mapping those feeds is a small future addition.
 
 ## Data-coverage notes (vendor recipes, this PR)
 

@@ -11,6 +11,16 @@ class League(BaseModel):
     ninja_available: bool
 
 
+def price_storage_key(key: str, variant: str | None, ilvl: int | None) -> str:
+    """The snapshot/history key for a price. Bare name when there is no variant (exchange
+    prices); variant-qualified for stash prices so base-type variants don't share a
+    series. Used by both the write path (Price.storage_key) and the read path
+    (PriceService), so the two never diverge."""
+    if variant is None and ilvl is None:
+        return key
+    return f"{key}|{variant}|{ilvl}"
+
+
 class Price(BaseModel):
     key: str
     league: str
@@ -20,6 +30,15 @@ class Price(BaseModel):
     source: str
     confidence: float
     ts: datetime
+    # Variant discriminators for stash-sourced prices (base-type influence/ilvl).
+    # None for exchange-sourced prices (currency, fragments, div cards).
+    variant: str | None = None
+    ilvl: int | None = None
+
+    def storage_key(self) -> str:
+        """History/snapshot key. Plain name for exchange prices; variant-qualified for
+        stash prices so base-type variants don't share a price series."""
+        return price_storage_key(self.key, self.variant, self.ilvl)
 
 
 class Maturity(BaseModel):

@@ -6,6 +6,7 @@ from oracle.http.client import HttpClient
 
 LEAGUES_URL = "https://poe.ninja/poe1/api/economy/leagues"
 OVERVIEW_URL = "https://poe.ninja/poe1/api/economy/exchange/current/overview"
+STASH_OVERVIEW_URL = "https://poe.ninja/poe1/api/economy/stash/current/item/overview"
 
 
 class NinjaSchemaError(Exception):
@@ -16,6 +17,21 @@ class NinjaLine(BaseModel):
     key: str
     chaos_value: float
     sample_depth: int
+
+
+class StashLine(BaseModel):
+    """A line from the stash item overview (uniques, base types, gems).
+
+    Unlike the exchange feed, variants matter: base types repeat per (name, variant,
+    ilvl). `variant` carries the influence discriminator ("Shaper", "Crusader/Redeemer",
+    or None for a plain base); `ilvl` is levelRequired.
+    """
+
+    key: str
+    chaos_value: float
+    sample_depth: int
+    variant: str | None = None
+    ilvl: int | None = None
 
 
 class NinjaClient:
@@ -32,6 +48,45 @@ class NinjaClient:
 
     def item_overview(self, league: str, category: str) -> list[NinjaLine]:
         return self.overview(league, category)
+
+    def stash_overview(self, league: str, type_: str) -> list[StashLine]:
+        """Fetch the stash item overview (uniques, base types, gems) for a category."""
+        payload = self._http.get_json(STASH_OVERVIEW_URL, params={"league": league, "type": type_})
+        return self._parse_stash_overview(payload)
+
+    @staticmethod
+    def _parse_stash_overview(payload: Any) -> list[StashLine]:
+        if not isinstance(payload, dict):
+            raise NinjaSchemaError("payload is not a dict")
+        if "lines" not in payload:
+            raise NinjaSchemaError("missing 'lines'")
+        raw_lines = payload["lines"]
+        if not isinstance(raw_lines, list):
+            raise NinjaSchemaError("'lines' is not a list")
+
+        out: list[StashLine] = []
+        for line in raw_lines:
+            if not isinstance(line, dict):
+                raise NinjaSchemaError("line entry is not a dict")
+            if "name" not in line:
+                raise NinjaSchemaError("line missing 'name'")
+            # Skip unpriced lines rather than crash (mirrors the exchange sparse policy).
+            if line.get("chaosValue") is None:
+                continue
+            try:
+                lvl = line.get("levelRequired")
+                out.append(
+                    StashLine(
+                        key=str(line["name"]),
+                        chaos_value=float(line["chaosValue"]),
+                        sample_depth=int(line.get("listingCount") or 0),
+                        variant=line.get("variant"),
+                        ilvl=None if lvl is None else int(lvl),
+                    )
+                )
+            except (TypeError, ValueError) as exc:
+                raise NinjaSchemaError(str(exc)) from exc
+        return out
 
     def league_is_covered(self, league: str) -> bool:
         try:

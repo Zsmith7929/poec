@@ -8,21 +8,24 @@
 # expanders (currency vendor recipes: data/metadata/vendor_recipes.yaml). This file is
 # only for genuine one-offs that no harvested class covers.
 transforms:
-  # Flagship shaper-shield case (PRD s2). A real mechanic: plain influenced-base +
-  # influence orb -> influenced base. Priced in VERIFY mode via the human-in-the-loop
-  # DeepLinkResolver (no fake auto price); ranks provisionally with a trade deep-link.
-  # Influence-base pricing is selection-biased (ADR-0004) — surfaced for human judgment.
-  - id: shaper_shield_base_influence
-    name: "Shaper Titanium Spirit Shield: plain base + Shaper's Orb"
+  # Flagship influenced-base case (PRD s2). A real mechanic: plain base + Conqueror
+  # exalt -> single-influence base. Auto-priced from the poe.ninja stash BaseType feed,
+  # which carries plain and influenced variants (matched by influence + ilvl). The
+  # Conqueror exalts (not the defunct Shaper's/Elder's Orb) are the current influence
+  # currency and are in the feed. Base-type pricing is selection-biased (ADR-0004) —
+  # surfaced for human judgment, not treated as exact.
+  - id: crusader_shield_base_influence
+    name: "Crusader Titanium Spirit Shield: plain base + Crusader's Exalted Orb"
     inputs:
       - {category: BaseType, key: "Titanium Spirit Shield", qty: 1.0, ilvl: 84}
-      - {category: Currency, key: "Shaper's Orb", qty: 1.0}
+      - {category: Currency, key: "Crusader's Exalted Orb", qty: 1.0}
     output:
       {category: BaseType, key: "Titanium Spirit Shield", qty: 1.0,
-       influence: shaper, ilvl: 84}
+       influence: crusader, ilvl: 84}
     applicability: >
-      Flagship transform (PRD s2). Output is a specific influenced base; poe.ninja's new
-      exchange API does not serve base types, so priced via ListingResolver (verify).
+      Flagship transform (PRD s2): plain Titanium Spirit Shield (ilvl 84) + Crusader's
+      Exalted Orb -> Crusader-influenced base. Both base variants come from the ninja
+      stash BaseType feed; the exalt from the currency feed.
     friction: 0.0
     enabled: true
-    pricing_mode: verify
+    pricing_mode: auto
