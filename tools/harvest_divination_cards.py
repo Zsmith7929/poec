@@ -67,6 +67,7 @@ def main() -> None:
                 "reward_name": c.reward_name,
                 "reward_qty": c.reward_qty,
                 "reward_kind": c.reward_kind,
+                "reward_variant": c.reward_variant,
             }
             for c in sorted(cards, key=lambda c: c.name)
         ],

@@ -42,8 +42,20 @@ _CARD_RE = re.compile(
 _SPAN_RE = re.compile(r"<span class=\"([a-z]+)\"[^>]*>([^<]+)</span>", re.I)
 _TAG_RE = re.compile(r"<[^>]+>")
 _QTY_RE = re.compile(r"(\d+)\s*x", re.I)
-# Reward variant qualifier, e.g. "{Foulborn}" trailing the item span.
-_VARIANT_RE = re.compile(r"\{([A-Za-z][A-Za-z '-]*)\}")
+# Reward variant qualifiers trailing the item span: corrupted/enchanted (Synthesised,
+# implicit counts) spans, a "Quality:" note, and brace tags like "{Foulborn}".
+_QUAL_SPAN_RE = re.compile(r"<span class=\"(?:corrupted|enchanted)\"[^>]*>([^<]+)</span>", re.I)
+_BRACE_RE = re.compile(r"\{([A-Za-z][A-Za-z '-]*)\}")
+
+
+def _reward_variant(reward_inner: str) -> str:
+    """Collect any variant qualifier on the reward (empty string if it's a plain item)."""
+    quals = list(_QUAL_SPAN_RE.findall(reward_inner))
+    if "Quality:" in reward_inner:
+        quals.append("Quality")
+    quals += _BRACE_RE.findall(reward_inner)
+    # de-dupe, preserve order
+    return " ".join(dict.fromkeys(q.strip() for q in quals if q.strip()))
 
 
 def _slug(name: str) -> str:
@@ -64,11 +76,7 @@ def parse_divination_cards_html(html: str) -> list[DivCard]:
             continue  # reward not a single named item (skip; recorded as unparseable)
         kind = _KIND_BY_SPAN.get(span.group(1).lower(), "other")
         reward_name = span.group(2).strip()
-        # A variant qualifier like "{Foulborn}" trails the item span; poe.ninja renders
-        # it as a prefix ("Foulborn Mageblood"). Capture it so we price the actual reward.
-        variant = _VARIANT_RE.search(reward_inner)
-        if variant:
-            reward_name = f"{variant.group(1).strip()} {reward_name}"
+        reward_variant = _reward_variant(reward_inner)
         # The "Nx" quantity may be inline in the span text ("13x Orb of Alteration") or
         # in the text preceding the span ("10x <span>Chaos Orb</span>"). Inline is the
         # common real-page shape; check it first, else fall back to the preceding text.
@@ -90,6 +98,7 @@ def parse_divination_cards_html(html: str) -> list[DivCard]:
                 reward_name=reward_name,
                 reward_qty=reward_qty,
                 reward_kind=kind,
+                reward_variant=reward_variant,
             )
         )
     return cards
@@ -132,6 +141,10 @@ def expand_divination_cards(doc: DivCardDoc) -> list[Transform]:
     for c in doc.cards:
         reward_cat = _reward_category(c.reward_kind)
         if reward_cat is None:
+            continue
+        # A qualified reward (Corrupted/Synthesised/Foulborn/Quality/…) is a spec we can't
+        # reliably price against the clean item, so we don't emit it (ADR-0009).
+        if c.reward_variant:
             continue
         qty_label = str(int(c.reward_qty)) if c.reward_qty.is_integer() else str(c.reward_qty)
         reward_label = c.reward_name if c.reward_qty == 1.0 else f"{qty_label}x {c.reward_name}"

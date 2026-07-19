@@ -44,12 +44,19 @@ def test_parser_classifies_noncurrency_nonunique_as_other() -> None:
     assert cards["A Chilling Wind"].reward_kind == "other"
 
 
-def test_parser_captures_reward_variant_prefix() -> None:
-    # poedb trails the reward with a "{Foulborn}" variant tag; poe.ninja prefixes it.
-    # Dropping it prices the clean item instead of the actual (variant) reward.
+def test_parser_captures_variants_keeping_item_name_plain() -> None:
+    # Variants are captured separately (ADR-0009); reward_name stays the plain item.
     cards = {c.name: c for c in parse_divination_cards_html(FIX.read_text())}
     eot = cards["The Eye of Terror"]
-    assert eot.reward_name == "Foulborn Mageblood" and eot.reward_kind == "unique"
+    assert eot.reward_name == "Mageblood" and eot.reward_variant == "Foulborn"
+    cursed = cards["The Cursed King"]
+    assert cursed.reward_name == "Voll's Devotion" and cursed.reward_variant == "Corrupted"
+
+
+def test_parser_plain_rewards_have_no_variant() -> None:
+    cards = {c.name: c for c in parse_divination_cards_html(FIX.read_text())}
+    assert cards["House of Mirrors"].reward_variant == ""
+    assert cards["The Doctor"].reward_variant == ""
 
 
 # --- loader -----------------------------------------------------------------
@@ -115,6 +122,22 @@ def test_expand_emits_currency_and_unique_routes_by_kind() -> None:
     assert mirror.output.category == "RewardCurrency" and mirror.output.key == "Mirror of Kalandra"
     hh = ts["divcard::the_doctor"]
     assert hh.output.category == "RewardUnique" and hh.output.key == "Headhunter"
+
+
+def test_expand_skips_variant_rewards() -> None:
+    # A qualified reward (e.g. Foulborn/Corrupted) is a spec we don't price (ADR-0009).
+    doc = _doc(
+        DivCard(
+            name="The Eye of Terror",
+            set_size=8,
+            reward_name="Mageblood",
+            reward_kind="unique",
+            reward_variant="Foulborn",
+        ),
+        DivCard(name="The Doctor", set_size=8, reward_name="Headhunter", reward_kind="unique"),
+    )
+    ids = {t.id for t in expand_divination_cards(doc)}
+    assert ids == {"divcard::the_doctor"}  # plain reward emitted; variant reward skipped
 
 
 def test_expand_skips_other_kind_rewards() -> None:
