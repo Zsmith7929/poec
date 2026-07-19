@@ -161,6 +161,54 @@ def test_priced_rows_rank_before_provisional_verify_rows() -> None:
     assert [r.transform_id for r in rows] == ["priced", "prov"]
 
 
+def test_verify_with_resolved_price_ranks_after_confirmed_auto() -> None:
+    """verify-mode row that resolves a real price must still rank after confirmed auto rows.
+
+    The verify transform (verify_high) has input=10c, output=90c -> margin=80.
+    The auto transform (auto_low) has input=10c, output=30c -> margin=20.
+    Despite the verify row's higher raw margin, it must sort AFTER the confirmed auto row.
+    """
+
+    class PerRefStubResolver:
+        """Resolver that uses per-ref price maps for both auto and verify lookups."""
+
+        def __init__(
+            self,
+            prices: dict[tuple[str, str], ResolvedPrice],
+        ) -> None:
+            self._prices = prices
+
+        def clear_cache(self) -> None:
+            pass
+
+        def resolve_auto(self, ref: PriceRef, league: str) -> ResolvedPrice:
+            return self._prices[(ref.category, ref.key)]
+
+        def resolve_verify(self, ref: PriceRef, league: str) -> ResolvedPrice:
+            return self._prices[(ref.category, ref.key)]
+
+    auto_t = _t("auto_low", "Currency", "Chaos Orb", "Fossil", "A")
+    verify_t = _t("verify_high", "Currency", "Chaos Orb", "Fossil", "B", mode="verify")
+    prices = {
+        ("Currency", "Chaos Orb"): _auto(10.0, 100, 0.9),
+        ("Fossil", "A"): _auto(30.0, 50, 0.8),  # auto margin = 30 - 10 = 20
+        ("Fossil", "B"): _auto(90.0, 50, 0.8),  # verify margin = 90 - 10 = 80 (higher raw)
+    }
+    engine = ScanEngine(
+        TransformRegistry([auto_t, verify_t], "v"),
+        PerRefStubResolver(prices),
+        _settings(),
+        clock=_clock,
+    )
+    rows = engine.scan("L")
+    # verify row has margin 80 > auto row margin 20, but must still appear last
+    assert len(rows) == 2
+    assert rows[0].transform_id == "auto_low"
+    assert rows[0].pricing_mode == "auto"
+    assert rows[1].transform_id == "verify_high"
+    assert rows[1].pricing_mode == "verify"
+
+
 def test_min_margin_override() -> None:
     t = _t("thin", "Currency", "Chaos Orb", "Fossil", "A")
     auto = {

@@ -89,5 +89,7 @@ class ScanEngine:
             kept.append(row)
 
         # Priced rows (margin not None) ranked by margin desc; provisional rows last.
-        kept.sort(key=lambda r: (r.margin is None, -(r.margin or 0.0)))
+        kept.sort(
+            key=lambda r: (r.pricing_mode == "verify" or r.margin is None, -(r.margin or 0.0))
+        )
         return kept
