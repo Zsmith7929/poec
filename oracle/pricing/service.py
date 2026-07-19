@@ -5,6 +5,7 @@ from typing import Protocol
 from oracle.config import Settings
 from oracle.models import Maturity, Price, price_storage_key
 from oracle.pricing.aggregate import aggregate, confidence
+from oracle.pricing.demand import demand_label
 from oracle.pricing.maturity import maturity_signals
 from oracle.pricing.ninja import NinjaLine, StashLine
 from oracle.store.prices import PriceSnapshotRepo
@@ -54,6 +55,7 @@ class PriceService:
             agg = aggregate(
                 history, self._settings.pricing.percentile, self._settings.pricing.outlier_z
             )
+            min_depth = self._settings.pricing.min_sample_depth
             price = Price(
                 key=line.key,
                 league=league,
@@ -61,10 +63,15 @@ class PriceService:
                 chaos_value=agg.value,
                 sample_depth=line.sample_depth,
                 source=f"ninja:{category}",
-                confidence=confidence(
-                    line.sample_depth, self._settings.pricing.min_sample_depth, mat.score
-                ),
+                confidence=confidence(line.sample_depth, min_depth, mat.score),
                 ts=now,
+                # Exchange sample_depth IS trade volume -> a real demand signal.
+                demand=demand_label(
+                    sample_depth=line.sample_depth,
+                    observations=None,
+                    trend=None,
+                    min_depth=min_depth,
+                ),
             )
             self._repo.insert(price)
             out.append(price)
@@ -83,6 +90,7 @@ class PriceService:
             agg = aggregate(
                 history, self._settings.pricing.percentile, self._settings.pricing.outlier_z
             )
+            min_depth = self._settings.pricing.min_sample_depth
             price = Price(
                 key=line.key,
                 league=league,
@@ -90,12 +98,19 @@ class PriceService:
                 chaos_value=agg.value,
                 sample_depth=line.sample_depth,
                 source=f"ninja:{category}",
-                confidence=confidence(
-                    line.sample_depth, self._settings.pricing.min_sample_depth, mat.score
-                ),
+                # Confidence from OBSERVATIONS (data points behind the price), NOT the
+                # listing count (supply) — supply must not masquerade as confidence
+                # (ADR-0005).
+                confidence=confidence(line.observations, min_depth, mat.score),
                 ts=now,
                 variant=line.variant,
                 ilvl=line.ilvl,
+                demand=demand_label(
+                    sample_depth=line.sample_depth,
+                    observations=line.observations,
+                    trend=line.trend,
+                    min_depth=min_depth,
+                ),
             )
             self._repo.insert(price)
             out.append(price)

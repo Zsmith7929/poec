@@ -29,9 +29,11 @@ class StashLine(BaseModel):
 
     key: str
     chaos_value: float
-    sample_depth: int
+    sample_depth: int  # listing count = SUPPLY, not demand (see ADR-0005)
     variant: str | None = None
     ilvl: int | None = None
+    observations: int = 0  # poe.ninja `count`: data points behind the price
+    trend: float = 0.0  # sparkline total % change over the window (price momentum)
 
 
 class NinjaClient:
@@ -75,6 +77,7 @@ class NinjaClient:
                 continue
             try:
                 lvl = line.get("levelRequired")
+                spark = line.get("sparkLine") or {}
                 out.append(
                     StashLine(
                         key=str(line["name"]),
@@ -82,6 +85,8 @@ class NinjaClient:
                         sample_depth=int(line.get("listingCount") or 0),
                         variant=line.get("variant"),
                         ilvl=None if lvl is None else int(lvl),
+                        observations=int(line.get("count") or 0),
+                        trend=float(spark.get("totalChange") or 0.0),
                     )
                 )
             except (TypeError, ValueError) as exc:

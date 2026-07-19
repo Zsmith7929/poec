@@ -20,6 +20,7 @@ class ResolvedPrice:
     confidence: float
     source: str
     deep_link: str | None
+    demand: str = "unknown"
 
 
 def _influence_set(variant: str | None) -> frozenset[str]:
@@ -93,6 +94,7 @@ class PriceResolver:
             confidence=price.confidence,
             source=price.source,
             deep_link=None,
+            demand=price.demand,
         )
 
     def resolve_verify(self, ref: PriceRef, league: str) -> ResolvedPrice:

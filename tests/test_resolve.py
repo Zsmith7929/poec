@@ -71,6 +71,7 @@ class FakePriceService:
                     ts=now,
                     variant="Shaper",
                     ilvl=84,
+                    demand="thin",
                 ),
                 Price(
                     key="Titanium Spirit Shield",
@@ -221,6 +222,14 @@ def test_resolve_auto_base_no_influence_no_ilvl_matches_plain_not_most_liquid() 
     ref = PriceRef(category="BaseType", key="Titanium Spirit Shield")
     res = r.resolve_auto(ref, "L")
     assert res.chaos_value == 12.0  # plain line, not the more-liquid influenced 900c one
+
+
+def test_resolve_auto_propagates_demand_label() -> None:
+    svc = FakePriceService()
+    r = _resolver(svc, _quote(None, "unresolved"))
+    ref = PriceRef(category="BaseType", key="Titanium Spirit Shield", influence="shaper", ilvl=84)
+    res = r.resolve_auto(ref, "L")
+    assert res.demand == "thin"  # carried from the chosen price line
 
 
 def test_resolve_auto_name_only_unique_picks_most_liquid_variant() -> None:
