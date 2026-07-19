@@ -27,6 +27,13 @@ class ScannerSettings(BaseModel):
     min_liquidity: float = Field(ge=0.0)
 
 
+class T2Settings(BaseModel):
+    prob_sum_tolerance: float = Field(gt=0.0)
+    default_service_cost: float = Field(ge=0.0)
+    mc_trials: int = Field(ge=1)
+    mc_seed: int = Field(ge=0)
+
+
 class Settings(BaseModel):
     default_league: str
     realm: str
@@ -35,6 +42,7 @@ class Settings(BaseModel):
     cache: CacheSettings
     store: StoreSettings
     scanner: ScannerSettings
+    t2: T2Settings
 
 
 def load_settings(path: Path | None = None) -> Settings:

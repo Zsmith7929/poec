@@ -1,0 +1,23 @@
+# Tier-2 gamble odds. Rules-as-data: edit + revalidate on patch day.
+# Illustrative probabilities (shape correct; magnitudes revalidated per patch).
+# category values map to poe.ninja `type=` values supported by the Phase 0 client.
+tables:
+  - id: vaal_amulet_corrupt
+    name: "Vaal Orb on a rare amulet (item-class corruption outcomes)"
+    input: {category: Currency, key: "Vaal Orb", qty: 1.0}
+    service_cost: 0.0
+    source: "https://www.poewiki.net/wiki/Vaal_Orb (revalidate per patch)"
+    patch_validity: "Illustrative Vaal outcome split for amulets; revalidate on patch day."
+    outcomes:
+      - result: {category: UniqueAccessory, key: "Amulet No Change (resell)"}
+        probability: 0.25
+        notes: "No change: item survives unmodified, priced as the input rare's resale."
+      - result: {category: UniqueAccessory, key: "Amulet Corrupted Implicit A"}
+        probability: 0.25
+        notes: "Gains a corrupted implicit (variant A)."
+      - result: {category: UniqueAccessory, key: "Amulet Corrupted Implicit B"}
+        probability: 0.25
+        notes: "Gains a corrupted implicit (variant B)."
+      - result: {category: Currency, key: "Vaal salvage scrap"}
+        probability: 0.25
+        notes: "Bricked: reforged rare / white socket loss; salvage value only."

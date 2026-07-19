@@ -19,3 +19,9 @@ db_path = "data/oracle.db"
 [scanner]
 min_margin = 15.0          # chaos; rows below this margin are suppressed
 min_liquidity = 5.0        # min sample-depth-derived liquidity to rank normally
+
+[t2]
+prob_sum_tolerance = 0.01     # odds tables must sum to 1.0 within this tolerance
+default_service_cost = 0.0    # default per-attempt service cost (e.g. temple carry) in chaos
+mc_trials = 10000             # default Monte-Carlo trials for factory mode
+mc_seed = 1234                # default seed for reproducible factory runs

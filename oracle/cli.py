@@ -87,5 +87,36 @@ def scan(
     typer.echo(report.to_terminal())
 
 
+@app.command()
+def factory(
+    table_id: str,
+    league: str = typer.Option(...),
+    bankroll: float = typer.Option(...),
+    attempts: int = typer.Option(...),
+    seed: int | None = typer.Option(None),
+    trials: int | None = typer.Option(None),
+    as_json: bool = typer.Option(False, "--json"),
+) -> None:
+    """Print a Tier-2 production plan (buy N inputs; expected profit; P10/P50/P90)."""
+    svc = _services()
+    use_seed = svc.settings.t2.mc_seed if seed is None else seed
+    use_trials = svc.settings.t2.mc_trials if trials is None else trials
+    plan = svc.t2.factory(table_id, league, bankroll, attempts, use_seed, use_trials)
+    if as_json:
+        typer.echo(plan.model_dump_json(indent=2))
+        return
+    typer.echo(f"Factory plan: {plan.name} (league={league})")
+    typer.echo(f"  Buy {plan.attempts} inputs; total input spend {plan.total_input_spend:.2f}c")
+    typer.echo(
+        f"  Expected total profit: {plan.expected_total_profit:.1f}c "
+        f"(trials={plan.trials}, seed={plan.seed})"
+    )
+    typer.echo(f"  P10 {plan.p10:.1f}c   P50 {plan.p50:.1f}c   P90 {plan.p90:.1f}c")
+    if plan.attempts_affordable is not None:
+        typer.echo(f"  Bankroll {plan.bankroll:.0f}c affords {plan.attempts_affordable} attempts")
+    if plan.unresolved_outcomes:
+        typer.echo(f"  ! {plan.unresolved_outcomes} outcome(s) unpriced (excluded)")
+
+
 if __name__ == "__main__":
     app()
