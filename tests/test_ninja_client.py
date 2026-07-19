@@ -6,7 +6,7 @@ import pytest
 import respx
 
 from oracle.http.client import HttpClient
-from oracle.pricing.ninja import LEAGUES_URL, OVERVIEW_URL, NinjaClient, NinjaSchemaError
+from oracle.pricing.ninja import LEAGUES_URL, OVERVIEW_URL, NinjaClient, NinjaLine, NinjaSchemaError
 
 FIX = Path(__file__).parent / "fixtures"
 HOSTS = {"poe.ninja", "api.pathofexile.com"}
@@ -132,6 +132,29 @@ def test_league_is_covered_false_on_error() -> None:
     client = NinjaClient(HttpClient("ua", HOSTS, max_retries=1))
     # 500 triggers retries then raises; league_is_covered should catch and return False.
     assert client.league_is_covered("TestLeagueA") is False
+
+
+@respx.mock
+def test_overview_mixed_sparse_and_valid_lines() -> None:
+    # A payload with one sparse line (has id but no primaryValue/volumePrimaryValue)
+    # and one valid line.  The sparse line must be skipped; the valid one must survive.
+    # This guards against the skip logic accidentally aborting the whole list.
+    payload = {
+        "core": {},
+        "lines": [
+            {"id": "chaos"},  # sparse — no primaryValue or volumePrimaryValue
+            {"id": "divine", "primaryValue": 180.0, "volumePrimaryValue": 42},
+        ],
+        "items": [
+            {"id": "chaos", "name": "Chaos Orb"},
+            {"id": "divine", "name": "Divine Orb"},
+        ],
+    }
+    respx.get(OVERVIEW_URL).mock(return_value=httpx.Response(200, json=payload))
+    client = NinjaClient(HttpClient("ua", HOSTS))
+    result = client.overview("TestLeagueA", "Currency")
+    assert len(result) == 1
+    assert result[0] == NinjaLine(key="Divine Orb", chaos_value=180.0, sample_depth=42)
 
 
 @respx.mock

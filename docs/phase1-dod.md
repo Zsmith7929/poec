@@ -72,7 +72,7 @@ Each row in the JSON carries `source` (e.g. `ninja:Currency`, `missing:UniqueArm
 | `ruff format .` | Clean (57 files unchanged) |
 | `ruff check .` | All checks passed |
 | `mypy` (strict) | No issues found in 30 source files |
-| `pytest` (non-live) | 84 passed, 4 deselected |
+| `pytest` (non-live) | 85 passed, 4 deselected |
 | `pytest --cov=oracle` | **93% total coverage** |
 | `pytest -m live` | 2 passed |
 | Compliance guards | 4/4 passed |
