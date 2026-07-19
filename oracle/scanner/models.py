@@ -1,10 +1,12 @@
 from datetime import datetime
 from typing import Literal
 
-from pydantic import BaseModel
+from pydantic import BaseModel, ConfigDict
 
 
 class PriceRef(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+
     category: str
     key: str
     qty: float = 1.0
@@ -13,6 +15,8 @@ class PriceRef(BaseModel):
 
 
 class Transform(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+
     id: str
     name: str
     inputs: list[PriceRef]

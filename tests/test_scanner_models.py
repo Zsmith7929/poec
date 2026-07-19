@@ -37,6 +37,20 @@ def test_transform_rejects_unknown_pricing_mode() -> None:
         )
 
 
+def test_transform_rejects_unknown_field() -> None:
+    import pytest
+    from pydantic import ValidationError
+
+    with pytest.raises(ValidationError):
+        Transform(
+            id="x",
+            name="X",
+            inputs=[],
+            output=PriceRef(category="Currency", key="Chaos Orb"),
+            catgory="typo",  # type: ignore[call-arg]
+        )
+
+
 def test_scanrow_allows_none_output_for_verify() -> None:
     row = ScanRow(
         transform_id="t1",
