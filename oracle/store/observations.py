@@ -23,6 +23,8 @@ class ObservedPriceRepo:
         if row is None:
             return None
         observed = datetime.fromisoformat(row["observed_ts"])
+        if observed.tzinfo is None:
+            observed = observed.replace(tzinfo=UTC)
         if datetime.now(tz=UTC) - observed > timedelta(seconds=ttl_seconds):
             return None
         return (row["chaos_value"], row["observed_ts"])
