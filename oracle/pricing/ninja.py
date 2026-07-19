@@ -76,10 +76,10 @@ class NinjaClient:
                 raise NinjaSchemaError("line entry is not a dict")
             if "id" not in line:
                 raise NinjaSchemaError("line missing 'id'")
-            if "primaryValue" not in line:
-                raise NinjaSchemaError("line missing 'primaryValue'")
-            if "volumePrimaryValue" not in line:
-                raise NinjaSchemaError("line missing 'volumePrimaryValue'")
+            # Some leagues return sparse entries (e.g. the chaos base with no primaryValue)
+            # when liquidity is essentially zero.  Skip rather than crash.
+            if "primaryValue" not in line or "volumePrimaryValue" not in line:
+                continue
             line_id = line["id"]
             if line_id not in id_to_name:
                 # Structural drift: a line has no matching item name.

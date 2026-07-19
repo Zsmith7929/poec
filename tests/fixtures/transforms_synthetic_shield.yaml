@@ -1,0 +1,14 @@
+# Synthetic fixture: a shield-class transform with a KNOWN positive margin,
+# priced entirely auto so the engine can prove end-to-end detection without
+# live-league margins. league appears in metadata only (test uses an invented id).
+transforms:
+  - id: synthetic_shaper_shield
+    name: "Synthetic shaper shield (plain base + orb -> influenced base)"
+    inputs:
+      - {category: BaseType, key: "Plain Shield Base", qty: 1.0}
+      - {category: Currency, key: "Shaper's Orb", qty: 1.0}
+    output: {category: BaseType, key: "Shaper Shield Base", qty: 1.0}
+    applicability: "synthetic; both sides auto-priced for deterministic detection"
+    friction: 0.0
+    enabled: true
+    pricing_mode: auto

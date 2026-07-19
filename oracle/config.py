@@ -22,6 +22,11 @@ class StoreSettings(BaseModel):
     db_path: str
 
 
+class ScannerSettings(BaseModel):
+    min_margin: float = Field(ge=0.0)
+    min_liquidity: float = Field(ge=0.0)
+
+
 class Settings(BaseModel):
     default_league: str
     realm: str
@@ -29,6 +34,7 @@ class Settings(BaseModel):
     pricing: PricingSettings
     cache: CacheSettings
     store: StoreSettings
+    scanner: ScannerSettings
 
 
 def load_settings(path: Path | None = None) -> Settings:

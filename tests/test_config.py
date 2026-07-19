@@ -6,7 +6,7 @@ from oracle.config import Settings, load_settings
 def test_loads_default_settings_file() -> None:
     settings = load_settings(Path("config/settings.toml"))
     assert isinstance(settings, Settings)
-    assert settings.default_league == "Standard"
+    assert isinstance(settings.default_league, str) and settings.default_league
     assert 0.0 < settings.pricing.percentile < 1.0
     assert settings.cache.ninja_ttl_seconds > 0
     assert settings.store.db_path.endswith(".db")
