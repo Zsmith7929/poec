@@ -95,6 +95,8 @@ def test_schema_drift_line_missing_id() -> None:
 
 @respx.mock
 def test_schema_drift_line_missing_primary_value() -> None:
+    # poe.ninja returns sparse entries (only "id") for low-liquidity base currencies;
+    # we skip them rather than crashing so thin-economy leagues still work.
     payload = {
         "core": {},
         "lines": [{"id": "chaos", "volumePrimaryValue": 10}],
@@ -102,8 +104,8 @@ def test_schema_drift_line_missing_primary_value() -> None:
     }
     respx.get(OVERVIEW_URL).mock(return_value=httpx.Response(200, json=payload))
     client = NinjaClient(HttpClient("ua", HOSTS))
-    with pytest.raises(NinjaSchemaError, match="missing 'primaryValue'"):
-        client.overview("TestLeagueA", "Currency")
+    result = client.overview("TestLeagueA", "Currency")
+    assert result == []  # sparse line skipped, no crash
 
 
 @respx.mock
@@ -134,6 +136,7 @@ def test_league_is_covered_false_on_error() -> None:
 
 @respx.mock
 def test_schema_drift_line_missing_volume_primary_value() -> None:
+    # Same sparse-line policy: if volumePrimaryValue is absent, skip the line.
     payload = {
         "core": {},
         "lines": [{"id": "chaos", "primaryValue": 1.0}],
@@ -141,5 +144,5 @@ def test_schema_drift_line_missing_volume_primary_value() -> None:
     }
     respx.get(OVERVIEW_URL).mock(return_value=httpx.Response(200, json=payload))
     client = NinjaClient(HttpClient("ua", HOSTS))
-    with pytest.raises(NinjaSchemaError, match="missing 'volumePrimaryValue'"):
-        client.overview("TestLeagueA", "Currency")
+    result = client.overview("TestLeagueA", "Currency")
+    assert result == []  # sparse line skipped, no crash
