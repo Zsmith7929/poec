@@ -3,33 +3,56 @@
 From the grounded-transform reseed (ADR-0001..0004). None block this PR; each is a
 deferral with a concrete reason and evidence.
 
-## Deferred transform classes
+## CORRECTION (2026-07-19, after PR #5)
 
-- **Influence base flips — infeasible on the current poe.ninja API.** Verified during
-  design: the new exchange API (`/poe1/api/economy/exchange/current/overview`) returns
-  **0 lines for `type=BaseType`** on Standard. Base types aren't served, so plain-vs-
-  influenced base pricing can't be computed. Blocked on the uniques/base-type endpoint
-  gap below. (The flagship shaper-shield remains as a single verify-mode one-off in
-  `data/transforms_t1.yaml`, priced via the human-in-the-loop DeepLinkResolver.)
+An earlier version of this file claimed uniques/base-types are unpriceable and deferred
+influence flips + div-card→reward "with evidence." **That was wrong** — it came from
+guessing endpoint URLs instead of reading `https://poe.ninja/docs/api`. poe.ninja
+exposes a **second** overview family the tool wasn't using:
 
-- **Div-card → reward — harvest de-risked, pricing blocked.** The poedb
-  `Divination_Cards` page yields all ~459 cards with set size + reward from one fetch,
-  in stable class-tagged HTML (`stackSize`, `explicitMod`/`currencyitem`); House of
-  Mirrors = 9 → Mirror of Kalandra verified. But the valuable rewards are **uniques**,
-  which the current poe.ninja API doesn't price (see below). Card→currency-reward cards
-  (e.g. → Mirror/Divine) are a viable subset; deferred until the reward-category
-  resolution is worth building for that subset alone.
+- **`/poe1/api/economy/stash/current/item/overview?league=&type=`** — stash-listed
+  items. Types include `UniqueWeapon`, `UniqueArmour`, `UniqueAccessory`, `UniqueJewel`,
+  `BaseType`, `SkillGem`, etc. Verified live on Standard: `UniqueAccessory`=372 lines
+  (Headhunter = 13,570c / 18 div, 667 listings), `BaseType`=9,092 lines, `UniqueWeapon`
+  =656, `SkillGem`=6,442.
+- **Response shape differs from the exchange endpoint.** Data is inline in `lines`
+  (`items` is empty): each line has `name`, `chaosValue`/`divineValue`, `count`,
+  `listingCount`, `itemType`, `levelRequired`, and `detailsId`. Influence + ilvl
+  variants are encoded in `detailsId` (e.g. `titanium-spirit-shield-84-shaper-hunter`
+  vs `titanium-spirit-shield-84-crusader-redeemer`).
 
-## Cross-cutting gap (affects more than this PR)
+So uniques/bases/gems ARE priceable; the flagship shaper-shield flip is priceable; and
+the deferred classes below are **feasible**, not blocked — they just need the tool to
+call the stash endpoint. The currency-vendor-recipe work in PR #5 is unaffected
+(currency prices via the exchange endpoint, correctly).
 
-- **No known current poe.ninja endpoint for uniques / base types / gems.** The exchange
-  API serves only currency-like feeds (verified: `Currency`=91, `Fragment`=63,
-  `DivinationCard`=31; `BaseType`=0, `UniqueAccessory`=0). The classic
-  `api/data/itemoverview` 404s. This limits *every* class whose legs are uniques/bases
-  (div-card→unique rewards, influence flips, unique flips), and affects future phases
-  that assume unique/base pricing. **Action:** identify the endpoint poe.ninja's own
-  site uses for unique/base pricing (or an alternative source), then revisit the
-  deferred classes. Until then, the tool can only price currency-exchange items.
+## Deferred transform classes (feasible; need stash-endpoint pricing support)
+
+Blocked only on adding stash-endpoint support to the price layer (see next section),
+not on any missing data:
+
+- **Influence base flips.** `BaseType` feed carries plain and influenced variants
+  (distinguished by `detailsId`). Needs variant-aware keying (name + influence + ilvl →
+  `detailsId`) since the current resolver keys by name alone. Pricing is selection-
+  biased — surfaced for human judgment (ADR-0004).
+- **Div-card → reward.** Harvest de-risked (poedb `Divination_Cards`, 459 cards, set
+  size + reward; House of Mirrors = 9 → Mirror verified). Rewards that are uniques
+  (Headhunter etc.) are now priceable via the stash endpoint; reward→category routing
+  is the remaining work.
+
+## Next enabling work: stash-endpoint price support
+
+The tool currently calls only the exchange overview (currency-like feeds). To unlock the
+classes above (and future phases that assume unique/base/gem pricing):
+
+- Add a `stash_overview(league, type)` path to `NinjaClient` with its own parser for the
+  inline-`lines` shape (name/chaosValue/listingCount/detailsId), keeping the existing
+  exchange parser for currency-like types.
+- Route categories to the right endpoint in `PriceService` (Currency/Fragment/
+  DivinationCard → exchange; Unique*/BaseType/SkillGem → stash).
+- For base types, key on the `detailsId` variant (influence + ilvl), not just name.
+- This is the highest-leverage single addition: it lights up uniques, bases, gems, the
+  flagship, influence flips, and div-card→unique rewards.
 
 ## Data-coverage notes (vendor recipes, this PR)
 
