@@ -1,0 +1,18 @@
+# Golden fixture for the DoD EV hand-calc (prices pinned in test/notebook).
+tables:
+  - id: golden_vaal
+    name: "Golden Vaal amulet (pinned-price EV fixture)"
+    input: {category: Currency, key: "Vaal Orb", qty: 1.0}
+    service_cost: 0.0
+    source: "fixture: hand-calc EV; not a live odds source"
+    patch_validity: "Fixture only — pinned prices, deterministic EV."
+    outcomes:
+      - result: {category: UniqueAccessory, key: "Golden Unique Jackpot"}
+        probability: 0.5
+        notes: "jackpot"
+      - result: {category: UniqueAccessory, key: "Golden Unique NoChange"}
+        probability: 0.3
+        notes: "no change, resells"
+      - result: {category: Currency, key: "Vaal salvage scrap"}
+        probability: 0.2
+        notes: "bricked salvage"
