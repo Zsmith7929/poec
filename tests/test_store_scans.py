@@ -29,7 +29,7 @@ def test_scan_results_table_exists(tmp_path) -> None:
 
 
 def test_insert_and_recent_round_trip(tmp_path) -> None:
-    verify_url = "https://www.pathofexile.com/trade/search/Settlers/abc123"
+    verify_url = "https://www.pathofexile.com/trade/search/InventedLeague/abc123"
     repo = ScanResultRepo(connect(str(tmp_path / "t.db")))
     repo.insert_many(
         "L",
