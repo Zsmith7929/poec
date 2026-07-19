@@ -73,5 +73,19 @@ def link(
         typer.echo(f"  - {note}")
 
 
+@app.command()
+def scan(
+    league: str = typer.Option(...),
+    min_margin: float = typer.Option(None, "--min-margin"),
+    as_json: bool = typer.Option(False, "--json"),
+) -> None:
+    """Run the Tier-1 scanner for a league; write report files and print the table."""
+    report, _md, _json = _services().scan.run(league, min_margin)
+    if as_json:
+        typer.echo(report.to_json())
+        return
+    typer.echo(report.to_terminal())
+
+
 if __name__ == "__main__":
     app()
