@@ -20,6 +20,10 @@ MIGRATIONS: list[str] = [
         ON price_snapshots (league, category, ts)
     """,
     """
+    CREATE INDEX IF NOT EXISTS ix_price_league_cat_key
+        ON price_snapshots (league, category, key)
+    """,
+    """
     CREATE TABLE IF NOT EXISTS observed_prices (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         league TEXT NOT NULL,
