@@ -35,6 +35,20 @@ def _influence_set(variant: str | None) -> frozenset[str]:
     return frozenset(part.strip().lower() for part in variant.split("/") if part.strip())
 
 
+# Reward sentinel categories -> the kind-scoped feeds to price a reward item by name
+# (ADR-0006). First feed with a name match wins.
+_REWARD_FEEDS: dict[str, tuple[str, ...]] = {
+    "RewardCurrency": ("Currency", "Fragment"),
+    "RewardUnique": (
+        "UniqueAccessory",
+        "UniqueWeapon",
+        "UniqueArmour",
+        "UniqueJewel",
+        "UniqueFlask",
+    ),
+}
+
+
 class PriceResolver:
     def __init__(
         self,
@@ -78,8 +92,20 @@ class PriceResolver:
             return None
         return max(matches, key=lambda p: p.sample_depth)
 
+    def _select_reward(self, ref: PriceRef, league: str) -> Price | None:
+        """Price a div-card reward by name across its kind-scoped feeds; first feed with
+        a name match wins (most-liquid line)."""
+        for feed in _REWARD_FEEDS[ref.category]:
+            candidates = [p for p in self._category_table(feed, league) if p.key == ref.key]
+            if candidates:
+                return max(candidates, key=lambda p: p.sample_depth)
+        return None
+
     def resolve_auto(self, ref: PriceRef, league: str) -> ResolvedPrice:
-        price = self._select(ref, league)
+        if ref.category in _REWARD_FEEDS:
+            price = self._select_reward(ref, league)
+        else:
+            price = self._select(ref, league)
         if price is None:
             return ResolvedPrice(
                 chaos_value=None,

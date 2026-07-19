@@ -242,6 +242,29 @@ def test_resolve_auto_name_only_unique_picks_most_liquid_variant() -> None:
     assert res.liquidity == 40
 
 
+def test_resolve_reward_currency_finds_in_currency_feed() -> None:
+    svc = FakePriceService()
+    r = _resolver(svc, _quote(None, "unresolved"))
+    ref = PriceRef(category="RewardCurrency", key="Divine Orb")
+    res = r.resolve_auto(ref, "L")
+    assert res.chaos_value == 180.0  # priced via the Currency feed by name
+
+
+def test_resolve_reward_unique_finds_in_unique_feed_most_liquid() -> None:
+    svc = FakePriceService()
+    r = _resolver(svc, _quote(None, "unresolved"))
+    ref = PriceRef(category="RewardUnique", key="Watcher's Eye")
+    res = r.resolve_auto(ref, "L")
+    assert res.chaos_value == 300.0  # UniqueAccessory feed, most-liquid variant
+
+
+def test_resolve_reward_missing_never_fabricates() -> None:
+    svc = FakePriceService()
+    r = _resolver(svc, _quote(None, "unresolved"))
+    res = r.resolve_auto(PriceRef(category="RewardCurrency", key="Nonexistent"), "L")
+    assert res.chaos_value is None and res.source.startswith("missing:")
+
+
 def test_clear_cache_forces_refetch() -> None:
     svc = FakePriceService()
     r = _resolver(svc, _quote(None, "unresolved"))

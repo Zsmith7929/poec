@@ -41,14 +41,17 @@ selection-biased *candidate* per ADR-0004, not guaranteed profit).
   (a recollection error — the very failure mode ADR-0003 targets). Replaced with the
   Conqueror exalt (Crusader's Exalted Orb), which is real and in the currency feed.
 
-## Now-feasible transform classes (data + pricing both available)
+## Transform classes
 
+- **Div-card → reward — SHIPPED** (ADR-0006). Harvested 444 cards from poedb
+  (`data/metadata/divination_cards.yaml`, cited); expander emits the 296 currency/unique
+  rewards (79 card-legs priced on the DivinationCard feed). Reward priced by name across
+  kind-scoped feeds. Verified live: The Doctor → Headhunter prices end-to-end (currently
+  −51%, correctly gated). Remaining: `other`-kind rewards (bases/gems/maps/multi-item,
+  148 cards) — need base variant keying / gem+map feeds; deferred.
 - **Influence base flips** — the flagship works; generalizing to more bases/influences
   is a data-authoring pass (enumerate base × influence × ilvl from the `BaseType` feed,
   or hand-author high-value ones). Pricing is selection-biased — surfaced for judgment.
-- **Div-card → reward** — uniques now price. Remaining work: harvest the poedb
-  `Divination_Cards` metadata (set size + reward) and add a card→reward expander that
-  routes the reward to the right stash category (Unique*/Currency).
 
 ## Demand / tradeability (ADR-0005)
 

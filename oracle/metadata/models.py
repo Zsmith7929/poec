@@ -41,3 +41,23 @@ class VendorRecipeDoc(BaseModel):
 
     source: MetadataSource
     recipes: list[VendorRecipe]
+
+
+class DivCard(BaseModel):
+    """A divination card: turn in `set_size` copies, receive `reward_qty`x `reward_name`.
+    `reward_kind` (currency/unique/other) is classified from poedb and routes pricing."""
+
+    model_config = ConfigDict(extra="forbid")
+
+    name: str
+    set_size: int
+    reward_name: str
+    reward_qty: float = 1.0
+    reward_kind: str  # "currency" | "unique" | "other"
+
+
+class DivCardDoc(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+
+    source: MetadataSource
+    cards: list[DivCard]
