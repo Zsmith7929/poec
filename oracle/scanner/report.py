@@ -54,7 +54,10 @@ class ScanReport:
         lines.append("== PROBABILISTIC (Tier-2) ==")
         lines.append(f"{'gamble':<32}{'ev_net':>10}{'stddev':>10}{'conf':>7}")
         for e in self.ev_rows:
-            lines.append(f"{e.name[:32]:<32}{e.ev_net:>10.2f}{e.stddev:>10.2f}{e.confidence:>7.2f}")
+            link = e.deep_link or "—"
+            lines.append(
+                f"{e.name[:32]:<32}{e.ev_net:>10.2f}{e.stddev:>10.2f}{e.confidence:>7.2f}  {link}"
+            )
             if e.bankroll_note:
                 lines.append(f"    {e.bankroll_note}")
             if e.unresolved_outcomes:
@@ -94,13 +97,14 @@ class ScanReport:
             "",
             "## PROBABILISTIC (Tier-2)",
             "",
-            "| Gamble | EV gross (c) | EV net (c) | Stddev | Liquidity | Confidence | Bankroll |",
-            "|---|---:|---:|---:|---:|---:|---|",
+            "| Gamble | EV gross (c) | EV net (c) | Stddev | Liquidity | Confidence | Bankroll | Deep-link |",  # noqa: E501
+            "|---|---:|---:|---:|---:|---:|---|---|",
         ]
         for e in self.ev_rows:
+            link = f"[open]({e.deep_link})" if e.deep_link else "—"
             lines.append(
                 f"| {e.name} | {e.ev_gross:.2f} | {e.ev_net:.2f} | {e.stddev:.2f} | "
-                f"{e.liquidity:.0f} | {e.confidence:.2f} | {e.bankroll_note or '—'} |"
+                f"{e.liquidity:.0f} | {e.confidence:.2f} | {e.bankroll_note or '—'} | {link} |"
             )
         return "\n".join(lines) + "\n"
 

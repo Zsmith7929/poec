@@ -23,7 +23,7 @@ def _auto(tid: str, margin: float) -> ScanRow:
     )
 
 
-def _ev(tid: str, ev_net: float) -> EvRow:
+def _ev(tid: str, ev_net: float, deep_link: str | None = None) -> EvRow:
     return EvRow(
         table_id=tid,
         name=f"gamble-{tid}",
@@ -40,7 +40,7 @@ def _ev(tid: str, ev_net: float) -> EvRow:
         confidence=0.7,
         bankroll_note="bankroll 100c affords 20 attempts",
         source="ninja:x",
-        deep_link=None,
+        deep_link=deep_link,
         unresolved_outcomes=0,
         ts=datetime(2026, 7, 18, 12, 0, tzinfo=UTC),
     )
@@ -88,3 +88,40 @@ def test_default_ev_rows_empty_keeps_phase1_construction() -> None:
     )
     assert r.ev_rows == []
     assert "PROBABILISTIC" in r.to_terminal()  # section header present even if empty
+
+
+_VERIFY_URL = "https://www.pathofexile.com/trade/search/InventedLeague/abc123"
+
+
+def _report_with_links() -> ScanReport:
+    return ScanReport(
+        league="TestLeagueA",
+        snapshot_ts=datetime(2026, 7, 18, 12, 0, tzinfo=UTC),
+        rule_version="sha256:abc",
+        rows=[_auto("big", 30.0)],
+        ev_rows=[
+            _ev("vaal", 90.0, deep_link=_VERIFY_URL),
+            _ev("alchemy", 5.0, deep_link=None),
+        ],
+    )
+
+
+def test_terminal_t2_deep_link_present() -> None:
+    text = _report_with_links().to_terminal()
+    assert _VERIFY_URL in text
+    # row without deep_link shows em-dash
+    lines = text.splitlines()
+    alchemy_lines = [ln for ln in lines if "gamble-alchemy" in ln]
+    assert alchemy_lines, "gamble-alchemy line missing from terminal output"
+    assert "—" in alchemy_lines[0]
+
+
+def test_markdown_t2_deep_link_present() -> None:
+    md = _report_with_links().to_markdown()
+    # row with deep_link renders as [open](url)
+    assert f"[open]({_VERIFY_URL})" in md
+    # row without deep_link renders as em-dash
+    lines = md.splitlines()
+    alchemy_lines = [ln for ln in lines if "gamble-alchemy" in ln]
+    assert alchemy_lines, "gamble-alchemy row missing from markdown output"
+    assert "—" in alchemy_lines[0]
