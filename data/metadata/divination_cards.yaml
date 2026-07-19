@@ -3,2225 +3,2670 @@
 source:
   url: https://poedb.tw/us/Divination_Cards
   fetched_at: '2026-07-19'
-  page_sha256: f138622073e89d129abac7e6f44685705bccab13f91d19efa1eac69bab55464e
+  page_sha256: e57f75f328bfcd40522cc836f9bb94c0a6f6c8f1d6f8dbcdb7cfdf5ef3cf1c1a
 cards:
 - name: A Chilling Wind
   set_size: 4
   reward_name: Level 21 Vaal Cold Snap
   reward_qty: 1.0
   reward_kind: other
+  reward_variant: Corrupted Quality
 - name: A Dab of Ink
   set_size: 9
   reward_name: The Poet's Pen
   reward_qty: 1.0
   reward_kind: unique
+  reward_variant: ''
 - name: A Dusty Memory
   set_size: 5
   reward_name: Item
   reward_qty: 1.0
   reward_kind: other
+  reward_variant: ''
 - name: A Familiar Call
   set_size: 3
   reward_name: Jewellery of Farrul
   reward_qty: 1.0
   reward_kind: other
+  reward_variant: ''
 - name: A Fate Worse Than Death
   set_size: 4
   reward_name: Cortex
   reward_qty: 1.0
   reward_kind: unique
+  reward_variant: Corrupted
 - name: A Modest Request
   set_size: 3
   reward_name: Megalomaniac
   reward_qty: 1.0
   reward_kind: unique
+  reward_variant: Corrupted
 - name: A Mother's Parting Gift
   set_size: 6
   reward_name: Fertile Mind
   reward_qty: 1.0
   reward_kind: unique
+  reward_variant: Corrupted
 - name: A Note in the Wind
   set_size: 4
   reward_name: Asenath's Mark
   reward_qty: 1.0
   reward_kind: unique
+  reward_variant: ''
 - name: A Sea of Blue
   set_size: 3
   reward_name: Orb of Alteration
   reward_qty: 13.0
   reward_kind: currency
+  reward_variant: ''
 - name: A Stone Perfected
   set_size: 5
   reward_name: Jewel
   reward_qty: 1.0
   reward_kind: unique
+  reward_variant: 1-2 Implicit Corrupted
 - name: Abandoned Wealth
   set_size: 5
   reward_name: Exalted Orb
   reward_qty: 3.0
   reward_kind: currency
+  reward_variant: ''
 - name: Acclimatisation
   set_size: 2
   reward_name: Orb of Alteration
   reward_qty: 20.0
   reward_kind: currency
+  reward_variant: ''
 - name: Akil's Prophecy
   set_size: 3
   reward_name: Elegant Round Shield
   reward_qty: 1.0
   reward_kind: unique
+  reward_variant: Two-Implicit Corrupted
 - name: Alivia's Grace
   set_size: 6
   reward_name: Queen of the Forest
   reward_qty: 1.0
   reward_kind: unique
+  reward_variant: ''
 - name: Alluring Bounty
   set_size: 7
   reward_name: Exalted Orb
   reward_qty: 10.0
   reward_kind: currency
+  reward_variant: ''
 - name: Alone in the Darkness
   set_size: 5
   reward_name: Delve Item
   reward_qty: 1.0
   reward_kind: unique
+  reward_variant: ''
 - name: Altered Perception
   set_size: 3
   reward_name: Simulacrum
   reward_qty: 1.0
   reward_kind: currency
+  reward_variant: ''
 - name: Ambitious Obsession
   set_size: 4
   reward_name: Skittering Delirium Orb
   reward_qty: 1.0
   reward_kind: currency
+  reward_variant: ''
 - name: Anarchy's Price
   set_size: 13
   reward_name: Voltaxic Rift
   reward_qty: 1.0
   reward_kind: unique
+  reward_variant: Corrupted
 - name: Apocalypse
   set_size: 2
   reward_name: Eyes of the Greatwolf
   reward_qty: 1.0
   reward_kind: unique
+  reward_variant: One Corruption Implicit
 - name: Arrogance of the Vaal
   set_size: 8
   reward_name: Item
   reward_qty: 1.0
   reward_kind: unique
+  reward_variant: Two-Implicit Corrupted
 - name: Assassin's Favour
   set_size: 9
   reward_name: Dagger
   reward_qty: 1.0
   reward_kind: unique
+  reward_variant: ''
 - name: Assassin's Gift
   set_size: 9
   reward_name: Divinarius
   reward_qty: 1.0
   reward_kind: unique
+  reward_variant: Two-Implicit Corrupted
 - name: Astral Protection
   set_size: 5
   reward_name: Shield
   reward_qty: 1.0
   reward_kind: other
+  reward_variant: ''
 - name: Atziri's Arsenal
   set_size: 4
   reward_name: Weapon
   reward_qty: 1.0
   reward_kind: unique
+  reward_variant: Corrupted
 - name: Audacity
   set_size: 5
   reward_name: Doryani's Fist
   reward_qty: 1.0
   reward_kind: unique
+  reward_variant: Corrupted
 - name: Auspicious Ambitions
   set_size: 4
   reward_name: Experimented Item
   reward_qty: 1.0
   reward_kind: other
+  reward_variant: ''
 - name: Avian Pursuit
   set_size: 3
   reward_name: 1,500x Vivid Crystallised Lifeforce
   reward_qty: 1.0
   reward_kind: currency
+  reward_variant: ''
 - name: Azure Rage
   set_size: 4
   reward_name: Punishing Map
   reward_qty: 1.0
   reward_kind: other
+  reward_variant: ''
 - name: Azyran's Reward
   set_size: 9
   reward_name: Prismatic Jewel
   reward_qty: 1.0
   reward_kind: unique
+  reward_variant: Corrupted
 - name: Baited Expectations
   set_size: 8
   reward_name: Fishing Item
   reward_qty: 1.0
   reward_kind: unique
+  reward_variant: ''
 - name: Beauty Through Death
   set_size: 5
   reward_name: Atziri's Reflection
   reward_qty: 1.0
   reward_kind: unique
+  reward_variant: ''
 - name: Bijoux
   set_size: 3
   reward_name: Cluster Jewel
   reward_qty: 1.0
   reward_kind: other
+  reward_variant: ''
 - name: Blind Venture
   set_size: 7
   reward_name: Ring
   reward_qty: 1.0
   reward_kind: unique
+  reward_variant: Corrupted
 - name: Boon of Justice
   set_size: 6
   reward_name: Offering to the Goddess
   reward_qty: 1.0
   reward_kind: other
+  reward_variant: ''
 - name: Boon of the First Ones
   set_size: 6
   reward_name: Bestiary Item
   reward_qty: 1.0
   reward_kind: unique
+  reward_variant: ''
 - name: Bound by Flame
   set_size: 2
   reward_name: Level 21 Flame Link
   reward_qty: 1.0
   reward_kind: other
+  reward_variant: Quality
 - name: Boundless Realms
   set_size: 4
   reward_name: Map
   reward_qty: 1.0
   reward_kind: other
+  reward_variant: ''
 - name: Bowyer's Dream
   set_size: 6
   reward_name: Six-Link Harbinger Bow
   reward_qty: 1.0
   reward_kind: other
+  reward_variant: ''
 - name: Broken Promises
   set_size: 2
   reward_name: Diamond Ring
   reward_qty: 1.0
   reward_kind: other
+  reward_variant: Two-Implicit Synthesised
 - name: Broken Truce
   set_size: 5
   reward_name: Cold Iron Point
   reward_qty: 1.0
   reward_kind: unique
+  reward_variant: ''
 - name: Brotherhood in Exile
   set_size: 5
   reward_name: One With Nothing
   reward_qty: 1.0
   reward_kind: unique
+  reward_variant: Corrupted
 - name: Brush, Paint and Palette
   set_size: 5
   reward_name: The Artist
   reward_qty: 1.0
   reward_kind: other
+  reward_variant: ''
 - name: Buried Treasure
   set_size: 3
   reward_name: Sulphite Scarab
   reward_qty: 1.0
   reward_kind: other
+  reward_variant: ''
 - name: Burning Blood
   set_size: 6
   reward_name: Xoph's Blood
   reward_qty: 1.0
   reward_kind: unique
+  reward_variant: Corrupted
 - name: Call to the First Ones
   set_size: 5
   reward_name: Tier 1 Talisman
   reward_qty: 1.0
   reward_kind: other
+  reward_variant: Corrupted
 - name: Cameria's Cut
   set_size: 2
   reward_name: Scarab
   reward_qty: 1.0
   reward_kind: other
+  reward_variant: ''
 - name: Cartographer's Delight
   set_size: 3
   reward_name: Map
   reward_qty: 1.0
   reward_kind: other
+  reward_variant: ''
 - name: Chasing Risk
   set_size: 4
   reward_name: Synthesis Item
   reward_qty: 1.0
   reward_kind: unique
+  reward_variant: ''
 - name: Checkmate
   set_size: 8
   reward_name: Simulacrum Splinter
   reward_qty: 76.0
   reward_kind: currency
+  reward_variant: ''
 - name: Choking Guilt
   set_size: 6
   reward_name: Stranglegasp
   reward_qty: 1.0
   reward_kind: unique
+  reward_variant: ''
 - name: Costly Curio
   set_size: 6
   reward_name: Item
   reward_qty: 1.0
   reward_kind: unique
+  reward_variant: ''
 - name: Council of Cats
   set_size: 4
   reward_name: Farrul Item
   reward_qty: 1.0
   reward_kind: unique
+  reward_variant: ''
 - name: Coveted Possession
   set_size: 9
   reward_name: Regal Orb
   reward_qty: 5.0
   reward_kind: currency
+  reward_variant: ''
 - name: Cursed Words
   set_size: 13
   reward_name: Maw of Mischief
   reward_qty: 1.0
   reward_kind: unique
+  reward_variant: ''
 - name: Damnation
   set_size: 16
   reward_name: The Original Scripture
   reward_qty: 1.0
   reward_kind: unique
+  reward_variant: ''
 - name: Dark Dreams
   set_size: 4
   reward_name: Bone Helmet
   reward_qty: 1.0
   reward_kind: other
+  reward_variant: ''
 - name: Dark Temptation
   set_size: 5
   reward_name: Obliteration
   reward_qty: 1.0
   reward_kind: unique
+  reward_variant: ''
 - name: Darker Half
   set_size: 3
   reward_name: Eldritch Chaos Orb
   reward_qty: 5.0
   reward_kind: currency
+  reward_variant: ''
 - name: Deadly Joy
   set_size: 6
   reward_name: Torrent's Reclamation
   reward_qty: 1.0
   reward_kind: unique
+  reward_variant: Two-Implicit Corrupted
 - name: Death
   set_size: 4
   reward_name: Mon'tregul's Grasp
   reward_qty: 1.0
   reward_kind: unique
+  reward_variant: ''
 - name: Deathly Designs
   set_size: 7
   reward_name: Level 21 Trap Gem
   reward_qty: 1.0
   reward_kind: other
+  reward_variant: Corrupted Quality
 - name: Dementophobia
   set_size: 11
   reward_name: Delirium Orb
   reward_qty: 10.0
   reward_kind: currency
+  reward_variant: ''
 - name: Demigod's Wager
   set_size: 7
   reward_name: Orb of Annulment
   reward_qty: 1.0
   reward_kind: currency
+  reward_variant: ''
 - name: Desecrated Virtue
   set_size: 9
   reward_name: Level 4 Exceptional Support Gem
   reward_qty: 1.0
   reward_kind: other
+  reward_variant: Corrupted Quality
 - name: Desperate Crusade
   set_size: 3
   reward_name: Prism Guardian
   reward_qty: 1.0
   reward_kind: unique
+  reward_variant: ''
 - name: Destined to Crumble
   set_size: 5
   reward_name: Body Armour
   reward_qty: 1.0
   reward_kind: other
+  reward_variant: ''
 - name: Dialla's Subjugation
   set_size: 7
   reward_name: Support Gem
   reward_qty: 1.0
   reward_kind: other
+  reward_variant: Corrupted Quality
 - name: Disdain
   set_size: 5
   reward_name: Delirium Orb
   reward_qty: 1.0
   reward_kind: currency
+  reward_variant: ''
 - name: Divine Beauty
   set_size: 12
   reward_name: Divine Orb
   reward_qty: 7.0
   reward_kind: currency
+  reward_variant: ''
 - name: Doedre's Madness
   set_size: 9
   reward_name: Doedre Item
   reward_qty: 1.0
   reward_kind: unique
+  reward_variant: ''
 - name: Doryani's Epiphany
   set_size: 3
   reward_name: Level 21 Transfigured Gem
   reward_qty: 1.0
   reward_kind: other
+  reward_variant: Corrupted Quality
 - name: Draped in Dreams
   set_size: 5
   reward_name: Six-Link Astral Plate
   reward_qty: 1.0
   reward_kind: other
+  reward_variant: ''
 - name: Duality
   set_size: 2
   reward_name: Body Armour
   reward_qty: 1.0
   reward_kind: other
+  reward_variant: ''
 - name: Dying Anguish
   set_size: 8
   reward_name: Level 19 Transfigured Gem
   reward_qty: 1.0
   reward_kind: other
+  reward_variant: Quality
 - name: Dying Light
   set_size: 10
   reward_name: Diamond Ring
   reward_qty: 1.0
   reward_kind: other
+  reward_variant: ''
 - name: Earth Drinker
   set_size: 5
   reward_name: Granite Flask
   reward_qty: 1.0
   reward_kind: unique
+  reward_variant: ''
 - name: Echoes of Love
   set_size: 3
   reward_name: Fidelitas' Spike
   reward_qty: 1.0
   reward_kind: unique
+  reward_variant: Two-Implicit Corrupted
 - name: Eldritch Perfection
   set_size: 4
   reward_name: Item
   reward_qty: 1.0
   reward_kind: other
+  reward_variant: Perfect Eldritch Implicit Modifier
 - name: Emperor of Purity
   set_size: 7
   reward_name: Six-Link Holy Chainmail
   reward_qty: 1.0
   reward_kind: other
+  reward_variant: ''
 - name: Emperor's Luck
   set_size: 5
   reward_name: Currency
   reward_qty: 5.0
   reward_kind: currency
+  reward_variant: ''
 - name: Endless Night
   set_size: 7
   reward_name: Maloney's Mechanism
   reward_qty: 1.0
   reward_kind: unique
+  reward_variant: ''
 - name: Etched in Blood
   set_size: 9
   reward_name: Rigwald's Quills
   reward_qty: 1.0
   reward_kind: unique
+  reward_variant: Two-Implicit Corrupted
 - name: Eternal Bonds
   set_size: 4
   reward_name: Replica Cortex
   reward_qty: 1.0
   reward_kind: unique
+  reward_variant: ''
 - name: Ever-Changing
   set_size: 3
   reward_name: Orb of Unmaking
   reward_qty: 10.0
   reward_kind: currency
+  reward_variant: ''
 - name: Fateful Meeting
   set_size: 9
   reward_name: League-Specific Item
   reward_qty: 1.0
   reward_kind: unique
+  reward_variant: Two-Implicit Corrupted
 - name: Father's Love
   set_size: 2
   reward_name: Sublime Vision
   reward_qty: 1.0
   reward_kind: unique
+  reward_variant: ''
 - name: Fire Of Unknown Origin
   set_size: 7
   reward_name: Nimis
   reward_qty: 1.0
   reward_kind: unique
+  reward_variant: ''
 - name: Forbidden Power
   set_size: 4
   reward_name: Balefire
   reward_qty: 1.0
   reward_kind: unique
+  reward_variant: Corrupted
 - name: Friendship
   set_size: 3
   reward_name: Aul's Uprising
   reward_qty: 1.0
   reward_kind: unique
+  reward_variant: ''
 - name: From Bone to Ashes
   set_size: 8
   reward_name: Ngamahu's Flame
   reward_qty: 1.0
   reward_kind: unique
+  reward_variant: Two-Implicit Corrupted
 - name: Further Invention
   set_size: 4
   reward_name: Helmet
   reward_qty: 1.0
   reward_kind: other
+  reward_variant: ''
 - name: Gemcutter's Mercy
   set_size: 3
   reward_name: Empower, Enhance or Enlighten
   reward_qty: 1.0
   reward_kind: other
+  reward_variant: ''
 - name: Gemcutter's Promise
   set_size: 3
   reward_name: Gem
   reward_qty: 1.0
   reward_kind: other
+  reward_variant: Quality
 - name: Gift of Asenath
   set_size: 5
   reward_name: Asenath's Gentle Touch
   reward_qty: 1.0
   reward_kind: unique
+  reward_variant: Two-Implicit Corrupted
 - name: Gift of the Gemling Queen
   set_size: 9
   reward_name: Level 20 Support Gem
   reward_qty: 1.0
   reward_kind: other
+  reward_variant: ''
 - name: Glimmer of Hope
   set_size: 8
   reward_name: Gold Ring
   reward_qty: 1.0
   reward_kind: unique
+  reward_variant: ''
 - name: Grave Knowledge
   set_size: 6
   reward_name: Summon Raging Spirit
   reward_qty: 1.0
   reward_kind: other
+  reward_variant: Quality
 - name: Guardian's Challenge
   set_size: 4
   reward_name: Shaper Guardian Map
   reward_qty: 1.0
   reward_kind: other
+  reward_variant: ''
 - name: Harmony of Souls
   set_size: 9
   reward_name: Shrieking Essence
   reward_qty: 9.0
   reward_kind: currency
+  reward_variant: ''
 - name: Haunting Shadows
   set_size: 4
   reward_name: Metamorph Item
   reward_qty: 1.0
   reward_kind: unique
+  reward_variant: ''
 - name: Her Mask
   set_size: 4
   reward_name: Sacrifice Fragment
   reward_qty: 1.0
   reward_kind: other
+  reward_variant: ''
 - name: Heterochromia
   set_size: 2
   reward_name: Two-Stone Ring
   reward_qty: 1.0
   reward_kind: unique
+  reward_variant: ''
 - name: History
   set_size: 5
   reward_name: Hinekora's Lock
   reward_qty: 2.0
   reward_kind: currency
+  reward_variant: ''
 - name: Home
   set_size: 3
   reward_name: Empower, Enhance or Enlighten
   reward_qty: 1.0
   reward_kind: other
+  reward_variant: Quality
 - name: Hope
   set_size: 5
   reward_name: Prismatic Ring
   reward_qty: 1.0
   reward_kind: unique
+  reward_variant: Corrupted
 - name: House of Mirrors
   set_size: 9
   reward_name: Mirror of Kalandra
   reward_qty: 1.0
   reward_kind: currency
+  reward_variant: ''
 - name: Hubris
   set_size: 5
   reward_name: Ring
   reward_qty: 1.0
   reward_kind: unique
+  reward_variant: ''
 - name: Humility
   set_size: 9
   reward_name: Tabula Rasa
   reward_qty: 1.0
   reward_kind: unique
+  reward_variant: ''
 - name: Hunter's Resolve
   set_size: 8
   reward_name: Bow
   reward_qty: 1.0
   reward_kind: unique
+  reward_variant: ''
 - name: Hunter's Reward
   set_size: 3
   reward_name: The Taming
   reward_qty: 1.0
   reward_kind: unique
+  reward_variant: ''
 - name: I See Brothers
   set_size: 2
   reward_name: Fracturing Orb
   reward_qty: 2.0
   reward_kind: currency
+  reward_variant: ''
 - name: Immortal Resolve
   set_size: 6
   reward_name: Six-Linked Body Armour
   reward_qty: 1.0
   reward_kind: other
+  reward_variant: ''
 - name: Imperfect Memories
   set_size: 5
   reward_name: Jewellery
   reward_qty: 1.0
   reward_kind: other
+  reward_variant: Three-Implicit Synthesised
 - name: Imperial Legacy
   set_size: 22
   reward_name: Six-Link Imperial Bow
   reward_qty: 1.0
   reward_kind: other
+  reward_variant: ''
 - name: Jack in the Box
   set_size: 4
   reward_name: Item
   reward_qty: 1.0
   reward_kind: unique
+  reward_variant: ''
 - name: Judging Voices
   set_size: 9
   reward_name: Forbidden Shako
   reward_qty: 1.0
   reward_kind: unique
+  reward_variant: ''
 - name: Justified Ambition
   set_size: 5
   reward_name: Synthesis Map
   reward_qty: 1.0
   reward_kind: unique
+  reward_variant: ''
 - name: Keeper's Corruption
   set_size: 7
   reward_name: Eldritch Bone Helmet (Concentrated Effect)
   reward_qty: 1.0
   reward_kind: other
+  reward_variant: ''
 - name: Lachrymal Necrosis
   set_size: 3
   reward_name: Jewel
   reward_qty: 1.0
   reward_kind: other
+  reward_variant: 'Implicit Modifier: Corrupted'
 - name: Lantador's Lost Love
   set_size: 7
   reward_name: Two-Stone Ring
   reward_qty: 1.0
   reward_kind: other
+  reward_variant: ''
 - name: Last Hope
   set_size: 3
   reward_name: Mortal Hope
   reward_qty: 1.0
   reward_kind: other
+  reward_variant: ''
 - name: Last Stand
   set_size: 3
   reward_name: The Surrender
   reward_qty: 1.0
   reward_kind: unique
+  reward_variant: ''
 - name: Left to Fate
   set_size: 4
   reward_name: Map
   reward_qty: 1.0
   reward_kind: other
+  reward_variant: Unidentified Corrupted
 - name: Lethean Temptation
   set_size: 6
   reward_name: Nebulis
   reward_qty: 1.0
   reward_kind: unique
+  reward_variant: ''
 - name: Light and Truth
   set_size: 2
   reward_name: Crystal Sceptre
   reward_qty: 1.0
   reward_kind: unique
+  reward_variant: ''
 - name: Lingering Remnants
   set_size: 16
   reward_name: Vaal Temple Map
   reward_qty: 1.0
   reward_kind: other
+  reward_variant: Corrupted
 - name: Lonely Warrior
   set_size: 10
   reward_name: Defiance of Destiny
   reward_qty: 1.0
   reward_kind: unique
+  reward_variant: ''
 - name: Lost Worlds
   set_size: 8
   reward_name: Map
   reward_qty: 1.0
   reward_kind: other
+  reward_variant: ''
 - name: Love Through Ice
   set_size: 4
   reward_name: Unnatural Instinct
   reward_qty: 1.0
   reward_kind: unique
+  reward_variant: Two-Implicit Corrupted
 - name: Loyalty
   set_size: 5
   reward_name: Orb of Fusing
   reward_qty: 3.0
   reward_kind: currency
+  reward_variant: ''
 - name: Lucky Bastion
   set_size: 6
   reward_name: Svalinn
   reward_qty: 1.0
   reward_kind: unique
+  reward_variant: ''
 - name: Lucky Connections
   set_size: 7
   reward_name: Orb of Fusing
   reward_qty: 20.0
   reward_kind: currency
+  reward_variant: ''
 - name: Lucky Deck
   set_size: 9
   reward_name: Stacked Deck
   reward_qty: 10.0
   reward_kind: currency
+  reward_variant: ''
 - name: Luminous Trove
   set_size: 7
   reward_name: Voices
   reward_qty: 1.0
   reward_kind: unique
+  reward_variant: Corrupted
 - name: Lysah's Respite
   set_size: 6
   reward_name: Agate Amulet
   reward_qty: 1.0
   reward_kind: unique
+  reward_variant: Corrupted
 - name: Magnum Opus
   set_size: 5
   reward_name: Item
   reward_qty: 1.0
   reward_kind: other
+  reward_variant: Three-Implicit Synthesised
 - name: Man With Bear
   set_size: 3
   reward_name: Bestiary Scarab
   reward_qty: 1.0
   reward_kind: other
+  reward_variant: ''
 - name: Matryoshka
   set_size: 8
-  reward_name: 'Onyx Amulet Item Level:'
+  reward_name: 'Item Level:'
   reward_qty: 1.0
   reward_kind: other
+  reward_variant: Four Anointments Incubating Talisman Item Corrupted Quality Onyx
+    Amulet
 - name: Mawr Blaidd
   set_size: 16
   reward_name: Eyes of the Greatwolf
   reward_qty: 1.0
   reward_kind: unique
+  reward_variant: ''
 - name: Merciless Armament
   set_size: 4
   reward_name: Merciless Two-Hand Weapon
   reward_qty: 1.0
   reward_kind: other
+  reward_variant: ''
 - name: Might is Right
   set_size: 9
   reward_name: Trypanon
   reward_qty: 1.0
   reward_kind: unique
+  reward_variant: ''
 - name: Misery in Darkness
   set_size: 6
   reward_name: Shroud of the Lightless
   reward_qty: 1.0
   reward_kind: unique
+  reward_variant: ''
 - name: Mitts
   set_size: 5
   reward_name: Gloves
   reward_qty: 1.0
   reward_kind: unique
+  reward_variant: ''
 - name: Monochrome
   set_size: 3
   reward_name: Valdo's Puzzle Box
   reward_qty: 1.0
   reward_kind: currency
+  reward_variant: ''
 - name: More is Never Enough
   set_size: 7
   reward_name: Scarab
   reward_qty: 4.0
   reward_kind: other
+  reward_variant: ''
 - name: No Traces
   set_size: 9
   reward_name: Orb of Scouring
   reward_qty: 30.0
   reward_kind: currency
+  reward_variant: ''
 - name: Nook's Crown
   set_size: 4
   reward_name: Bone Helmet
   reward_qty: 1.0
   reward_kind: other
+  reward_variant: ''
 - name: One Last Score
   set_size: 5
   reward_name: Experimented Jewellery
   reward_qty: 1.0
   reward_kind: other
+  reward_variant: ''
 - name: Outfoxed
   set_size: 2
   reward_name: Veiled Exalted Orb
   reward_qty: 1.0
   reward_kind: currency
+  reward_variant: ''
 - name: Parasitic Passengers
   set_size: 8
   reward_name: Incubator
   reward_qty: 10.0
   reward_kind: currency
+  reward_variant: ''
 - name: Peaceful Moments
   set_size: 5
   reward_name: Timeless Jewel
   reward_qty: 1.0
   reward_kind: unique
+  reward_variant: ''
 - name: Perfection
   set_size: 5
   reward_name: Jewellery
   reward_qty: 1.0
   reward_kind: other
+  reward_variant: ''
 - name: Poisoned Faith
   set_size: 8
   reward_name: Arakaali's Fang
   reward_qty: 1.0
   reward_kind: unique
+  reward_variant: Corrupted
 - name: Prejudice
   set_size: 7
   reward_name: Item
   reward_qty: 1.0
   reward_kind: unique
+  reward_variant: ''
 - name: Pride Before the Fall
   set_size: 8
   reward_name: Kaom's Heart
   reward_qty: 1.0
   reward_kind: unique
+  reward_variant: Corrupted
 - name: Pride of the First Ones
   set_size: 7
   reward_name: Farrul's Fur
   reward_qty: 1.0
   reward_kind: unique
+  reward_variant: ''
 - name: Prometheus' Armoury
   set_size: 6
   reward_name: One-Hand Weapon
   reward_qty: 1.0
   reward_kind: other
+  reward_variant: ''
 - name: Prosperity
   set_size: 10
   reward_name: Perandus' Gold Ring
   reward_qty: 1.0
   reward_kind: other
+  reward_variant: ''
 - name: Rain Tempter
   set_size: 9
   reward_name: Map
   reward_qty: 1.0
   reward_kind: other
+  reward_variant: ''
 - name: Rain of Chaos
   set_size: 8
   reward_name: Chaos Orb
   reward_qty: 1.0
   reward_kind: currency
+  reward_variant: ''
 - name: Rats
   set_size: 8
   reward_name: Rat's Nest
   reward_qty: 1.0
   reward_kind: unique
+  reward_variant: ''
 - name: Rebirth
   set_size: 27
   reward_name: Charan's Sword
   reward_qty: 1.0
   reward_kind: unique
+  reward_variant: ''
 - name: Rebirth and Renewal
   set_size: 4
   reward_name: Horned Scarab
   reward_qty: 1.0
   reward_kind: other
+  reward_variant: ''
 - name: Reckless Ambition
   set_size: 6
   reward_name: Omeyocan
   reward_qty: 1.0
   reward_kind: unique
+  reward_variant: ''
 - name: Reflection of the Heart
   set_size: 2
   reward_name: Kalandra's Touch
   reward_qty: 1.0
   reward_kind: unique
+  reward_variant: ''
 - name: Remembrance
   set_size: 8
   reward_name: Precursor's Emblem
   reward_qty: 1.0
   reward_kind: unique
+  reward_variant: Corrupted
 - name: Runic Luck
   set_size: 4
   reward_name: Vendor Refresh Currency
   reward_qty: 10.0
   reward_kind: currency
+  reward_variant: ''
 - name: Sambodhi's Vow
   set_size: 3
   reward_name: Mortal Fragment
   reward_qty: 1.0
   reward_kind: other
+  reward_variant: ''
 - name: Sambodhi's Wisdom
   set_size: 3
   reward_name: Tabula Rasa
   reward_qty: 1.0
   reward_kind: unique
+  reward_variant: Two-Implicit Corrupted
 - name: Scholar of the Seas
   set_size: 7
   reward_name: Mao Kun
   reward_qty: 1.0
   reward_kind: unique
+  reward_variant: ''
 - name: Seven Years Bad Luck
   set_size: 13
   reward_name: Mirror Shard
   reward_qty: 1.0
   reward_kind: currency
+  reward_variant: ''
 - name: Shard of Fate
   set_size: 4
   reward_name: Vivid Jewel
   reward_qty: 1.0
   reward_kind: other
+  reward_variant: ''
 - name: Silence and Frost
   set_size: 7
   reward_name: The Pandemonius
   reward_qty: 1.0
   reward_kind: unique
+  reward_variant: ''
 - name: Something Dark
   set_size: 5
   reward_name: Blueprint
   reward_qty: 1.0
   reward_kind: other
+  reward_variant: ''
 - name: Squandered Prosperity
   set_size: 5
   reward_name: The Light of Meaning
   reward_qty: 1.0
   reward_kind: unique
+  reward_variant: Corrupted
 - name: Struck by Lightning
   set_size: 3
   reward_name: Electrocuting Jewellery
   reward_qty: 1.0
   reward_kind: other
+  reward_variant: ''
 - name: Succor of the Sinless
   set_size: 6
   reward_name: Bottled Faith
   reward_qty: 1.0
   reward_kind: unique
+  reward_variant: ''
 - name: Temperance
   set_size: 4
   reward_name: Relic
   reward_qty: 1.0
   reward_kind: unique
+  reward_variant: ''
 - name: Terrible Secret of Space
   set_size: 8
   reward_name: Level 21 Transfigured Golem Gem
   reward_qty: 1.0
   reward_kind: other
+  reward_variant: Corrupted Quality
 - name: The Academic
   set_size: 8
   reward_name: Inspired Learning
   reward_qty: 1.0
   reward_kind: unique
+  reward_variant: ''
 - name: The Admirer
   set_size: 9
   reward_name: Atziri Item
   reward_qty: 1.0
   reward_kind: unique
+  reward_variant: ''
 - name: The Adventuring Spirit
   set_size: 6
   reward_name: Victario's Influence
   reward_qty: 1.0
   reward_kind: unique
+  reward_variant: ''
 - name: The Aesthete
   set_size: 8
   reward_name: Shavronne Item
   reward_qty: 1.0
   reward_kind: unique
+  reward_variant: ''
 - name: The Apothecary
   set_size: 5
   reward_name: Mageblood
   reward_qty: 1.0
   reward_kind: unique
+  reward_variant: ''
 - name: The Archmage's Right Hand
   set_size: 7
   reward_name: Glyphic Prophecy Wand
   reward_qty: 1.0
   reward_kind: other
+  reward_variant: ''
 - name: The Arena Champion
   set_size: 10
   reward_name: Map
   reward_qty: 1.0
   reward_kind: other
+  reward_variant: ''
 - name: The Army of Blood
   set_size: 6
   reward_name: Bloodbond
   reward_qty: 1.0
   reward_kind: unique
+  reward_variant: ''
 - name: The Artist
   set_size: 11
   reward_name: Level 4 Enhance
   reward_qty: 1.0
   reward_kind: other
+  reward_variant: Corrupted
 - name: The Aspirant
   set_size: 5
   reward_name: Item
   reward_qty: 1.0
   reward_kind: other
+  reward_variant: ''
 - name: The Astromancer
   set_size: 7
   reward_name: The Eternity Shroud
   reward_qty: 1.0
   reward_kind: unique
+  reward_variant: Two-Implicit Corrupted
 - name: The Avenger
   set_size: 12
   reward_name: Mjölner
   reward_qty: 1.0
   reward_kind: unique
+  reward_variant: Corrupted
 - name: The Awakened
   set_size: 6
   reward_name: Jewellery
   reward_qty: 1.0
   reward_kind: other
+  reward_variant: ''
 - name: The Battle Born
   set_size: 5
   reward_name: Axe
   reward_qty: 1.0
   reward_kind: unique
+  reward_variant: ''
 - name: The Bear Woman
   set_size: 6
   reward_name: Fecund Ursine Pelt
   reward_qty: 1.0
   reward_kind: other
+  reward_variant: ''
 - name: The Beast
   set_size: 6
   reward_name: Belly of the Beast
   reward_qty: 1.0
   reward_kind: unique
+  reward_variant: ''
 - name: The Betrayal
   set_size: 9
   reward_name: Maligaro's Virtuosity
   reward_qty: 1.0
   reward_kind: unique
+  reward_variant: ''
 - name: The Bitter Blossom
   set_size: 3
   reward_name: Level 21 Chaos Gem
   reward_qty: 1.0
   reward_kind: other
+  reward_variant: Corrupted Quality
 - name: The Blazing Fire
   set_size: 6
   reward_name: Chin Sol
   reward_qty: 1.0
   reward_kind: unique
+  reward_variant: ''
 - name: The Blessing of Moosh
   set_size: 4
   reward_name: Level 21 Transfigured Gem
   reward_qty: 1.0
   reward_kind: other
+  reward_variant: Corrupted
 - name: The Body
   set_size: 4
   reward_name: Body Armour
   reward_qty: 1.0
   reward_kind: unique
+  reward_variant: ''
 - name: The Bones
   set_size: 6
   reward_name: Level 21 Vaal Summon Skeletons
   reward_qty: 1.0
   reward_kind: other
+  reward_variant: Corrupted
 - name: The Brawny Battle Mage
   set_size: 5
   reward_name: Merciless Tornado Wand
   reward_qty: 1.0
   reward_kind: other
+  reward_variant: ''
 - name: The Breach
   set_size: 4
   reward_name: Breach Item
   reward_qty: 1.0
   reward_kind: unique
+  reward_variant: ''
 - name: The Brittle Emperor
   set_size: 8
   reward_name: Voll's Devotion
   reward_qty: 1.0
   reward_kind: unique
+  reward_variant: Corrupted
 - name: The Cache
   set_size: 6
   reward_name: Jewellery
   reward_qty: 1.0
   reward_kind: unique
+  reward_variant: ''
 - name: The Cacophony
   set_size: 8
   reward_name: Deafening Essence
   reward_qty: 3.0
   reward_kind: currency
+  reward_variant: ''
 - name: The Calling
   set_size: 6
   reward_name: Beyond Item
   reward_qty: 1.0
   reward_kind: unique
+  reward_variant: ''
 - name: The Card Sharp
   set_size: 4
   reward_name: Divination Scarab
   reward_qty: 1.0
   reward_kind: other
+  reward_variant: ''
 - name: The Carrion Crow
   set_size: 4
   reward_name: Life Armour
   reward_qty: 1.0
   reward_kind: other
+  reward_variant: ''
 - name: The Cataclysm
   set_size: 13
   reward_name: Level 21 Spell Gem
   reward_qty: 1.0
   reward_kind: other
+  reward_variant: Corrupted
 - name: The Catalyst
   set_size: 3
   reward_name: Vaal Orb
   reward_qty: 1.0
   reward_kind: currency
+  reward_variant: ''
 - name: The Catch
   set_size: 18
   reward_name: Fishing Rod
   reward_qty: 1.0
   reward_kind: other
+  reward_variant: Incubated
 - name: The Celestial Justicar
   set_size: 6
   reward_name: Six-Link Astral Plate
   reward_qty: 1.0
   reward_kind: other
+  reward_variant: ''
 - name: The Celestial Stone
   set_size: 10
   reward_name: Opal Ring
   reward_qty: 1.0
   reward_kind: other
+  reward_variant: ''
 - name: The Chains that Bind
   set_size: 11
   reward_name: Six-Link Body Armour
   reward_qty: 1.0
   reward_kind: other
+  reward_variant: ''
 - name: The Chosen
   set_size: 5
   reward_name: Skin of the Lords
   reward_qty: 1.0
   reward_kind: unique
+  reward_variant: Corrupted
 - name: The Coming Storm
   set_size: 8
   reward_name: Lightning Coil
   reward_qty: 1.0
   reward_kind: unique
+  reward_variant: ''
 - name: The Conduit
   set_size: 9
   reward_name: Doryani's Fist
   reward_qty: 1.0
   reward_kind: unique
+  reward_variant: ''
 - name: The Craving
   set_size: 4
   reward_name: Unending Hunger
   reward_qty: 1.0
   reward_kind: unique
+  reward_variant: ''
 - name: The Cursed King
   set_size: 8
   reward_name: Rigwald's Curse
   reward_qty: 1.0
   reward_kind: unique
+  reward_variant: ''
 - name: The Damned
   set_size: 6
   reward_name: Soul Ripper
   reward_qty: 1.0
   reward_kind: unique
+  reward_variant: ''
 - name: The Dapper Prodigy
   set_size: 6
   reward_name: Six-Link Body Armour
   reward_qty: 1.0
   reward_kind: other
+  reward_variant: ''
 - name: The Dark Mage
   set_size: 6
   reward_name: Six-Link Staff
   reward_qty: 1.0
   reward_kind: other
+  reward_variant: ''
 - name: The Darkest Dream
   set_size: 6
   reward_name: Severed in Sleep
   reward_qty: 1.0
   reward_kind: unique
+  reward_variant: Corrupted
 - name: The Deal
   set_size: 5
   reward_name: Cartography Scarab
   reward_qty: 1.0
   reward_kind: other
+  reward_variant: ''
 - name: The Deceiver
   set_size: 4
   reward_name: Belt of the Deceiver
   reward_qty: 1.0
   reward_kind: unique
+  reward_variant: Corrupted
 - name: The Deep Ones
   set_size: 5
   reward_name: Tidebreaker
   reward_qty: 1.0
   reward_kind: unique
+  reward_variant: ''
 - name: The Demon
   set_size: 10
   reward_name: Headhunter
   reward_qty: 1.0
   reward_kind: unique
+  reward_variant: Two-Implicit Corrupted
 - name: The Demoness
   set_size: 5
   reward_name: Death's Hand
   reward_qty: 1.0
   reward_kind: unique
+  reward_variant: ''
 - name: The Destination
   set_size: 9
   reward_name: Watcher's Eye
   reward_qty: 1.0
   reward_kind: unique
+  reward_variant: Two-Implicit Corrupted
 - name: The Devastator
   set_size: 8
   reward_name: Atziri's Disfavour
   reward_qty: 1.0
   reward_kind: unique
+  reward_variant: Corrupted
 - name: The Doctor
   set_size: 8
   reward_name: Headhunter
   reward_qty: 1.0
   reward_kind: unique
+  reward_variant: ''
 - name: The Doppelganger
   set_size: 2
   reward_name: Mirror Arrow
   reward_qty: 1.0
   reward_kind: other
+  reward_variant: Quality
 - name: The Dragon
   set_size: 4
   reward_name: Coruscating Elixir
   reward_qty: 1.0
   reward_kind: unique
+  reward_variant: ''
 - name: The Dragon's Heart
   set_size: 11
   reward_name: Level 4 Empower
   reward_qty: 1.0
   reward_kind: other
+  reward_variant: Corrupted
 - name: The Dreamer
   set_size: 6
   reward_name: Chayula Item
   reward_qty: 1.0
   reward_kind: unique
+  reward_variant: ''
 - name: The Dreamland
   set_size: 8
   reward_name: Poorjoy's Asylum
   reward_qty: 1.0
   reward_kind: unique
+  reward_variant: ''
 - name: The Drunken Aristocrat
   set_size: 8
   reward_name: Divination Distillate
   reward_qty: 1.0
   reward_kind: unique
+  reward_variant: ''
 - name: The Dungeon Master
   set_size: 7
   reward_name: Belt
   reward_qty: 1.0
   reward_kind: unique
+  reward_variant: ''
 - name: The Easy Stroll
   set_size: 2
   reward_name: Map
   reward_qty: 1.0
   reward_kind: other
+  reward_variant: Corrupted
 - name: The Eldritch Decay
   set_size: 4
   reward_name: Uber Elder Fragment
   reward_qty: 1.0
   reward_kind: other
+  reward_variant: ''
 - name: The Encroaching Darkness
   set_size: 8
   reward_name: Map
   reward_qty: 1.0
   reward_kind: unique
+  reward_variant: Corrupted
 - name: The Endless Darkness
   set_size: 9
   reward_name: Voidforge
   reward_qty: 1.0
   reward_kind: unique
+  reward_variant: ''
 - name: The Endurance
   set_size: 4
   reward_name: Vivid Crimson Jewel
   reward_qty: 1.0
   reward_kind: other
+  reward_variant: ''
 - name: The Enforcer
   set_size: 4
   reward_name: Spiked Gloves of the Conquest (Culling Strike)
   reward_qty: 1.0
   reward_kind: other
+  reward_variant: ''
 - name: The Enlightened
   set_size: 6
   reward_name: Level 3 Enlighten
   reward_qty: 1.0
   reward_kind: other
+  reward_variant: ''
 - name: The Enthusiasts
   set_size: 3
   reward_name: Victario's Influence
   reward_qty: 1.0
   reward_kind: unique
+  reward_variant: Two-Implicit Corrupted
 - name: The Escape
   set_size: 5
   reward_name: Seven-League Step
   reward_qty: 1.0
   reward_kind: unique
+  reward_variant: ''
 - name: The Eternal War
   set_size: 4
   reward_name: Timeless Jewel
   reward_qty: 1.0
   reward_kind: unique
+  reward_variant: Two-Implicit Corrupted
 - name: The Ethereal
   set_size: 7
   reward_name: Six-Link Vaal Regalia
   reward_qty: 1.0
   reward_kind: other
+  reward_variant: ''
 - name: The Everlasting
   set_size: 3
   reward_name: Originator Incarnation Item
   reward_qty: 1.0
   reward_kind: unique
+  reward_variant: ''
 - name: The Explorer
   set_size: 6
   reward_name: Map
   reward_qty: 1.0
   reward_kind: other
+  reward_variant: Corrupted
 - name: The Eye of Terror
   set_size: 8
-  reward_name: Foulborn Mageblood
+  reward_name: Mageblood
   reward_qty: 1.0
   reward_kind: unique
+  reward_variant: Foulborn
 - name: The Eye of the Dragon
   set_size: 10
   reward_name: Jewel
   reward_qty: 1.0
   reward_kind: unique
+  reward_variant: Corrupted
 - name: The Fathomless Depths
   set_size: 8
   reward_name: Lightpoacher
   reward_qty: 1.0
   reward_kind: unique
+  reward_variant: ''
 - name: The Feast
   set_size: 5
   reward_name: Romira's Banquet
   reward_qty: 1.0
   reward_kind: unique
+  reward_variant: Corrupted
 - name: The Fiend
   set_size: 11
   reward_name: Headhunter
   reward_qty: 1.0
   reward_kind: unique
+  reward_variant: Corrupted
 - name: The Finishing Touch
   set_size: 2
   reward_name: Fertile Catalyst
   reward_qty: 1.0
   reward_kind: currency
+  reward_variant: ''
 - name: The Fishmonger
   set_size: 4
   reward_name: Albino Rhoa Feather
   reward_qty: 1.0
   reward_kind: other
+  reward_variant: ''
 - name: The Fletcher
   set_size: 5
   reward_name: Drillneck
   reward_qty: 1.0
   reward_kind: unique
+  reward_variant: Corrupted
 - name: The Flora's Gift
   set_size: 5
   reward_name: Five-Link Staff
   reward_qty: 1.0
   reward_kind: other
+  reward_variant: ''
 - name: The Fool
   set_size: 4
   reward_name: Orb of Chance
   reward_qty: 20.0
   reward_kind: currency
+  reward_variant: ''
 - name: The Forgotten Treasure
   set_size: 6
   reward_name: Leather Belt
   reward_qty: 1.0
   reward_kind: unique
+  reward_variant: ''
 - name: The Formless Sea
   set_size: 7
   reward_name: Varunastra
   reward_qty: 1.0
   reward_kind: unique
+  reward_variant: ''
 - name: The Forsaken
   set_size: 7
   reward_name: Umbilicus Immortalis
   reward_qty: 1.0
   reward_kind: unique
+  reward_variant: ''
 - name: The Fortunate
   set_size: 12
   reward_name: Divine Orb
   reward_qty: 2.0
   reward_kind: currency
+  reward_variant: ''
 - name: The Forward Gaze
   set_size: 6
   reward_name: Replica Item
   reward_qty: 1.0
   reward_kind: unique
+  reward_variant: ''
 - name: The Fox
   set_size: 6
   reward_name: Level 20 Gem
   reward_qty: 1.0
   reward_kind: other
+  reward_variant: ''
 - name: The Fox in the Brambles
   set_size: 7
   reward_name: Bramblejack
   reward_qty: 1.0
   reward_kind: unique
+  reward_variant: Two-Implicit Corrupted
 - name: The Gambler
   set_size: 5
   reward_name: Divination Card
   reward_qty: 1.0
   reward_kind: other
+  reward_variant: ''
 - name: The Garish Power
   set_size: 4
   reward_name: Jewel
   reward_qty: 1.0
   reward_kind: unique
+  reward_variant: ''
 - name: The Gemcutter
   set_size: 3
   reward_name: Gemcutter's Prism
   reward_qty: 1.0
   reward_kind: currency
+  reward_variant: ''
 - name: The Gentleman
   set_size: 4
   reward_name: Sword
   reward_qty: 1.0
   reward_kind: unique
+  reward_variant: Corrupted
 - name: The Gladiator
   set_size: 5
   reward_name: Nightmare Bascinet
   reward_qty: 1.0
   reward_kind: unique
+  reward_variant: ''
 - name: The Golden Era
   set_size: 7
   reward_name: Flaring Eclipse Staff
   reward_qty: 1.0
   reward_kind: other
+  reward_variant: ''
 - name: The Greatest Intentions
   set_size: 10
   reward_name: The Saviour
   reward_qty: 1.0
   reward_kind: unique
+  reward_variant: Two-Implicit Corrupted
 - name: The Gulf
   set_size: 5
   reward_name: Thread of Hope
   reward_qty: 1.0
   reward_kind: unique
+  reward_variant: Two-Implicit Corrupted
 - name: The Hale Heart
   set_size: 4
   reward_name: Item
   reward_qty: 1.0
   reward_kind: other
+  reward_variant: ''
 - name: The Harvester
   set_size: 11
   reward_name: The Harvest
   reward_qty: 1.0
   reward_kind: unique
+  reward_variant: ''
 - name: The Hermit
   set_size: 9
   reward_name: Lifesprig
   reward_qty: 1.0
   reward_kind: unique
+  reward_variant: ''
 - name: The Hive of Knowledge
   set_size: 6
   reward_name: Machina Mitts
   reward_qty: 1.0
   reward_kind: unique
+  reward_variant: Two-Implicit Corrupted
 - name: The Hoarder
   set_size: 12
   reward_name: Exalted Orb
   reward_qty: 1.0
   reward_kind: currency
+  reward_variant: ''
 - name: The Hook
   set_size: 8
   reward_name: Level 21 Transfigured Gem
   reward_qty: 1.0
   reward_kind: other
+  reward_variant: Corrupted Quality
 - name: The Hunger
   set_size: 9
   reward_name: Taste of Hate
   reward_qty: 1.0
   reward_kind: unique
+  reward_variant: ''
 - name: The Immortal
   set_size: 10
   reward_name: House of Mirrors
   reward_qty: 1.0
   reward_kind: other
+  reward_variant: ''
 - name: The Incantation
   set_size: 4
   reward_name: The Whispering Ice
   reward_qty: 1.0
   reward_kind: unique
+  reward_variant: ''
 - name: The Innocent
   set_size: 10
   reward_name: Orb of Regret
   reward_qty: 40.0
   reward_kind: currency
+  reward_variant: ''
 - name: The Inoculated
   set_size: 4
   reward_name: Seraphim's Armour
   reward_qty: 1.0
   reward_kind: other
+  reward_variant: ''
 - name: The Insane Cat
   set_size: 9
   reward_name: Mageblood
   reward_qty: 1.0
   reward_kind: unique
+  reward_variant: Corrupted
 - name: The Insatiable
   set_size: 3
   reward_name: The Harvest
   reward_qty: 1.0
   reward_kind: unique
+  reward_variant: Corrupted
 - name: The Inventor
   set_size: 6
   reward_name: Vaal Orb
   reward_qty: 10.0
   reward_kind: currency
+  reward_variant: ''
 - name: The Jester
   set_size: 9
   reward_name: Merciless One-Hand Weapon
   reward_qty: 1.0
   reward_kind: other
+  reward_variant: ''
 - name: The Jeweller's Boon
   set_size: 5
   reward_name: Five-Linked Body Armour
   reward_qty: 1.0
   reward_kind: other
+  reward_variant: ''
 - name: The Journalist
   set_size: 10
   reward_name: Helmet
   reward_qty: 1.0
   reward_kind: other
+  reward_variant: ''
 - name: The Journey
   set_size: 4
   reward_name: Journey Tattoo
   reward_qty: 1.0
   reward_kind: currency
+  reward_variant: ''
 - name: The King's Blade
   set_size: 5
   reward_name: Bloodthirsty Eternal Sword
   reward_qty: 1.0
   reward_kind: other
+  reward_variant: ''
 - name: The King's Heart
   set_size: 8
   reward_name: Kaom's Heart
   reward_qty: 1.0
   reward_kind: unique
+  reward_variant: ''
 - name: The Lake
   set_size: 8
   reward_name: Reflecting Mist
   reward_qty: 1.0
   reward_kind: currency
+  reward_variant: ''
 - name: The Last Laugh
   set_size: 5
   reward_name: Replica Dragonfang's Flight
   reward_qty: 1.0
   reward_kind: unique
+  reward_variant: Corrupted
 - name: The Last One Standing
   set_size: 10
   reward_name: Atziri's Disfavour
   reward_qty: 1.0
   reward_kind: unique
+  reward_variant: ''
 - name: The Last Supper
   set_size: 6
   reward_name: Bino's Kitchen Knife
   reward_qty: 1.0
   reward_kind: unique
+  reward_variant: ''
 - name: The Leviathan
   set_size: 7
   reward_name: Maven Item
   reward_qty: 1.0
   reward_kind: unique
+  reward_variant: Two-Implicit Corrupted
 - name: The Lich
   set_size: 12
   reward_name: Midnight Bargain
   reward_qty: 1.0
   reward_kind: unique
+  reward_variant: Corrupted
 - name: The Life Thief
   set_size: 6
   reward_name: Zerphi's Heart
   reward_qty: 1.0
   reward_kind: unique
+  reward_variant: ''
 - name: The Lion
   set_size: 5
   reward_name: Lioneye Item
   reward_qty: 1.0
   reward_kind: unique
+  reward_variant: ''
 - name: The Long Con
   set_size: 4
   reward_name: Elderslayer's Exalted Orb
   reward_qty: 1.0
   reward_kind: currency
+  reward_variant: ''
 - name: The Long Watch
   set_size: 3
   reward_name: The Fourth Vow
   reward_qty: 1.0
   reward_kind: unique
+  reward_variant: ''
 - name: The Lord in Black
   set_size: 6
   reward_name: Ring of Bameth
   reward_qty: 1.0
   reward_kind: other
+  reward_variant: ''
 - name: The Lord of Celebration
   set_size: 4
   reward_name: Sceptre of Celebration
   reward_qty: 1.0
   reward_kind: other
+  reward_variant: ''
 - name: The Lover
   set_size: 2
   reward_name: Jewellery
   reward_qty: 1.0
   reward_kind: other
+  reward_variant: ''
 - name: The Lunaris Priestess
   set_size: 5
   reward_name: Sire of Shards
   reward_qty: 1.0
   reward_kind: unique
+  reward_variant: ''
 - name: The Mad King
   set_size: 7
   reward_name: Vaal Aspect
   reward_qty: 1.0
   reward_kind: unique
+  reward_variant: ''
 - name: The Magma Crab
   set_size: 6
   reward_name: Level 21 Vaal Molten Shell
   reward_qty: 1.0
   reward_kind: other
+  reward_variant: Corrupted
 - name: The Master Artisan
   set_size: 5
   reward_name: Quality Currency
   reward_qty: 20.0
   reward_kind: currency
+  reward_variant: ''
 - name: The Mayor
   set_size: 5
   reward_name: The Light of Meaning
   reward_qty: 1.0
   reward_kind: unique
+  reward_variant: ''
 - name: The Mercenary
   set_size: 5
   reward_name: Shield
   reward_qty: 1.0
   reward_kind: unique
+  reward_variant: Corrupted
 - name: The Messenger
   set_size: 4
   reward_name: Harbinger Item
   reward_qty: 1.0
   reward_kind: unique
+  reward_variant: ''
 - name: The Metalsmith's Gift
   set_size: 6
   reward_name: Prismatic Ring
   reward_qty: 1.0
   reward_kind: other
+  reward_variant: ''
 - name: The Mind's Eyes
   set_size: 7
   reward_name: Astral Projector
   reward_qty: 1.0
   reward_kind: unique
+  reward_variant: ''
 - name: The Miracle
   set_size: 3
   reward_name: Awakened Exceptional Gem
   reward_qty: 1.0
   reward_kind: other
+  reward_variant: ''
 - name: The Mountain
   set_size: 6
   reward_name: Jewel of Potency
   reward_qty: 1.0
   reward_kind: other
+  reward_variant: ''
 - name: The Nurse
   set_size: 8
   reward_name: The Doctor
   reward_qty: 1.0
   reward_kind: other
+  reward_variant: ''
 - name: The Oath
   set_size: 6
   reward_name: Death's Oath
   reward_qty: 1.0
   reward_kind: unique
+  reward_variant: ''
 - name: The Offering
   set_size: 8
   reward_name: Shavronne's Wrappings
   reward_qty: 1.0
   reward_kind: unique
+  reward_variant: ''
 - name: The Offspring
   set_size: 9
   reward_name: Ryslatha's Coil
   reward_qty: 1.0
   reward_kind: unique
+  reward_variant: ''
 - name: The Old Man
   set_size: 12
   reward_name: Fishing Rod
   reward_qty: 1.0
   reward_kind: other
+  reward_variant: Two-Implicit Corrupted
 - name: The One That Got Away
   set_size: 7
   reward_name: Replica Bated Breath
   reward_qty: 1.0
   reward_kind: unique
+  reward_variant: ''
 - name: The One With All
   set_size: 6
   reward_name: Le Heup of All
   reward_qty: 1.0
   reward_kind: unique
+  reward_variant: Corrupted
 - name: The Opulent
   set_size: 5
   reward_name: Ring
   reward_qty: 1.0
   reward_kind: other
+  reward_variant: ''
 - name: The Pack Leader
   set_size: 6
   reward_name: Alpha's Howl
   reward_qty: 1.0
   reward_kind: unique
+  reward_variant: ''
 - name: The Pact
   set_size: 9
   reward_name: Pledge of Hands
   reward_qty: 1.0
   reward_kind: unique
+  reward_variant: ''
 - name: The Patient
   set_size: 8
   reward_name: The Nurse
   reward_qty: 1.0
   reward_kind: other
+  reward_variant: ''
 - name: The Penitent
   set_size: 5
   reward_name: Unset Ring
   reward_qty: 1.0
   reward_kind: unique
+  reward_variant: ''
 - name: The Poet
   set_size: 9
   reward_name: Blood of Corruption
   reward_qty: 1.0
   reward_kind: unique
+  reward_variant: Corrupted
 - name: The Polymath
   set_size: 3
   reward_name: Astramentis
   reward_qty: 1.0
   reward_kind: unique
+  reward_variant: ''
 - name: The Porcupine
   set_size: 6
   reward_name: Six-Link Short Bow
   reward_qty: 1.0
   reward_kind: other
+  reward_variant: ''
 - name: The Price of Devotion
   set_size: 7
   reward_name: Mageblood
   reward_qty: 1.0
   reward_kind: unique
+  reward_variant: Two-Implicit Corrupted Quality
 - name: The Price of Loyalty
   set_size: 4
   reward_name: Skin of the Loyal
   reward_qty: 1.0
   reward_kind: unique
+  reward_variant: Two-Implicit Corrupted
 - name: The Price of Prescience
   set_size: 5
   reward_name: Vaal Temple Map
   reward_qty: 1.0
   reward_kind: other
+  reward_variant: Corrupted
 - name: The Price of Protection
   set_size: 5
   reward_name: Elder Guardian Occupied Map
   reward_qty: 1.0
   reward_kind: other
+  reward_variant: Corrupted
 - name: The Primordial
   set_size: 5
   reward_name: Jewel
   reward_qty: 1.0
   reward_kind: unique
+  reward_variant: ''
 - name: The Prince of Darkness
   set_size: 6
   reward_name: Elegant Hubris
   reward_qty: 1.0
   reward_kind: unique
+  reward_variant: ''
 - name: The Professor
   set_size: 4
   reward_name: The Putrid Cloister
   reward_qty: 1.0
   reward_kind: unique
+  reward_variant: ''
 - name: The Progeny of Lunaris
   set_size: 2
   reward_name: Dying Sun
   reward_qty: 1.0
   reward_kind: unique
+  reward_variant: ''
 - name: The Queen
   set_size: 16
   reward_name: Atziri's Acuity
   reward_qty: 1.0
   reward_kind: unique
+  reward_variant: ''
 - name: The Rabbit's Foot
   set_size: 8
   reward_name: Incursion Vial
   reward_qty: 10.0
   reward_kind: currency
+  reward_variant: ''
 - name: The Rabid Rhoa
   set_size: 4
   reward_name: Malicious Gemini Claw
   reward_qty: 1.0
   reward_kind: other
+  reward_variant: ''
 - name: The Realm
   set_size: 5
   reward_name: Portal
   reward_qty: 1.0
   reward_kind: other
+  reward_variant: Quality
 - name: The Return of the Rat
   set_size: 3
   reward_name: Tavukai
   reward_qty: 1.0
   reward_kind: unique
+  reward_variant: ''
 - name: The Risk
   set_size: 3
   reward_name: Ventor's Gamble
   reward_qty: 1.0
   reward_kind: unique
+  reward_variant: ''
 - name: The Rite of Elements
   set_size: 5
   reward_name: Level 21 Golem Gem
   reward_qty: 1.0
   reward_kind: other
+  reward_variant: Corrupted
 - name: The Road to Power
   set_size: 7
   reward_name: Runic One-Hand Weapon
   reward_qty: 1.0
   reward_kind: other
+  reward_variant: ''
 - name: The Rusted Bard
   set_size: 9
   reward_name: Tainted Mythic Orb
   reward_qty: 4.0
   reward_kind: currency
+  reward_variant: ''
 - name: The Ruthless Ceinture
   set_size: 7
   reward_name: Meginord's Girdle
   reward_qty: 1.0
   reward_kind: unique
+  reward_variant: Corrupted
 - name: The Sacrifice
   set_size: 4
   reward_name: Six-Link Sacrificial Garb
   reward_qty: 1.0
   reward_kind: other
+  reward_variant: ''
 - name: The Saint's Treasure
   set_size: 10
   reward_name: Exalted Orb
   reward_qty: 2.0
   reward_kind: currency
+  reward_variant: ''
 - name: The Samurai's Eye
   set_size: 3
   reward_name: Watcher's Eye
   reward_qty: 1.0
   reward_kind: unique
+  reward_variant: ''
 - name: The Scarred Meadow
   set_size: 9
   reward_name: Wake of Destruction
   reward_qty: 1.0
   reward_kind: unique
+  reward_variant: ''
 - name: The Scavenger
   set_size: 8
   reward_name: Carcass Jack
   reward_qty: 1.0
   reward_kind: unique
+  reward_variant: ''
 - name: The Scholar
   set_size: 3
   reward_name: Scroll of Wisdom
   reward_qty: 40.0
   reward_kind: currency
+  reward_variant: ''
 - name: The Scout
   set_size: 8
   reward_name: Exalted Orb
   reward_qty: 7.0
   reward_kind: currency
+  reward_variant: ''
 - name: The Seeker
   set_size: 9
   reward_name: Orb of Annulment
   reward_qty: 3.0
   reward_kind: currency
+  reward_variant: ''
 - name: The Sephirot
   set_size: 11
   reward_name: Divine Orb
   reward_qty: 10.0
   reward_kind: currency
+  reward_variant: ''
 - name: The Shepherd's Sandals
   set_size: 3
   reward_name: Boots
   reward_qty: 1.0
   reward_kind: unique
+  reward_variant: Two-Implicit Corrupted
 - name: The Shieldbearer
   set_size: 8
   reward_name: The Squire
   reward_qty: 1.0
   reward_kind: unique
+  reward_variant: ''
 - name: The Side Quest
   set_size: 5
   reward_name: Incarnation Echo
   reward_qty: 1.0
   reward_kind: other
+  reward_variant: ''
 - name: The Sigil
   set_size: 3
   reward_name: Unassailable Amulet
   reward_qty: 1.0
   reward_kind: other
+  reward_variant: ''
 - name: The Silly Boy
   set_size: 9
   reward_name: Horned Scarab
   reward_qty: 6.0
   reward_kind: other
+  reward_variant: ''
 - name: The Siren
   set_size: 7
   reward_name: The Whispering Ice
   reward_qty: 1.0
   reward_kind: unique
+  reward_variant: Corrupted
 - name: The Skeleton
   set_size: 6
   reward_name: Level 1 Summon Skeletons
   reward_qty: 1.0
   reward_kind: other
+  reward_variant: Corrupted Quality
 - name: The Slumbering Beast
   set_size: 5
   reward_name: Hinekora's Lock
   reward_qty: 1.0
   reward_kind: currency
+  reward_variant: ''
 - name: The Soul
   set_size: 9
   reward_name: Soul Taker
   reward_qty: 1.0
   reward_kind: unique
+  reward_variant: ''
 - name: The Spark and the Flame
   set_size: 2
   reward_name: Berek's Respite
   reward_qty: 1.0
   reward_kind: unique
+  reward_variant: ''
 - name: The Spoiled Prince
   set_size: 4
   reward_name: Dictator's Prophecy Wand
   reward_qty: 1.0
   reward_kind: other
+  reward_variant: ''
 - name: The Standoff
   set_size: 3
   reward_name: Rustic Sash
   reward_qty: 1.0
   reward_kind: unique
+  reward_variant: ''
 - name: The Stormcaller
   set_size: 4
   reward_name: Agnerod Staff
   reward_qty: 1.0
   reward_kind: unique
+  reward_variant: ''
 - name: The Strategist
   set_size: 6
   reward_name: Inspired Learning
   reward_qty: 1.0
   reward_kind: unique
+  reward_variant: Corrupted
 - name: The Summoner
   set_size: 6
   reward_name: Minion Gem
   reward_qty: 1.0
   reward_kind: other
+  reward_variant: Quality
 - name: The Sun
   set_size: 7
   reward_name: Rise of the Phoenix
   reward_qty: 1.0
   reward_kind: unique
+  reward_variant: ''
 - name: The Surgeon
   set_size: 4
   reward_name: Surgeon's Flask
   reward_qty: 1.0
   reward_kind: other
+  reward_variant: ''
 - name: The Surveyor
   set_size: 4
   reward_name: Map
   reward_qty: 1.0
   reward_kind: other
+  reward_variant: ''
 - name: The Survivalist
   set_size: 3
   reward_name: Orb of Alchemy
   reward_qty: 7.0
   reward_kind: currency
+  reward_variant: ''
 - name: The Sword King's Salute
   set_size: 7
   reward_name: Daresso's Salute
   reward_qty: 1.0
   reward_kind: unique
+  reward_variant: ''
 - name: The Thaumaturgist
   set_size: 8
   reward_name: Shavronne's Revelation
   reward_qty: 1.0
   reward_kind: unique
+  reward_variant: Corrupted
 - name: The Throne
   set_size: 2
   reward_name: Kaom's Roots
   reward_qty: 1.0
   reward_kind: unique
+  reward_variant: Corrupted
 - name: The Tinkerer's Table
   set_size: 5
   reward_name: Fossil
   reward_qty: 5.0
   reward_kind: currency
+  reward_variant: ''
 - name: The Tireless Extractor
   set_size: 8
   reward_name: Oil
   reward_qty: 10.0
   reward_kind: currency
+  reward_variant: ''
 - name: The Tower
   set_size: 6
   reward_name: Staff
   reward_qty: 1.0
   reward_kind: unique
+  reward_variant: ''
 - name: The Traitor
   set_size: 4
   reward_name: Wand
   reward_qty: 1.0
   reward_kind: unique
+  reward_variant: Corrupted
 - name: The Transformation
   set_size: 5
   reward_name: Tainted Mythic Orb
   reward_qty: 1.0
   reward_kind: currency
+  reward_variant: ''
 - name: The Trial
   set_size: 7
   reward_name: Map
   reward_qty: 1.0
   reward_kind: other
+  reward_variant: Corrupted
 - name: The Tumbleweed
   set_size: 2
   reward_name: Diamond Ring of Redemption
   reward_qty: 1.0
   reward_kind: other
+  reward_variant: ''
 - name: The Twilight Moon
   set_size: 6
   reward_name: The Twilight Temple
   reward_qty: 1.0
   reward_kind: unique
+  reward_variant: ''
 - name: The Twins
   set_size: 8
   reward_name: Gemini Claw of Celebration
   reward_qty: 1.0
   reward_kind: other
+  reward_variant: ''
 - name: The Tyrant
   set_size: 9
   reward_name: Merciless Weapon
   reward_qty: 1.0
   reward_kind: other
+  reward_variant: ''
 - name: The Undaunted
   set_size: 5
   reward_name: Nemesis Item
   reward_qty: 1.0
   reward_kind: unique
+  reward_variant: Corrupted
 - name: The Undisputed
   set_size: 8
   reward_name: Merciless Vaal Axe
   reward_qty: 1.0
   reward_kind: other
+  reward_variant: ''
 - name: The Unexpected Prize
   set_size: 2
   reward_name: Attribute Transforming Jewel
   reward_qty: 1.0
   reward_kind: unique
+  reward_variant: Corrupted
 - name: The Union
   set_size: 7
   reward_name: Gemcutter's Prism
   reward_qty: 10.0
   reward_kind: currency
+  reward_variant: ''
 - name: The Valkyrie
   set_size: 8
   reward_name: Nemesis Item
   reward_qty: 1.0
   reward_kind: unique
+  reward_variant: ''
 - name: The Vast
   set_size: 7
   reward_name: Song of the Sirens
   reward_qty: 1.0
   reward_kind: unique
+  reward_variant: ''
 - name: The Visionary
   set_size: 6
   reward_name: Lioneye's Vision
   reward_qty: 1.0
   reward_kind: unique
+  reward_variant: ''
 - name: The Warden
   set_size: 4
   reward_name: Amulet
   reward_qty: 1.0
   reward_kind: other
+  reward_variant: Corrupted
 - name: The Warlord
   set_size: 6
   reward_name: Six-Link Coronal Maul
   reward_qty: 1.0
   reward_kind: other
+  reward_variant: ''
 - name: The Watcher
   set_size: 12
   reward_name: Crown of Eyes
   reward_qty: 1.0
   reward_kind: unique
+  reward_variant: ''
 - name: The Web
   set_size: 8
   reward_name: Weapon of Crafting
   reward_qty: 1.0
   reward_kind: other
+  reward_variant: ''
 - name: The Wedding Gift
   set_size: 2
   reward_name: Arakaali's Fang
   reward_qty: 1.0
   reward_kind: unique
+  reward_variant: ''
 - name: The White Knight
   set_size: 8
   reward_name: Six-Link Astral Plate
   reward_qty: 1.0
   reward_kind: other
+  reward_variant: ''
 - name: The Whiteout
   set_size: 8
   reward_name: Cospri's Malice
   reward_qty: 1.0
   reward_kind: unique
+  reward_variant: ''
 - name: The Wilted Rose
   set_size: 7
   reward_name: Level 21 Aura Gem
   reward_qty: 1.0
   reward_kind: other
+  reward_variant: Corrupted
 - name: The Wind
   set_size: 7
   reward_name: Windripper
   reward_qty: 1.0
   reward_kind: unique
+  reward_variant: ''
 - name: The Witch
   set_size: 8
   reward_name: Kiara's Determination
   reward_qty: 1.0
   reward_kind: unique
+  reward_variant: ''
 - name: The Wolf
   set_size: 5
   reward_name: Rigwald Item
   reward_qty: 1.0
   reward_kind: unique
+  reward_variant: ''
 - name: The Wolf's Legacy
   set_size: 4
   reward_name: Vaults of Atziri
   reward_qty: 1.0
   reward_kind: unique
+  reward_variant: ''
 - name: The Wolf's Shadow
   set_size: 3
   reward_name: Hyaon's Fury
   reward_qty: 1.0
   reward_kind: unique
+  reward_variant: ''
 - name: The Wolven King's Bite
   set_size: 8
   reward_name: Rigwald's Quills
   reward_qty: 1.0
   reward_kind: unique
+  reward_variant: ''
 - name: The Wolverine
   set_size: 4
   reward_name: Claw
   reward_qty: 1.0
   reward_kind: unique
+  reward_variant: Corrupted
 - name: The World Eater
   set_size: 8
   reward_name: Starforge
   reward_qty: 1.0
   reward_kind: unique
+  reward_variant: ''
 - name: The Wrath
   set_size: 8
   reward_name: Chaos Orb
   reward_qty: 10.0
   reward_kind: currency
+  reward_variant: ''
 - name: The Wretched
   set_size: 6
   reward_name: Belt
   reward_qty: 1.0
   reward_kind: unique
+  reward_variant: ''
 - name: Thirst for Knowledge
   set_size: 5
   reward_name: Gluttony
   reward_qty: 1.0
   reward_kind: unique
+  reward_variant: ''
 - name: Three Faces in the Dark
   set_size: 7
   reward_name: Chaos Orb
   reward_qty: 3.0
   reward_kind: currency
+  reward_variant: ''
 - name: Three Voices
   set_size: 3
   reward_name: Essence
   reward_qty: 3.0
   reward_kind: currency
+  reward_variant: ''
 - name: Thunderous Skies
   set_size: 5
   reward_name: Storm Cloud
   reward_qty: 1.0
   reward_kind: unique
+  reward_variant: ''
 - name: Time-Lost Relic
   set_size: 10
   reward_name: League-Specific Item
   reward_qty: 1.0
   reward_kind: unique
+  reward_variant: ''
 - name: Toxic Tidings
   set_size: 5
   reward_name: Dendrobate
   reward_qty: 1.0
   reward_kind: unique
+  reward_variant: Two-Implicit Corrupted
 - name: Tranquillity
   set_size: 7
   reward_name: Voltaxic Rift
   reward_qty: 1.0
   reward_kind: unique
+  reward_variant: ''
 - name: Treasure Hunter
   set_size: 7
   reward_name: Vaults of Atziri
   reward_qty: 1.0
   reward_kind: unique
+  reward_variant: Corrupted
 - name: Treasures of the Vaal
   set_size: 12
   reward_name: Vaal Jewel
   reward_qty: 1.0
   reward_kind: unique
+  reward_variant: Two-Implicit Corrupted
 - name: Triskaidekaphobia
   set_size: 13
   reward_name: Map
   reward_qty: 1.0
   reward_kind: other
+  reward_variant: Corrupted
 - name: Turn the Other Cheek
   set_size: 3
   reward_name: Pacifism
   reward_qty: 1.0
   reward_kind: unique
+  reward_variant: Corrupted
 - name: Unchained
   set_size: 4
   reward_name: Facebreaker
   reward_qty: 1.0
   reward_kind: unique
+  reward_variant: Two-Implicit Corrupted
 - name: Underground Forest
   set_size: 4
   reward_name: Grand Eldritch Ichor
   reward_qty: 10.0
   reward_kind: currency
+  reward_variant: ''
 - name: Unrequited Love
   set_size: 16
   reward_name: Mirror Shard
   reward_qty: 19.0
   reward_kind: currency
+  reward_variant: ''
 - name: Vanity
   set_size: 9
   reward_name: Tabula Rasa
   reward_qty: 1.0
   reward_kind: unique
+  reward_variant: Corrupted
 - name: Vile Power
   set_size: 5
   reward_name: Doomfletch
   reward_qty: 1.0
   reward_kind: unique
+  reward_variant: ''
 - name: Vinia's Token
   set_size: 5
   reward_name: Orb of Regret
   reward_qty: 10.0
   reward_kind: currency
+  reward_variant: ''
 - name: Void of the Elements
   set_size: 3
   reward_name: Overpowering Opal Ring
   reward_qty: 1.0
   reward_kind: other
+  reward_variant: ''
 - name: Volatile Power
   set_size: 9
   reward_name: Vaal Gem
   reward_qty: 1.0
   reward_kind: other
+  reward_variant: Corrupted Quality
 - name: Wealth and Power
   set_size: 11
   reward_name: Level 4 Enlighten
   reward_qty: 1.0
   reward_kind: other
+  reward_variant: Corrupted
 - name: When Currents Blaze
   set_size: 2
   reward_name: Stormfire
   reward_qty: 1.0
   reward_kind: unique
+  reward_variant: Corrupted Quality
 - name: Who Asked
   set_size: 9
   reward_name: Dictator's Weapon
   reward_qty: 1.0
   reward_kind: other
+  reward_variant: ''
 - name: Winter's Embrace
   set_size: 2
   reward_name: Circle of Fear
   reward_qty: 1.0
   reward_kind: unique
+  reward_variant: Three-Implicit Synthesised

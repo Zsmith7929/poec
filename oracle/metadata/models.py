@@ -54,6 +54,9 @@ class DivCard(BaseModel):
     reward_name: str
     reward_qty: float = 1.0
     reward_kind: str  # "currency" | "unique" | "other"
+    # Variant qualifier on the reward (Corrupted / Synthesised / Foulborn / Quality / …),
+    # captured from poedb. Non-empty => the reward is a spec we don't price (ADR-0009).
+    reward_variant: str = ""
 
 
 class DivCardDoc(BaseModel):
