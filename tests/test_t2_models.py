@@ -107,6 +107,30 @@ def test_evrow_and_outcome_ev_construct() -> None:
     assert row.per_outcome[0].price == 100.0
 
 
+def _minimal_odds_table(**kwargs: object) -> OddsTable:
+    defaults: dict[str, object] = dict(
+        id="t",
+        name="T",
+        input=PriceRef(category="Currency", key="Vaal Orb"),
+        outcomes=[Outcome(result=_ref("A"), probability=1.0)],
+        source="https://example.com/odds",
+    )
+    defaults.update(kwargs)
+    return OddsTable(**defaults)  # type: ignore[arg-type]
+
+
+def test_oddstable_negative_service_cost_rejected() -> None:
+    with pytest.raises(ValidationError):
+        _minimal_odds_table(service_cost=-1.0)
+
+
+def test_outcome_ev_probability_out_of_range_rejected() -> None:
+    with pytest.raises(ValidationError):
+        OutcomeEv(result_key="A", probability=1.5, price=100.0, contribution=100.0, notes="")
+    with pytest.raises(ValidationError):
+        OutcomeEv(result_key="A", probability=-0.1, price=100.0, contribution=100.0, notes="")
+
+
 def test_t2_settings_loaded_from_config() -> None:
     settings = load_settings()
     assert isinstance(settings.t2, T2Settings)

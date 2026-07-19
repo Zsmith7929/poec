@@ -19,7 +19,7 @@ class OddsTable(BaseModel):
     id: str
     name: str
     input: PriceRef
-    service_cost: float = 0.0
+    service_cost: float = Field(default=0.0, ge=0.0)
     outcomes: list[Outcome]
     source: str
     patch_validity: str = ""
@@ -41,7 +41,7 @@ class OddsTable(BaseModel):
 
 class OutcomeEv(BaseModel):
     result_key: str
-    probability: float
+    probability: float = Field(ge=0.0, le=1.0)
     price: float | None
     contribution: float
     notes: str
