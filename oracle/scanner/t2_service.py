@@ -1,6 +1,4 @@
 import random
-from collections.abc import Callable
-from datetime import UTC, datetime
 from typing import Protocol
 
 from oracle.scanner.ev import EvEngine
@@ -13,10 +11,6 @@ class _EvRepo(Protocol):
     def insert_many(self, league: str, rule_version: str, rows: list[EvRow]) -> None: ...
 
 
-def _default_clock() -> datetime:
-    return datetime.now(tz=UTC)
-
-
 class T2Service:
     def __init__(
         self,
@@ -25,14 +19,12 @@ class T2Service:
         registry: OddsRegistry,
         repo: _EvRepo,
         rule_version: str,
-        clock: Callable[[], datetime] = _default_clock,
     ) -> None:
         self._ev = ev_engine
         self._factory = factory_engine
         self._registry = registry
         self._repo = repo
         self._rule_version = rule_version
-        self._clock = clock
 
     def evaluate(self, league: str, bankroll: float | None = None) -> list[EvRow]:
         rows = self._ev.evaluate_all(self._registry.enabled(), league)

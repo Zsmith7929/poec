@@ -64,7 +64,7 @@ def _service(tmp_path: Path) -> T2Service:
     ev = EvEngine(resolver, clock=_clock)
     fac = FactoryEngine(ev, resolver, clock=_clock)
     repo = EvResultRepo(connect(str(tmp_path / "t.db")))
-    return T2Service(ev, fac, reg, repo, reg.version, clock=_clock)
+    return T2Service(ev, fac, reg, repo, reg.version)
 
 
 def test_evaluate_returns_and_persists(tmp_path: Path) -> None:
