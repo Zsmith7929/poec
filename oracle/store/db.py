@@ -32,6 +32,28 @@ MIGRATIONS: list[str] = [
     CREATE INDEX IF NOT EXISTS ix_obs_league_spec_ts
         ON observed_prices (league, spec_hash, observed_ts)
     """,
+    """
+    CREATE TABLE IF NOT EXISTS scan_results (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        league TEXT NOT NULL,
+        ts TEXT NOT NULL,
+        rule_version TEXT NOT NULL,
+        transform_id TEXT NOT NULL,
+        name TEXT NOT NULL,
+        input_cost REAL NOT NULL,
+        output_value REAL,
+        margin REAL,
+        margin_pct REAL,
+        liquidity REAL NOT NULL,
+        confidence REAL NOT NULL,
+        pricing_mode TEXT NOT NULL,
+        source TEXT NOT NULL
+    )
+    """,
+    """
+    CREATE INDEX IF NOT EXISTS ix_scan_league_ts
+        ON scan_results (league, ts)
+    """,
 ]
 
 
