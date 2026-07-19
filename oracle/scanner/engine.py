@@ -72,6 +72,8 @@ class ScanEngine:
             deep_link=deep_link,
             source=source,
             ts=self._clock(),
+            # Tradeability of the sell side — a "thin" output is the mirage-margin case.
+            demand=output_res.demand,
         )
 
     def scan(self, league: str, min_margin: float | None = None) -> list[ScanRow]:

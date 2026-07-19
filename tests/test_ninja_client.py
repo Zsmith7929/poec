@@ -6,7 +6,14 @@ import pytest
 import respx
 
 from oracle.http.client import HttpClient
-from oracle.pricing.ninja import LEAGUES_URL, OVERVIEW_URL, NinjaClient, NinjaLine, NinjaSchemaError
+from oracle.pricing.ninja import (
+    LEAGUES_URL,
+    OVERVIEW_URL,
+    STASH_OVERVIEW_URL,
+    NinjaClient,
+    NinjaLine,
+    NinjaSchemaError,
+)
 
 FIX = Path(__file__).parent / "fixtures"
 HOSTS = {"poe.ninja", "api.pathofexile.com"}
@@ -155,6 +162,41 @@ def test_overview_mixed_sparse_and_valid_lines() -> None:
     result = client.overview("TestLeagueA", "Currency")
     assert len(result) == 1
     assert result[0] == NinjaLine(key="Divine Orb", chaos_value=180.0, sample_depth=42)
+
+
+@respx.mock
+def test_stash_overview_parses_variants_and_ilvl() -> None:
+    respx.get(STASH_OVERVIEW_URL).mock(
+        return_value=httpx.Response(
+            200, json=json.loads((FIX / "ninja_basetype_stash.json").read_text())
+        )
+    )
+    client = NinjaClient(HttpClient("ua", HOSTS))
+    lines = client.stash_overview("TestLeagueA", "BaseType")
+    # 5 lines in fixture, one has null chaosValue -> skipped, leaving 4.
+    assert len(lines) == 4
+    plain = next(x for x in lines if x.variant is None and x.ilvl == 84)
+    assert plain.key == "Titanium Spirit Shield" and plain.chaos_value == 12.0
+    assert plain.sample_depth == 30
+    shaper84 = next(x for x in lines if x.variant == "Shaper" and x.ilvl == 84)
+    assert shaper84.chaos_value == 250.0
+
+
+@respx.mock
+def test_stash_overview_missing_lines_fails_loud() -> None:
+    respx.get(STASH_OVERVIEW_URL).mock(return_value=httpx.Response(200, json={"items": []}))
+    client = NinjaClient(HttpClient("ua", HOSTS))
+    with pytest.raises(NinjaSchemaError, match="missing 'lines'"):
+        client.stash_overview("TestLeagueA", "BaseType")
+
+
+@respx.mock
+def test_stash_overview_line_missing_name_fails_loud() -> None:
+    payload = {"lines": [{"chaosValue": 1.0, "listingCount": 3}], "items": []}
+    respx.get(STASH_OVERVIEW_URL).mock(return_value=httpx.Response(200, json=payload))
+    client = NinjaClient(HttpClient("ua", HOSTS))
+    with pytest.raises(NinjaSchemaError, match="missing 'name'"):
+        client.stash_overview("TestLeagueA", "BaseType")
 
 
 @respx.mock

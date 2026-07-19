@@ -14,14 +14,14 @@ def test_loads_default_seed_and_versions() -> None:
     reg = load_registry(DEFAULT_TRANSFORMS_PATH)
     assert isinstance(reg, TransformRegistry)
     assert reg.version.startswith("sha256:")
-    assert len(reg.transforms) >= 15  # seed target ~15-20
+    # Post-ADR-0003 the fabricated bulk seed is deleted; this file holds only grounded
+    # hand-authored one-offs (bulk transforms come from cited metadata expanders).
+    assert len(reg.transforms) >= 1
 
 
 def test_enabled_filters_disabled() -> None:
     reg = load_registry(DEFAULT_TRANSFORMS_PATH)
     assert all(t.enabled for t in reg.enabled())
-    # at least one disabled entry exists in the seed (patch-mechanic-dependent)
-    assert any(not t.enabled for t in reg.transforms)
 
 
 def test_disabled_entries_carry_patch_validity_note() -> None:

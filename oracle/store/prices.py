@@ -15,7 +15,7 @@ class PriceSnapshotRepo:
             (
                 price.league,
                 price.category,
-                price.key,
+                price.storage_key(),
                 price.chaos_value,
                 price.sample_depth,
                 price.source,

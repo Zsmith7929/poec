@@ -1,0 +1,40 @@
+{
+  "lines": [
+    {
+      "name": "Titanium Spirit Shield",
+      "levelRequired": 84,
+      "variant": null,
+      "chaosValue": 12.0,
+      "listingCount": 30
+    },
+    {
+      "name": "Titanium Spirit Shield",
+      "levelRequired": 84,
+      "variant": "Shaper",
+      "chaosValue": 250.0,
+      "listingCount": 8
+    },
+    {
+      "name": "Titanium Spirit Shield",
+      "levelRequired": 86,
+      "variant": "Shaper",
+      "chaosValue": 400.0,
+      "listingCount": 5
+    },
+    {
+      "name": "Titanium Spirit Shield",
+      "levelRequired": 84,
+      "variant": "Crusader/Redeemer",
+      "chaosValue": 900.0,
+      "listingCount": 13
+    },
+    {
+      "name": "Broken Base",
+      "levelRequired": 84,
+      "variant": null,
+      "chaosValue": null,
+      "listingCount": 0
+    }
+  ],
+  "items": []
+}
