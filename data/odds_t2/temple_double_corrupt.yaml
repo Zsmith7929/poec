@@ -1,0 +1,21 @@
+# Temple of Atzoatl double-corrupt on uniques. Illustrative; revalidate per patch.
+tables:
+  - id: temple_double_corrupt_unique
+    name: "Temple double-corrupt on a popular unique"
+    input: {category: UniqueArmour, key: "Popular Unique (input copy)", qty: 1.0}
+    service_cost: 20.0          # temple carry / service cost in chaos (config-overridable)
+    source: "https://www.poewiki.net/wiki/Corrupting_Altar (revalidate per patch)"
+    patch_validity: "Illustrative double-corrupt split; revalidate on patch day."
+    outcomes:
+      - result: {category: UniqueArmour, key: "Unique Double-Corrupt Jackpot"}
+        probability: 0.10
+        notes: "Best-case double-implicit jackpot outcome."
+      - result: {category: UniqueArmour, key: "Unique Good Corrupt"}
+        probability: 0.20
+        notes: "Useful single beneficial corruption."
+      - result: {category: UniqueArmour, key: "Popular Unique (input copy)"}
+        probability: 0.35
+        notes: "No meaningful change: resells as the input unique."
+      - result: {category: Currency, key: "Vaal salvage scrap"}
+        probability: 0.35
+        notes: "Bricked: corrupted/worthless; salvage value only."

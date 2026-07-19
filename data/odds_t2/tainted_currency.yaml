@@ -1,0 +1,18 @@
+# Tainted currency set (corrupted-item currency). Illustrative; revalidate per patch.
+tables:
+  - id: tainted_mythic_orb
+    name: "Tainted Mythic Orb on a corrupted unique"
+    input: {category: Currency, key: "Tainted Mythic Orb", qty: 1.0}
+    service_cost: 0.0
+    source: "https://www.poewiki.net/wiki/Tainted_currency (revalidate per patch)"
+    patch_validity: "Illustrative tainted-currency split; revalidate on patch day."
+    outcomes:
+      - result: {category: UniqueWeapon, key: "Reforged Corrupted Unique A"}
+        probability: 0.30
+        notes: "Reforges into a valuable corrupted unique (variant A)."
+      - result: {category: UniqueWeapon, key: "Reforged Corrupted Unique B"}
+        probability: 0.30
+        notes: "Reforges into a corrupted unique (variant B)."
+      - result: {category: Currency, key: "Tainted salvage scrap"}
+        probability: 0.40
+        notes: "Bricked: low-value reforge; salvage value only."
