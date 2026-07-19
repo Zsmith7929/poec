@@ -80,6 +80,10 @@ Live run (`uv run oracle scan --league Standard`) terminal output:
 gamble                              ev_net    stddev   conf
 Vaal Orb on a rare amulet (item-     -1.17      0.00   0.00  —
     ! 4 outcome(s) unpriced (excluded)
+    (Note: with all outcomes unresolved, ev_net = -(input_cost + service_cost);
+     here input_cost ≈ 1.17c (Vaal Orb) and service_cost = 0, so ev_net = -1.17.
+     This is not a formula inconsistency — it is the correct result when no
+     outcomes are priced.)
 Temple double-corrupt on a popul    -20.00      0.00   0.00  —
     ! 4 outcome(s) unpriced (excluded)
 Tainted Mythic Orb on a corrupte    -40.00      0.00   0.00  —

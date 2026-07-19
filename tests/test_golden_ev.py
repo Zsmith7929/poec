@@ -45,7 +45,7 @@ class PinnedPriceService:
 
 
 class NullDeepLink:
-    def resolve(self, spec: object, league: str) -> ListingQuote:  # type: ignore[no-untyped-def]
+    def resolve(self, spec: object, league: str) -> ListingQuote:
         return ListingQuote(
             spec_hash="h",
             league=league,
