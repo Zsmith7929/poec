@@ -73,8 +73,8 @@ class PriceService:
                     min_depth=min_depth,
                 ),
             )
-            self._repo.insert(price)
             out.append(price)
+        self._repo.insert_many(out)
         return out
 
     def _stash_prices(self, category: str, league: str) -> list[Price]:
@@ -112,8 +112,8 @@ class PriceService:
                     min_depth=min_depth,
                 ),
             )
-            self._repo.insert(price)
             out.append(price)
+        self._repo.insert_many(out)
         return out
 
     def maturity(self, league: str) -> Maturity:
