@@ -44,6 +44,8 @@ class ScanReport:
         )
         for r in self.auto_rows():
             pct = "—" if r.margin_pct is None else f"{r.margin_pct * 100:.0f}%"
+            if r.margin_confidence == "thin" and r.margin_pct is not None:
+                pct += "⚠"  # margin within pricing noise (ADR-0007)
             demand = "⚠ thin" if r.demand == "thin" else r.demand
             lines.append(
                 f"{r.name[:32]:<32}{_fmt(r.margin):>10}{pct:>10}"
@@ -77,13 +79,13 @@ class ScanReport:
             "",
             "## AUTO-PRICED",
             "",
-            "| Transform | Margin (c) | Margin % | Liquidity | Confidence | Demand | Source |",
-            "|---|---:|---:|---:|---:|---|---|",
+            "| Transform | Margin (c) | Margin % | Margin conf. | Liquidity | Confidence | Demand | Source |",  # noqa: E501
+            "|---|---:|---:|---|---:|---:|---|---|",
         ]
         for r in self.auto_rows():
             pct = "—" if r.margin_pct is None else f"{r.margin_pct * 100:.0f}%"
             lines.append(
-                f"| {r.name} | {_fmt(r.margin)} | {pct} | "
+                f"| {r.name} | {_fmt(r.margin)} | {pct} | {r.margin_confidence} | "
                 f"{r.liquidity:.0f} | {r.confidence:.2f} | {r.demand} | {r.source} |"
             )
         lines += [

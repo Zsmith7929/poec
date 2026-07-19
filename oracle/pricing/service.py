@@ -49,18 +49,18 @@ class PriceService:
         mat = self.maturity(league)
         now = datetime.now(tz=UTC)
         out: list[Price] = []
+        pr = self._settings.pricing
         for line in lines:
             history = self._repo.recent_values(league, category, line.key)
             history.append(line.chaos_value)
-            agg = aggregate(
-                history, self._settings.pricing.percentile, self._settings.pricing.outlier_z
-            )
-            min_depth = self._settings.pricing.min_sample_depth
+            sell = aggregate(history, pr.percentile, pr.outlier_z).value
+            buy = aggregate(history, pr.buy_percentile, pr.outlier_z).value
+            min_depth = pr.min_sample_depth
             price = Price(
                 key=line.key,
                 league=league,
                 category=category,
-                chaos_value=agg.value,
+                chaos_value=sell,
                 sample_depth=line.sample_depth,
                 source=f"ninja:{category}",
                 confidence=confidence(line.sample_depth, min_depth, mat.score),
@@ -72,6 +72,8 @@ class PriceService:
                     trend=None,
                     min_depth=min_depth,
                 ),
+                buy_value=buy,
+                sell_value=sell,
             )
             out.append(price)
         self._repo.insert_many(out)
@@ -82,20 +84,20 @@ class PriceService:
         mat = self.maturity(league)
         now = datetime.now(tz=UTC)
         out: list[Price] = []
+        pr = self._settings.pricing
         for line in lines:
             # Same key the write path uses (Price.storage_key), so history round-trips.
             hist_key = price_storage_key(line.key, line.variant, line.ilvl)
             history = self._repo.recent_values(league, category, hist_key)
             history.append(line.chaos_value)
-            agg = aggregate(
-                history, self._settings.pricing.percentile, self._settings.pricing.outlier_z
-            )
-            min_depth = self._settings.pricing.min_sample_depth
+            sell = aggregate(history, pr.percentile, pr.outlier_z).value
+            buy = aggregate(history, pr.buy_percentile, pr.outlier_z).value
+            min_depth = pr.min_sample_depth
             price = Price(
                 key=line.key,
                 league=league,
                 category=category,
-                chaos_value=agg.value,
+                chaos_value=sell,
                 sample_depth=line.sample_depth,
                 source=f"ninja:{category}",
                 # Confidence from OBSERVATIONS (data points behind the price), NOT the
@@ -111,6 +113,8 @@ class PriceService:
                     trend=line.trend,
                     min_depth=min_depth,
                 ),
+                buy_value=buy,
+                sell_value=sell,
             )
             out.append(price)
         self._repo.insert_many(out)

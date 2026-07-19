@@ -4,9 +4,10 @@ realm = "pc"
 user_agent = "oracle/0.0.0 (personal crafting tool; contact: smith7929@gmail.com)"
 
 [pricing]
-percentile = 0.15          # 15th-percentile band
+percentile = 0.15          # sell/output percentile (low end = conservative)
 outlier_z = 3.0            # reject samples beyond this many MAD-scaled deviations
 min_sample_depth = 5       # below this, confidence is heavily penalized
+buy_percentile = 0.85      # buy/input percentile (high end = conservative); ADR-0007
 
 [cache]
 ninja_ttl_seconds = 900    # ~15 min
@@ -19,6 +20,7 @@ db_path = "data/oracle.db"
 [scanner]
 min_margin = 15.0          # chaos; rows below this margin are suppressed
 min_liquidity = 5.0        # min sample-depth-derived liquidity to rank normally
+min_margin_pct = 0.20      # below this return, margin is within pricing noise -> flagged thin; ADR-0007
 
 [t2]
 prob_sum_tolerance = 0.01     # odds tables must sum to 1.0 within this tolerance

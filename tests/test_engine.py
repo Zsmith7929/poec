@@ -209,6 +209,72 @@ def test_verify_with_resolved_price_ranks_after_confirmed_auto() -> None:
     assert rows[1].pricing_mode == "verify"
 
 
+def _bracket(
+    chaos: float, buy: float, sell: float, liq: float = 50, conf: float = 0.8
+) -> ResolvedPrice:
+    return ResolvedPrice(
+        chaos_value=chaos,
+        liquidity=liq,
+        confidence=conf,
+        source="ninja:x",
+        deep_link=None,
+        buy_value=buy,
+        sell_value=sell,
+    )
+
+
+def test_bracketing_inputs_use_buy_outputs_use_sell() -> None:
+    # ADR-0007: input costs the BUY (high) price; output realizes the SELL (low) price.
+    t = _t("brk", "Currency", "Chaos Orb", "Fossil", "A")
+    auto = {
+        ("Currency", "Chaos Orb"): _bracket(10.0, 12.0, 8.0),  # buy 12
+        ("Fossil", "A"): _bracket(100.0, 110.0, 90.0),  # sell 90
+    }
+    engine = ScanEngine(
+        TransformRegistry([t], "v"), StubResolver(auto, _auto(0, 0, 0)), _settings(), clock=_clock
+    )
+    row = engine.scan("L")[0]
+    assert row.input_cost == 12.0  # buy side, not mid/sell
+    assert row.output_value == 90.0  # sell side, not mid/buy
+    assert row.margin == 78.0  # 90 - 12
+
+
+def test_margin_confidence_thin_below_noise_floor() -> None:
+    # margin passes the absolute gate but its % is within pricing noise -> flagged thin.
+    t = _t("thinpct", "Currency", "Chaos Orb", "Fossil", "A")
+    auto = {
+        ("Currency", "Chaos Orb"): _bracket(100.0, 100.0, 100.0),
+        ("Fossil", "A"): _bracket(115.0, 115.0, 115.0),  # margin 15 (>=min_margin), 15% < 20%
+    }
+    engine = ScanEngine(
+        TransformRegistry([t], "v"), StubResolver(auto, _auto(0, 0, 0)), _settings(), clock=_clock
+    )
+    row = engine.scan("L")[0]
+    assert row.margin == 15.0 and row.margin_confidence == "thin"
+
+
+def test_thin_margin_ranks_below_firm_even_with_bigger_absolute_margin() -> None:
+    # firm: margin 50 at 50% (firm). thin: margin 100 at 10% (thin, bigger absolute).
+    firm = _t("firm", "Currency", "Chaos Orb", "Fossil", "A")
+    thin = _t("thin", "Currency", "Divine Orb", "Fossil", "B")
+    auto = {
+        ("Currency", "Chaos Orb"): _bracket(100.0, 100.0, 100.0),
+        ("Fossil", "A"): _bracket(150.0, 150.0, 150.0),  # margin 50 -> 50% firm
+        ("Currency", "Divine Orb"): _bracket(1000.0, 1000.0, 1000.0),
+        ("Fossil", "B"): _bracket(1100.0, 1100.0, 1100.0),  # margin 100 -> 10% thin
+    }
+    engine = ScanEngine(
+        TransformRegistry([firm, thin], "v"),
+        StubResolver(auto, _auto(0, 0, 0)),
+        _settings(),
+        clock=_clock,
+    )
+    rows = engine.scan("L")
+    ids = [r.transform_id for r in rows]
+    assert ids == ["firm", "thin"]  # firm ranks first despite thin's larger absolute margin
+    assert next(r for r in rows if r.transform_id == "thin").margin_confidence == "thin"
+
+
 def test_min_margin_override() -> None:
     t = _t("thin", "Currency", "Chaos Orb", "Fossil", "A")
     auto = {

@@ -21,6 +21,9 @@ class ResolvedPrice:
     source: str
     deep_link: str | None
     demand: str = "unknown"
+    # Conservative bracket (ADR-0007): use buy_value for inputs, sell_value for outputs.
+    buy_value: float | None = None
+    sell_value: float | None = None
 
 
 def _influence_set(variant: str | None) -> frozenset[str]:
@@ -114,6 +117,8 @@ class PriceResolver:
                 source=f"missing:{ref.category}/{ref.key}",
                 deep_link=None,
             )
+        buy = price.buy_value if price.buy_value is not None else price.chaos_value
+        sell = price.sell_value if price.sell_value is not None else price.chaos_value
         return ResolvedPrice(
             chaos_value=price.chaos_value * ref.qty,
             liquidity=float(price.sample_depth),
@@ -121,6 +126,8 @@ class PriceResolver:
             source=price.source,
             deep_link=None,
             demand=price.demand,
+            buy_value=buy * ref.qty,
+            sell_value=sell * ref.qty,
         )
 
     def resolve_verify(self, ref: PriceRef, league: str) -> ResolvedPrice:
@@ -135,4 +142,6 @@ class PriceResolver:
             confidence=confidence,
             source=quote.source,
             deep_link=quote.deep_link,
+            buy_value=value,
+            sell_value=value,
         )
