@@ -13,3 +13,4 @@ pointer at that spot.
 | [0004](0004-scanner-surfaces-candidates.md) | The scanner surfaces candidates for human judgment, not exact EV | Accepted | 2026-07-19 |
 | [0005](0005-demand-signals-tradeability.md) | Demand/tradeability is distinct from confidence and supply | Accepted | 2026-07-19 |
 | [0006](0006-divcard-reward-class.md) | Divination card → reward transform class | Accepted | 2026-07-19 |
+| [0007](0007-conservative-margin-bracketing.md) | Conservative margin bracketing + a margin-confidence floor | Accepted | 2026-07-19 |

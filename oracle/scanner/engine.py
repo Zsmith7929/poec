@@ -49,15 +49,32 @@ class ScanEngine:
         )
         source = output_res.source
 
-        input_cost = sum(r.chaos_value or 0.0 for r in input_res)
-        inputs_priced = all(r.chaos_value is not None for r in input_res)
-        output_value = output_res.chaos_value
+        # Conservative bracket (ADR-0007): inputs cost the BUY (high) price; the output
+        # realizes the SELL (low) price — the realizable margin with a safety band. Fall
+        # back to chaos_value when a side carries no bracket (e.g. verify/observed prices).
+        def _buy(r: ResolvedPrice) -> float | None:
+            return r.buy_value if r.buy_value is not None else r.chaos_value
+
+        def _sell(r: ResolvedPrice) -> float | None:
+            return r.sell_value if r.sell_value is not None else r.chaos_value
+
+        input_cost = sum(_buy(r) or 0.0 for r in input_res)
+        inputs_priced = all(_buy(r) is not None for r in input_res)
+        output_value = _sell(output_res)
+        margin_confidence = "firm"
         if output_value is None or not inputs_priced:
             margin: float | None = None
             margin_pct: float | None = None
         else:
             margin = output_value - input_cost - t.friction
             margin_pct = margin / input_cost if input_cost > 0 else None
+            # A margin thinner than our pricing noise floor isn't trustworthy on its own.
+            if (
+                not is_verify
+                and margin_pct is not None
+                and margin_pct < self._settings.min_margin_pct
+            ):
+                margin_confidence = "thin"
 
         return ScanRow(
             transform_id=t.id,
@@ -74,6 +91,7 @@ class ScanEngine:
             ts=self._clock(),
             # Tradeability of the sell side — a "thin" output is the mirage-margin case.
             demand=output_res.demand,
+            margin_confidence=margin_confidence,
         )
 
     def scan(self, league: str, min_margin: float | None = None) -> list[ScanRow]:
@@ -90,8 +108,13 @@ class ScanEngine:
                 continue
             kept.append(row)
 
-        # Priced rows (margin not None) ranked by margin desc; provisional rows last.
+        # Firm priced rows first (ranked by margin desc), then thin-margin rows (within
+        # pricing noise, ADR-0007), then provisional/verify rows.
         kept.sort(
-            key=lambda r: (r.pricing_mode == "verify" or r.margin is None, -(r.margin or 0.0))
+            key=lambda r: (
+                r.pricing_mode == "verify" or r.margin is None,
+                r.margin_confidence == "thin",
+                -(r.margin or 0.0),
+            )
         )
         return kept

@@ -44,3 +44,6 @@ class ScanRow(BaseModel):
     # Sell-side tradeability ("active"/"thin"/"unknown"); see ADR-0005. "thin" warns that
     # the output margin may be a mirage (priced off few, non-moving listings).
     demand: str = "unknown"
+    # Margin reliability ("firm"/"thin"); see ADR-0007. "thin" = margin_pct is within the
+    # tool's pricing noise, so the margin is not trustworthy on its own.
+    margin_confidence: str = "firm"

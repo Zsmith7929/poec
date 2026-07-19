@@ -7,9 +7,12 @@ DEFAULT_PATH = Path("config/settings.toml")
 
 
 class PricingSettings(BaseModel):
-    percentile: float = Field(gt=0.0, lt=1.0)
+    percentile: float = Field(gt=0.0, lt=1.0)  # sell/output percentile (low = conservative)
     outlier_z: float = Field(gt=0.0)
     min_sample_depth: int = Field(ge=1)
+    # Buy/input percentile (high = conservative: assume you pay the upper end). Bracketing
+    # the two sides removes aggregation-manufactured phantom margins (ADR-0007).
+    buy_percentile: float = Field(default=0.85, gt=0.0, lt=1.0)
 
 
 class CacheSettings(BaseModel):
@@ -25,6 +28,9 @@ class StoreSettings(BaseModel):
 class ScannerSettings(BaseModel):
     min_margin: float = Field(ge=0.0)
     min_liquidity: float = Field(ge=0.0)
+    # Auto rows with margin_pct below this are within pricing noise -> flagged "thin"
+    # margin and ranked below firm rows (ADR-0007). Default 20%.
+    min_margin_pct: float = Field(default=0.20, ge=0.0)
 
 
 class T2Settings(BaseModel):

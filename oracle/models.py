@@ -37,6 +37,11 @@ class Price(BaseModel):
     # Tradeability signal ("active"/"thin"/"unknown"); see ADR-0005. Distinct from
     # confidence (data sufficiency) and sample_depth (supply for stash prices).
     demand: str = "unknown"
+    # Conservative bracket (ADR-0007): buy_value = high percentile (what you'd pay for an
+    # input), sell_value = low percentile (what you'd get for an output). None falls back
+    # to chaos_value, so single-value prices behave as before.
+    buy_value: float | None = None
+    sell_value: float | None = None
 
     def storage_key(self) -> str:
         """History/snapshot key. Plain name for exchange prices; variant-qualified for
