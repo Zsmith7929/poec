@@ -127,7 +127,19 @@ def test_league_is_covered_false_absent() -> None:
 @respx.mock
 def test_league_is_covered_false_on_error() -> None:
     respx.get(LEAGUES_URL).mock(return_value=httpx.Response(500))
-    client = NinjaClient(HttpClient("ua", HOSTS))
+    client = NinjaClient(HttpClient("ua", HOSTS, max_retries=1))
     # 500 triggers retries then raises; league_is_covered should catch and return False.
-    # Use a tiny timeout approach: patch max_retries=1 via subclass to avoid slow retry.
     assert client.league_is_covered("TestLeagueA") is False
+
+
+@respx.mock
+def test_schema_drift_line_missing_volume_primary_value() -> None:
+    payload = {
+        "core": {},
+        "lines": [{"id": "chaos", "primaryValue": 1.0}],
+        "items": [{"id": "chaos", "name": "Chaos Orb"}],
+    }
+    respx.get(OVERVIEW_URL).mock(return_value=httpx.Response(200, json=payload))
+    client = NinjaClient(HttpClient("ua", HOSTS))
+    with pytest.raises(NinjaSchemaError, match="missing 'volumePrimaryValue'"):
+        client.overview("TestLeagueA", "Currency")

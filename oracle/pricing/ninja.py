@@ -78,6 +78,8 @@ class NinjaClient:
                 raise NinjaSchemaError("line missing 'id'")
             if "primaryValue" not in line:
                 raise NinjaSchemaError("line missing 'primaryValue'")
+            if "volumePrimaryValue" not in line:
+                raise NinjaSchemaError("line missing 'volumePrimaryValue'")
             line_id = line["id"]
             if line_id not in id_to_name:
                 # Structural drift: a line has no matching item name.
@@ -87,7 +89,7 @@ class NinjaClient:
                     NinjaLine(
                         key=id_to_name[line_id],
                         chaos_value=float(line["primaryValue"]),
-                        sample_depth=int(line.get("volumePrimaryValue", 0)),
+                        sample_depth=int(line["volumePrimaryValue"]),
                     )
                 )
             except (KeyError, TypeError, ValueError) as exc:
