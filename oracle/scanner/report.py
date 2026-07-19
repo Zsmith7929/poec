@@ -37,12 +37,15 @@ class ScanReport:
     def to_terminal(self) -> str:
         lines = [self._header(), ""]
         lines.append("== AUTO-PRICED ==")
-        lines.append(f"{'transform':<32}{'margin':>10}{'margin%':>10}{'liq':>8}{'conf':>7}")
+        lines.append(
+            f"{'transform':<32}{'margin':>10}{'margin%':>10}{'liq':>8}{'conf':>7}{'demand':>9}"
+        )
         for r in self.auto_rows():
             pct = "—" if r.margin_pct is None else f"{r.margin_pct * 100:.0f}%"
+            demand = "⚠ thin" if r.demand == "thin" else r.demand
             lines.append(
                 f"{r.name[:32]:<32}{_fmt(r.margin):>10}{pct:>10}"
-                f"{r.liquidity:>8.0f}{r.confidence:>7.2f}"
+                f"{r.liquidity:>8.0f}{r.confidence:>7.2f}{demand:>9}"
             )
         lines.append("")
         lines.append("== VERIFY-REQUIRED (provisional; click to price) ==")
@@ -60,14 +63,14 @@ class ScanReport:
             "",
             "## AUTO-PRICED",
             "",
-            "| Transform | Margin (c) | Margin % | Liquidity | Confidence | Source |",
-            "|---|---:|---:|---:|---:|---|",
+            "| Transform | Margin (c) | Margin % | Liquidity | Confidence | Demand | Source |",
+            "|---|---:|---:|---:|---:|---|---|",
         ]
         for r in self.auto_rows():
             pct = "—" if r.margin_pct is None else f"{r.margin_pct * 100:.0f}%"
             lines.append(
                 f"| {r.name} | {_fmt(r.margin)} | {pct} | "
-                f"{r.liquidity:.0f} | {r.confidence:.2f} | {r.source} |"
+                f"{r.liquidity:.0f} | {r.confidence:.2f} | {r.demand} | {r.source} |"
             )
         lines += [
             "",

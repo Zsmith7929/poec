@@ -50,6 +50,32 @@ selection-biased *candidate* per ADR-0004, not guaranteed profit).
   `Divination_Cards` metadata (set size + reward) and add a card→reward expander that
   routes the reward to the right stash category (Unique*/Currency).
 
+## Demand / tradeability (ADR-0005)
+
+Shipped (follow-up PR): a `demand` label (`active`/`thin`/`unknown`) per price and scan
+row, so mirage margins (fat gap off 1–2 stale, non-moving listings) get flagged ⚠ instead
+of ranking as clean opportunities. Stash confidence now derives from `count`
+(observations), not `listingCount` (supply). Deferred, needs history (Phase 6):
+
+- **Margin persistence/decay** — the strongest demand proxy we can own: a margin that
+  never closes across scans is illusory; one that closes fast was real demand. Belongs
+  with the Phase-6 margin-decay analytics over the append-only snapshot history.
+- **Listing-count trajectory** — rising supply + flat price = glut = weak demand.
+- **Input-leg demand** — the row's demand currently reflects the sell (output) leg only;
+  a thin *input* (can't actually buy the cheap side) could also be surfaced.
+- **Persist `demand` on `scan_results`** — currently report-only (no DB column); add it
+  when wiring margin-decay so demand history is queryable.
+- **Threshold tuning** — `demand_label` reuses `min_sample_depth` and a 1% movement
+  epsilon; revisit once history exists to calibrate false-positive rate.
+
+## Performance note (surfaced while testing)
+
+The stash `BaseType` feed is large (~9k lines); a scan touching it fetches and inserts
+~9k snapshots and does a `recent_values` lookup per line. `price_snapshots` has no index
+on `key`, so this degrades as history grows. Add an index on `(league, category, key)`
+(or scope base-type harvesting to the bases actually referenced by transforms) before
+base-type scanning is run routinely. Not a correctness issue.
+
 ## Notes / smaller follow-ups
 
 - Stash prices skip the historical percentile aggregate benefits only as history

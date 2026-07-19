@@ -59,6 +59,9 @@ def test_prices_base_type_routes_to_stash_and_keeps_variant(tmp_path) -> None:
     assert p.source == "ninja:BaseType"
     # variant-qualified storage key keeps base variants from sharing a price series.
     assert p.storage_key() == "Titanium Spirit Shield|Shaper|84"
+    # No observations backing this line (fake defaults) and no movement -> thin demand,
+    # NOT driven by the listing count (supply). See ADR-0005.
+    assert p.demand == "thin"
 
 
 def test_stash_price_no_variant_no_ilvl_history_round_trips(tmp_path) -> None:

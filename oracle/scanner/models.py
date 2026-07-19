@@ -41,3 +41,6 @@ class ScanRow(BaseModel):
     deep_link: str | None
     source: str
     ts: datetime
+    # Sell-side tradeability ("active"/"thin"/"unknown"); see ADR-0005. "thin" warns that
+    # the output margin may be a mirage (priced off few, non-moving listings).
+    demand: str = "unknown"

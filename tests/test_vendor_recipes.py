@@ -157,6 +157,7 @@ def test_expanded_recipe_prices_through_scan_engine() -> None:
                     source=f"ninja:{category}",
                     confidence=0.9,
                     ts=now,
+                    demand="active",
                 )
                 for k, (v, d) in table.items()
                 if category == "Currency"
@@ -192,3 +193,5 @@ def test_expanded_recipe_prices_through_scan_engine() -> None:
     # margin = price(Fusing) - 4*price(Jeweller's) - friction = 15 - 4 - 0 = 11
     assert row.margin == 11.0
     assert row.input_cost == 4.0
+    # Output-leg demand ("active" from high-volume Fusing) propagates to the row.
+    assert row.demand == "active"

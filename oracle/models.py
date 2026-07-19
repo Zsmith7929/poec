@@ -34,6 +34,9 @@ class Price(BaseModel):
     # None for exchange-sourced prices (currency, fragments, div cards).
     variant: str | None = None
     ilvl: int | None = None
+    # Tradeability signal ("active"/"thin"/"unknown"); see ADR-0005. Distinct from
+    # confidence (data sufficiency) and sample_depth (supply for stash prices).
+    demand: str = "unknown"
 
     def storage_key(self) -> str:
         """History/snapshot key. Plain name for exchange prices; variant-qualified for
