@@ -1,0 +1,46 @@
+import sqlite3
+from pathlib import Path
+
+MIGRATIONS: list[str] = [
+    """
+    CREATE TABLE IF NOT EXISTS price_snapshots (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        league TEXT NOT NULL,
+        category TEXT NOT NULL,
+        key TEXT NOT NULL,
+        chaos_value REAL NOT NULL,
+        sample_depth INTEGER NOT NULL,
+        source TEXT NOT NULL,
+        confidence REAL NOT NULL,
+        ts TEXT NOT NULL
+    )
+    """,
+    """
+    CREATE INDEX IF NOT EXISTS ix_price_league_cat_ts
+        ON price_snapshots (league, category, ts)
+    """,
+    """
+    CREATE TABLE IF NOT EXISTS observed_prices (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        league TEXT NOT NULL,
+        spec_hash TEXT NOT NULL,
+        chaos_value REAL NOT NULL,
+        observed_ts TEXT NOT NULL
+    )
+    """,
+    """
+    CREATE INDEX IF NOT EXISTS ix_obs_league_spec_ts
+        ON observed_prices (league, spec_hash, observed_ts)
+    """,
+]
+
+
+def connect(db_path: str) -> sqlite3.Connection:
+    Path(db_path).parent.mkdir(parents=True, exist_ok=True)
+    conn = sqlite3.connect(db_path)
+    conn.row_factory = sqlite3.Row
+    conn.execute("PRAGMA foreign_keys=ON")
+    for ddl in MIGRATIONS:
+        conn.execute(ddl)
+    conn.commit()
+    return conn
