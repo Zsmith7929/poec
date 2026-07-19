@@ -1,10 +1,11 @@
 import json
 import re
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from datetime import datetime
 from pathlib import Path
 
 from oracle.scanner.models import ScanRow
+from oracle.scanner.t2_models import EvRow
 
 
 def _fmt(value: float | None) -> str:
@@ -21,6 +22,7 @@ class ScanReport:
     snapshot_ts: datetime
     rule_version: str
     rows: list[ScanRow]
+    ev_rows: list[EvRow] = field(default_factory=list)
 
     def auto_rows(self) -> list[ScanRow]:
         return [r for r in self.rows if r.pricing_mode == "auto"]
@@ -48,6 +50,15 @@ class ScanReport:
         lines.append("== VERIFY-REQUIRED (provisional; click to price) ==")
         for r in self.verify_rows():
             lines.append(f"{r.name[:32]:<32}  input≈{_fmt(r.input_cost)}c  {r.deep_link or ''}")
+        lines.append("")
+        lines.append("== PROBABILISTIC (Tier-2) ==")
+        lines.append(f"{'gamble':<32}{'ev_net':>10}{'stddev':>10}{'conf':>7}")
+        for e in self.ev_rows:
+            lines.append(f"{e.name[:32]:<32}{e.ev_net:>10.2f}{e.stddev:>10.2f}{e.confidence:>7.2f}")
+            if e.bankroll_note:
+                lines.append(f"    {e.bankroll_note}")
+            if e.unresolved_outcomes:
+                lines.append(f"    ! {e.unresolved_outcomes} outcome(s) unpriced (excluded)")
         return "\n".join(lines)
 
     def to_markdown(self) -> str:
@@ -79,6 +90,18 @@ class ScanReport:
         for r in self.verify_rows():
             link = f"[open]({r.deep_link})" if r.deep_link else "—"
             lines.append(f"| {r.name} | {_fmt(r.input_cost)} | {link} | {r.source} |")
+        lines += [
+            "",
+            "## PROBABILISTIC (Tier-2)",
+            "",
+            "| Gamble | EV gross (c) | EV net (c) | Stddev | Liquidity | Confidence | Bankroll |",
+            "|---|---:|---:|---:|---:|---:|---|",
+        ]
+        for e in self.ev_rows:
+            lines.append(
+                f"| {e.name} | {e.ev_gross:.2f} | {e.ev_net:.2f} | {e.stddev:.2f} | "
+                f"{e.liquidity:.0f} | {e.confidence:.2f} | {e.bankroll_note or '—'} |"
+            )
         return "\n".join(lines) + "\n"
 
     def to_json(self) -> str:
@@ -87,6 +110,7 @@ class ScanReport:
             "snapshot_ts": self.snapshot_ts.isoformat(),
             "rule_version": self.rule_version,
             "rows": [json.loads(r.model_dump_json()) for r in self.rows],
+            "ev_rows": [json.loads(e.model_dump_json()) for e in self.ev_rows],
         }
         return json.dumps(payload, indent=2)
 
