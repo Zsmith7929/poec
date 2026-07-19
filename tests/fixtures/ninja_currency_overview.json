@@ -1,6 +1,13 @@
-{"lines": [
-  {"currencyTypeName": "Divine Orb", "chaosEquivalent": 180.0,
-   "receive": {"count": 42}},
-  {"currencyTypeName": "Exalted Orb", "chaosEquivalent": 12.5,
-   "receive": {"count": 300}}
-]}
+{
+  "core": {"items": [], "rates": {}, "primary": "chaos", "secondary": "divine"},
+  "lines": [
+    {"id": "divine", "primaryValue": 180.0, "volumePrimaryValue": 42,
+     "maxVolumeCurrency": "divine", "maxVolumeRate": 1.0, "sparkline": {}},
+    {"id": "exalted", "primaryValue": 12.5, "volumePrimaryValue": 300,
+     "maxVolumeCurrency": "divine", "maxVolumeRate": 0.07, "sparkline": {}}
+  ],
+  "items": [
+    {"id": "divine", "name": "Divine Orb", "image": "", "category": "Currency", "detailsId": "divine-orb"},
+    {"id": "exalted", "name": "Exalted Orb", "image": "", "category": "Currency", "detailsId": "exalted-orb"}
+  ]
+}
