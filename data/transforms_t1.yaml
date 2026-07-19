@@ -1,0 +1,170 @@
+# Tier-1 deterministic transforms. Rules-as-data: edit + revalidate on patch day.
+# category values map to poe.ninja `type=` values supported by the Phase 0 client.
+transforms:
+  - id: fossil_bound_reroll
+    name: "Bound Fossil arbitrage (buy vs vendor-equivalent)"
+    inputs:
+      - {category: Currency, key: "Chaos Orb", qty: 1.0}
+    output: {category: Fossil, key: "Bound Fossil"}
+    applicability: "Fossil priceable on ninja; deterministic vendor/exchange path"
+    friction: 0.0
+    enabled: true
+    pricing_mode: auto
+
+  - id: fossil_aberrant
+    name: "Aberrant Fossil resale"
+    inputs:
+      - {category: Currency, key: "Chaos Orb", qty: 1.0}
+    output: {category: Fossil, key: "Aberrant Fossil"}
+    enabled: true
+    pricing_mode: auto
+
+  - id: fossil_pristine
+    name: "Pristine Fossil resale"
+    inputs:
+      - {category: Currency, key: "Chaos Orb", qty: 1.0}
+    output: {category: Fossil, key: "Pristine Fossil"}
+    enabled: true
+    pricing_mode: auto
+
+  - id: essence_greed_upgrade
+    name: "Essence of Greed tier upgrade (3->1 via bench)"
+    inputs:
+      - {category: Essence, key: "Deafening Essence of Greed", qty: 3.0}
+    output: {category: Essence, key: "Deafening Essence of Greed"}
+    applicability: "Essence upgrade recipe; both sides ninja-priceable"
+    friction: 0.0
+    enabled: true
+    pricing_mode: auto
+
+  - id: essence_contempt_upgrade
+    name: "Essence of Contempt tier upgrade"
+    inputs:
+      - {category: Essence, key: "Deafening Essence of Contempt", qty: 3.0}
+    output: {category: Essence, key: "Deafening Essence of Contempt"}
+    enabled: true
+    pricing_mode: auto
+
+  - id: essence_wrath_upgrade
+    name: "Essence of Wrath tier upgrade"
+    inputs:
+      - {category: Essence, key: "Deafening Essence of Wrath", qty: 3.0}
+    output: {category: Essence, key: "Deafening Essence of Wrath"}
+    enabled: true
+    pricing_mode: auto
+
+  - id: chrom_recipe
+    name: "Chromatic Orb vendor recipe (off-colour base -> chrom)"
+    inputs:
+      - {category: Currency, key: "Chaos Orb", qty: 0.1}
+    output: {category: Currency, key: "Chromatic Orb"}
+    applicability: "Deterministic vendor recipe"
+    friction: 0.0
+    enabled: true
+    pricing_mode: auto
+
+  - id: jeweller_recipe
+    name: "Jeweller's Orb vendor / exchange play"
+    inputs:
+      - {category: Currency, key: "Chaos Orb", qty: 0.1}
+    output: {category: Currency, key: "Jeweller's Orb"}
+    enabled: true
+    pricing_mode: auto
+
+  - id: fusing_from_jewellers
+    name: "Fusing resale via exchange"
+    inputs:
+      - {category: Currency, key: "Jeweller's Orb", qty: 4.0}
+    output: {category: Currency, key: "Orb of Fusing"}
+    enabled: true
+    pricing_mode: auto
+
+  - id: regret_to_chaos
+    name: "Orb of Regret exchange"
+    inputs:
+      - {category: Currency, key: "Chaos Orb", qty: 1.0}
+    output: {category: Currency, key: "Orb of Regret"}
+    enabled: true
+    pricing_mode: auto
+
+  - id: divine_from_chaos
+    name: "Divine Orb accumulation"
+    inputs:
+      - {category: Currency, key: "Chaos Orb", qty: 150.0}
+    output: {category: Currency, key: "Divine Orb"}
+    enabled: true
+    pricing_mode: auto
+
+  - id: annul_exchange
+    name: "Orb of Annulment exchange"
+    inputs:
+      - {category: Currency, key: "Chaos Orb", qty: 5.0}
+    output: {category: Currency, key: "Orb of Annulment"}
+    enabled: true
+    pricing_mode: auto
+
+  - id: awakener_flip
+    name: "Awakener's Orb resale"
+    inputs:
+      - {category: Currency, key: "Chaos Orb", qty: 20.0}
+    output: {category: Currency, key: "Awakener's Orb"}
+    enabled: true
+    pricing_mode: auto
+
+  - id: unique_tabula_flip
+    name: "Cheap unique acquisition vs resale (Tabula Rasa)"
+    inputs:
+      - {category: Currency, key: "Chaos Orb", qty: 10.0}
+    output: {category: UniqueArmour, key: "Tabula Rasa"}
+    applicability: "Popular unique tracked by ninja unique feed"
+    enabled: true
+    pricing_mode: auto
+
+  - id: unique_goldrim_flip
+    name: "Goldrim resale"
+    inputs:
+      - {category: Currency, key: "Chaos Orb", qty: 1.0}
+    output: {category: UniqueArmour, key: "Goldrim"}
+    enabled: true
+    pricing_mode: auto
+
+  - id: catalyst_quality_play
+    name: "Turbulent Catalyst quality play on ring/amulet base"
+    inputs:
+      - {category: Currency, key: "Turbulent Catalyst", qty: 10.0}
+      - {category: Currency, key: "Chaos Orb", qty: 5.0}
+    output: {category: UniqueAccessory, key: "Ventor's Gamble"}
+    applicability: "Catalyst quality adds value; approximated via ninja feeds"
+    friction: 2.0
+    enabled: true
+    pricing_mode: auto
+
+  # --- Flagship shaper-shield case: verify-mode (base-type feed variance-sensitive). ---
+  - id: shaper_shield_base_influence
+    name: "Shaper Titanium Spirit Shield: plain base + Shaper's Orb"
+    inputs:
+      - {category: BaseType, key: "Titanium Spirit Shield", qty: 1.0, ilvl: 84}
+      - {category: Currency, key: "Shaper's Orb", qty: 1.0}
+    output:
+      {category: BaseType, key: "Titanium Spirit Shield", qty: 1.0,
+       influence: shaper, ilvl: 84}
+    applicability: >
+      Flagship deterministic transform (PRD s2). Output is a specific
+      influenced base; ninja base-type category feeds mask within-category
+      ilvl/roll variance, so priced via ListingResolver (verify).
+    friction: 0.0
+    enabled: true
+    pricing_mode: verify
+
+  # --- Patch-mechanic-dependent: ships DISABLED until validated against the patch. ---
+  - id: six_link_bench
+    name: "6-link via bench (socket/link mechanic dependent)"
+    inputs:
+      - {category: Currency, key: "Orb of Fusing", qty: 150.0}
+    output: {category: UniqueArmour, key: "Tabula Rasa"}
+    applicability: "Socket/link crafting; validity depends on current patch mechanics"
+    enabled: false
+    patch_validity: >
+      DISABLED: link/socket odds and bench costs are patch-specific; re-validate
+      against current patch notes before enabling (see docs/patch-day.md).
+    pricing_mode: auto
