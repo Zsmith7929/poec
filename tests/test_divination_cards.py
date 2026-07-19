@@ -44,6 +44,14 @@ def test_parser_classifies_noncurrency_nonunique_as_other() -> None:
     assert cards["A Chilling Wind"].reward_kind == "other"
 
 
+def test_parser_captures_reward_variant_prefix() -> None:
+    # poedb trails the reward with a "{Foulborn}" variant tag; poe.ninja prefixes it.
+    # Dropping it prices the clean item instead of the actual (variant) reward.
+    cards = {c.name: c for c in parse_divination_cards_html(FIX.read_text())}
+    eot = cards["The Eye of Terror"]
+    assert eot.reward_name == "Foulborn Mageblood" and eot.reward_kind == "unique"
+
+
 # --- loader -----------------------------------------------------------------
 
 

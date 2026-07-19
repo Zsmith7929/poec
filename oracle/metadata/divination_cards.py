@@ -42,6 +42,8 @@ _CARD_RE = re.compile(
 _SPAN_RE = re.compile(r"<span class=\"([a-z]+)\"[^>]*>([^<]+)</span>", re.I)
 _TAG_RE = re.compile(r"<[^>]+>")
 _QTY_RE = re.compile(r"(\d+)\s*x", re.I)
+# Reward variant qualifier, e.g. "{Foulborn}" trailing the item span.
+_VARIANT_RE = re.compile(r"\{([A-Za-z][A-Za-z '-]*)\}")
 
 
 def _slug(name: str) -> str:
@@ -62,6 +64,11 @@ def parse_divination_cards_html(html: str) -> list[DivCard]:
             continue  # reward not a single named item (skip; recorded as unparseable)
         kind = _KIND_BY_SPAN.get(span.group(1).lower(), "other")
         reward_name = span.group(2).strip()
+        # A variant qualifier like "{Foulborn}" trails the item span; poe.ninja renders
+        # it as a prefix ("Foulborn Mageblood"). Capture it so we price the actual reward.
+        variant = _VARIANT_RE.search(reward_inner)
+        if variant:
+            reward_name = f"{variant.group(1).strip()} {reward_name}"
         # The "Nx" quantity may be inline in the span text ("13x Orb of Alteration") or
         # in the text preceding the span ("10x <span>Chaos Orb</span>"). Inline is the
         # common real-page shape; check it first, else fall back to the preceding text.

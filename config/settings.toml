@@ -7,7 +7,7 @@ user_agent = "oracle/0.0.0 (personal crafting tool; contact: smith7929@gmail.com
 percentile = 0.15          # sell/output percentile (low end = conservative)
 outlier_z = 3.0            # reject samples beyond this many MAD-scaled deviations
 min_sample_depth = 5       # below this, confidence is heavily penalized
-buy_percentile = 0.85      # buy/input percentile (high end = conservative); ADR-0007
+buy_percentile = 0.15      # = percentile: single sold-proxy price, no buy/sell bracket (ADR-0008)
 
 [cache]
 ninja_ttl_seconds = 900    # ~15 min

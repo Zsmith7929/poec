@@ -14,6 +14,28 @@ class _Resolver(Protocol):
     def resolve_verify(self, ref: PriceRef, league: str) -> ResolvedPrice: ...
 
 
+# Price surfaces (ADR-0008): stash prices are ask/listing-based, exchange prices are
+# transacted. A margin that compares one against the other runs optimistic.
+_STASH_SURFACE = frozenset(
+    {
+        "BaseType",
+        "UniqueWeapon",
+        "UniqueArmour",
+        "UniqueAccessory",
+        "UniqueJewel",
+        "UniqueFlask",
+        "UniqueMap",
+        "SkillGem",
+        "ImbuedGem",
+        "RewardUnique",
+    }
+)
+
+
+def _surface(category: str) -> str:
+    return "stash" if category in _STASH_SURFACE else "exchange"
+
+
 def _default_clock() -> datetime:
     return datetime.now(tz=UTC)
 
@@ -68,12 +90,13 @@ class ScanEngine:
         else:
             margin = output_value - input_cost - t.friction
             margin_pct = margin / input_cost if input_cost > 0 else None
-            # A margin thinner than our pricing noise floor isn't trustworthy on its own.
-            if (
-                not is_verify
-                and margin_pct is not None
-                and margin_pct < self._settings.min_margin_pct
-            ):
+            # A margin is untrustworthy if it's within pricing noise (below the floor) OR
+            # it compares a stash (ask) price against an exchange (transacted) price
+            # across legs — that cross-surface spread runs optimistic (ADR-0007/0008).
+            input_surfaces = {_surface(ref.category) for ref in t.inputs}
+            cross_surface = _surface(t.output.category) not in input_surfaces
+            below_floor = margin_pct is not None and margin_pct < self._settings.min_margin_pct
+            if not is_verify and (below_floor or cross_surface):
                 margin_confidence = "thin"
 
         return ScanRow(

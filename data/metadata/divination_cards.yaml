@@ -3,7 +3,7 @@
 source:
   url: https://poedb.tw/us/Divination_Cards
   fetched_at: '2026-07-19'
-  page_sha256: 8c3fbd9e82cc4a4e8b8fbd33900c575e8c85fb002565e3b9eb54b0372151ea8a
+  page_sha256: f138622073e89d129abac7e6f44685705bccab13f91d19efa1eac69bab55464e
 cards:
 - name: A Chilling Wind
   set_size: 4
@@ -697,7 +697,7 @@ cards:
   reward_kind: other
 - name: Matryoshka
   set_size: 8
-  reward_name: 'Item Level:'
+  reward_name: 'Onyx Amulet Item Level:'
   reward_qty: 1.0
   reward_kind: other
 - name: Mawr Blaidd
@@ -1272,7 +1272,7 @@ cards:
   reward_kind: other
 - name: The Eye of Terror
   set_size: 8
-  reward_name: Mageblood
+  reward_name: Foulborn Mageblood
   reward_qty: 1.0
   reward_kind: unique
 - name: The Eye of the Dragon
