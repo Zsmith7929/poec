@@ -2,7 +2,7 @@ from datetime import UTC, datetime
 
 from oracle.models import ItemSpec, ListingQuote, Price
 from oracle.scanner.models import PriceRef
-from oracle.scanner.resolve import PriceResolver, ResolvedPrice  # noqa: F401
+from oracle.scanner.resolve import PriceResolver, ResolvedPrice
 
 
 class FakePriceService:
@@ -81,6 +81,7 @@ def test_resolve_auto_looks_up_key_and_scales_by_qty() -> None:
     svc = FakePriceService()
     r = _resolver(svc, _quote(None, "unresolved"))
     res = r.resolve_auto(PriceRef(category="Currency", key="Divine Orb", qty=2.0), "L")
+    assert isinstance(res, ResolvedPrice)
     assert res.chaos_value == 360.0
     assert res.liquidity == 300
     assert res.confidence == 0.95
