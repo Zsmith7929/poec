@@ -28,7 +28,7 @@ class StubResolver:
         return self._lookup(ref)
 
 
-def _p(value):  # type: ignore[no-untyped-def]
+def _p(value: float | None) -> ResolvedPrice:
     return ResolvedPrice(value, 50.0, 0.8, "ninja:x", None)
 
 
@@ -100,5 +100,8 @@ def test_all_unresolved_outcomes_is_fail_visible() -> None:
     plan = eng.plan(_table(), "TestLeagueA", attempts=10, rng=random.Random(1), trials=100)
     assert plan.unresolved_outcomes == 2
     assert (
-        plan.expected_total_profit == -plan.total_input_spend or plan.expected_total_profit == 0.0
+        plan.expected_total_profit == -plan.total_input_spend
     )  # no resolvable upside; loss surfaced
+    assert plan.p10 == -plan.total_input_spend  # every trial is the same total loss
+    assert plan.p50 == -plan.total_input_spend
+    assert plan.p90 == -plan.total_input_spend
