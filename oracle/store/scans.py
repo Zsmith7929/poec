@@ -11,8 +11,8 @@ class ScanResultRepo:
         self._conn.executemany(
             "INSERT INTO scan_results "
             "(league, ts, rule_version, transform_id, name, input_cost, output_value, "
-            "margin, margin_pct, liquidity, confidence, pricing_mode, source) "
-            "VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)",
+            "margin, margin_pct, liquidity, confidence, pricing_mode, source, deep_link) "
+            "VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
             [
                 (
                     league,
@@ -28,6 +28,7 @@ class ScanResultRepo:
                     r.confidence,
                     r.pricing_mode,
                     r.source,
+                    r.deep_link,
                 )
                 for r in rows
             ],

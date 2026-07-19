@@ -47,7 +47,8 @@ MIGRATIONS: list[str] = [
         liquidity REAL NOT NULL,
         confidence REAL NOT NULL,
         pricing_mode TEXT NOT NULL,
-        source TEXT NOT NULL
+        source TEXT NOT NULL,
+        deep_link TEXT
     )
     """,
     """

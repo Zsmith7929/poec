@@ -5,7 +5,7 @@ from oracle.store.db import connect
 from oracle.store.scans import ScanResultRepo
 
 
-def _row(tid: str, margin: float | None) -> ScanRow:
+def _row(tid: str, margin: float | None, deep_link: str | None = None) -> ScanRow:
     return ScanRow(
         transform_id=tid,
         name=tid,
@@ -16,7 +16,7 @@ def _row(tid: str, margin: float | None) -> ScanRow:
         liquidity=50.0,
         confidence=0.8,
         pricing_mode="auto",
-        deep_link=None,
+        deep_link=deep_link,
         source="ninja:x",
         ts=datetime.now(tz=UTC),
     )
@@ -29,12 +29,27 @@ def test_scan_results_table_exists(tmp_path) -> None:
 
 
 def test_insert_and_recent_round_trip(tmp_path) -> None:
+    verify_url = "https://www.pathofexile.com/trade/search/Settlers/abc123"
     repo = ScanResultRepo(connect(str(tmp_path / "t.db")))
-    repo.insert_many("L", "sha256:abc", [_row("a", 30.0), _row("b", None)])
+    repo.insert_many(
+        "L",
+        "sha256:abc",
+        [
+            _row("a", 30.0, deep_link=verify_url),
+            _row("b", None),
+        ],
+    )
     recent = repo.recent("L")
     assert len(recent) == 2
     assert {r["transform_id"] for r in recent} == {"a", "b"}
     assert all(r["rule_version"] == "sha256:abc" for r in recent)
+
+    by_tid = {r["transform_id"]: r for r in recent}
+    # verify-mode row: deep_link round-trips correctly
+    assert by_tid["a"]["deep_link"] == verify_url
+    # no-margin row: deep_link is None and margin is None
+    assert by_tid["b"]["deep_link"] is None
+    assert by_tid["b"]["margin"] is None
 
 
 def test_append_only_accumulates(tmp_path) -> None:
