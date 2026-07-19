@@ -88,7 +88,7 @@ class EvEngine:
             confidence *= (total - unresolved) / total
 
         attempt_cost = input_cost + table.service_cost
-        outcome_pairs = [(p, v) for p, v in resolved_prices]
+        outcome_pairs = list(resolved_prices)
         net_dist = bankroll_math.net_profit_distribution(outcome_pairs, attempt_cost)
         single_loss = bankroll_math.prob_single_attempt_loss(net_dist)
         note = bankroll_math.bankroll_note(attempt_cost, single_loss, bankroll)

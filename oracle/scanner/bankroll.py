@@ -1,4 +1,5 @@
 import math
+import sys
 from collections import defaultdict
 
 _EPS = 1e-6
@@ -6,7 +7,7 @@ _EPS = 1e-6
 
 def attempts_affordable(bankroll: float, attempt_cost: float) -> int:
     if attempt_cost <= 0.0:
-        return 0
+        return sys.maxsize
     return math.floor(bankroll / attempt_cost)
 
 
@@ -49,6 +50,12 @@ def bankroll_note(
 ) -> str:
     if bankroll is None:
         return ""
+    if attempt_cost <= 0.0:
+        return (
+            f"bankroll {bankroll:.0f}c — free/near-zero attempt cost"
+            f" — effectively unlimited attempts;"
+            f" P(loss per attempt)={single_loss_prob:.2f}"
+        )
     n = attempts_affordable(bankroll, attempt_cost)
     return (
         f"bankroll {bankroll:.0f}c affords {n} attempts at {attempt_cost:.2f}c each; "
