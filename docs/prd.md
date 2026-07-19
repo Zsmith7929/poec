@@ -4,6 +4,12 @@ Version 0.3, 2026-07-18. Author: Zac (with Claude). Status: locked for agent dec
 
 Changes from v0.2: corrected a wrong assumption about GGG API access. The trade *search* endpoints (`/api/trade/*`) are internal website APIs, not part of the documented developer API, and are off-limits regardless of OAuth status; OAuth registration itself is discretionary email-based, low priority, and slow. Consequences: (1) poe.ninja is now the *primary* pricing mode, not a degraded mode; (2) specific-listing resolution goes through a pluggable `ListingResolver` interface whose shipped v1 backend is compliant trade-site deep-links with human-in-the-loop verification; (3) session-cookie and public-stash-river backends are documented as future options with explicit preconditions, not built; (4) Pre-0 rewritten accordingly. All v0.2 league-agnostic principles carry forward unchanged.
 
+> **Decision log:** Significant decisions made after v0.3 (with their reasoning) are
+> recorded as ADRs in [`docs/adr/`](adr/README.md). Where an ADR supersedes a claim
+> below, the spot carries an inline `> **Amended (ADR-NNNN)**` pointer. Notably,
+> ADR-0001 reverses the poedb data-source constraint in §8, and ADR-0003/0004 revise
+> how §9 Phase 1 transforms are grounded and surfaced.
+
 ## 1. Summary
 
 A personal-use system for Path of Exile 1 that answers one question from two directions:
@@ -21,6 +27,13 @@ An LLM sits at the boundary only: translating user intent into structured target
 
 - Crafting mechanics are fully public (mod weights on poedb, game data via RePoE) and per-strategy cost calculators exist (Craft of Exile). What does not exist: strategy *selection* ("which method is cheapest for this item right now") and systematic *inefficiency detection* (production cost vs market price gaps).
 - Proof of concept from a prior league: shaper-influenced shields listed ~30c above (non-influenced base + shaper orb). A purely deterministic transform, found by accident, farmed profitably for weeks. The scanner automates finding these. Notably, this flagship case prices entirely from poe.ninja's base-type feeds (influence and ilvl variants): it requires no trade search at all.
+
+  > **Amended (ADR-0004):** "purely deterministic" is not quite right. An influence
+  > orb rolls a *random* influence mod, and poe.ninja's influenced-base price is a
+  > selection-biased aggregate (junk rolls get rerolled away), so the naive margin can
+  > be a mirage. The class stays in scope: the scanner *surfaces* the gap as a
+  > candidate for the human to judge ("is this a real edge or just everyone
+  > rerolling?"), rather than claiming an exact profit.
 - Practical crafting collapses to a bounded set of strategy archetypes (~30-50 community-known patterns). Strategy search over templates is tractable; a general crafting MDP solver is out of scope.
 - Business note, not a build gate: scanner margins are richest early in a fresh league, and crafting-for-profit is economically thin in a very young economy. These facts inform *when the tool pays best*, never when it can be built, tested, or run.
 
@@ -129,10 +142,10 @@ class ListingResolver(Protocol):
 |---|---|---|---|
 | GGG league API | Enumerate live leagues for the League Service | Public documented endpoint | Honor rate-limit headers; cross-check against poe.ninja coverage before offering a league |
 | RePoE (repoe-fork) | mods.json (weights, tags, spawn rules), base_items.json, essences.json, mod_types.json, crafting_bench_options.json | Static JSON from gh-pages; vendor a snapshot per patch | Re-snapshot each patch; validate schema on load |
-| poe.ninja economy API | Currency, fragment, essence, fossil, oil, unique, base-type (incl. influence/ilvl variants), gem price feeds, per league | Public JSON endpoints; **primary pricing source** | ~15-min refresh; unversioned, no SLA; schema drift monitoring; economy endpoints only |
+| poe.ninja economy API | **Prices only** — currency, fragment, essence, fossil, oil, unique, base-type (incl. influence/ilvl variants), gem price feeds, per league. Never attests that a recipe exists (ADR-0002). | Public JSON endpoints; **primary pricing source** | ~15-min refresh; unversioned, no SLA; schema drift monitoring; economy endpoints only |
 | Official trade website | Specific-listing price checks via DeepLinkResolver | Human clicks constructed URLs in a browser | No programmatic calls to `/api/trade/*`; the tool constructs URLs and records human-observed prices only |
 | GGG Currency Exchange API | Optional future enrichment for currency pairs | Documented, OAuth-gated | Only if/after discretionary OAuth registration is granted; not a v1 dependency |
-| poedb | Human-readable cross-reference for mod data | Reference only in v1 | Do not scrape programmatically |
+| **poedb** | **Canonical source of truth for all PoE metadata** (recipes, card set-size + reward, vendor recipes, item mechanics, mod cross-reference) — the *recipe/facts* side, distinct from poe.ninja's *price* side (ADR-0001, ADR-0002). | One-time, cited extraction into a vendored local metadata table (prefer `json.php`; targeted page parse only where JSON doesn't cover it) | Dev-time vendoring like the RePoE snapshot; **not** a runtime call. Refresh on patch day, versioned + cited. Supersedes the prior v1 "do not scrape" constraint. |
 | PoB export codes | User's build context (advisor phase) | User-pasted string; parse XML | Stats extraction only |
 
 ## 9. Phases
@@ -171,6 +184,13 @@ There is no OAuth flow, no credentials handling, and no trade-API client anywher
 
 **Deliverables**
 - Transform registry: `data/transforms_t1.yaml`. Each entry: id, human name, inputs (item/currency refs), output spec, applicability conditions, friction estimate, enabled flag, patch-validity note, and a *pricing mode* derived from its specs: `auto` (all sides ninja-priceable) or `verify` (a side requires ListingResolver). Seed with ~20 transforms biased toward `auto`: influence orbs on popular bases (ninja base-type feeds), essence single-mod finishes, catalyst quality plays, fractured-base + bench combos, unique-targeted transforms. Patch-mechanic-dependent transforms (e.g. anything socket/link related) ship disabled until validated against the current patch.
+
+  > **Amended (ADR-0003):** the as-built seed was authored from model recollection and
+  > contained fabricated recipes (e.g. "20 Chaos → Awakener's Orb"). Every transform
+  > must instead be *grounded* — either self-evidencing from feed structure (influence
+  > flips) or backed by a cited poedb metadata row (div-card→reward, vendor recipes).
+  > The fabricated seed is deleted and rebuilt from grounded classes; each entry should
+  > declare its grounding so an ungrounded one can't be added silently.
 - Scan engine: for each enabled transform, resolve input bundle cost and output market price via Price Service for the selected league; compute margin and margin %; attach liquidity score and confidence (staleness, sample depth, maturity signals). `verify`-mode transforms rank provisionally using best-available category proxies and carry the generated deep-link.
 - Report output: ranked table to terminal + markdown per run (`reports/<league>/YYYY-MM-DD-HHMM.md`); JSON for downstream use. Auto-priced and verify-required rows visually distinct. Per-opportunity detail: exact inputs, where to buy them, expected margin after friction, liquidity, confidence, deep-link where applicable.
 - Scheduling: cron/systemd-timer, league-parameterized; each run persists results for margin-decay analysis.

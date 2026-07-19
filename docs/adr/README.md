@@ -1,0 +1,13 @@
+# Architecture Decision Records
+
+Append-only log of significant decisions, with the context and reasoning that
+produced them. ADRs capture *why*; the PRD (`docs/prd.md`) captures *what*. When
+an ADR supersedes a PRD claim, the PRD carries an inline `> **Amended (ADR-NNNN)**`
+pointer at that spot.
+
+| # | Title | Status | Date |
+|---|---|---|---|
+| [0001](0001-poedb-canonical-metadata-source.md) | poedb is the canonical source of truth for PoE metadata | Accepted | 2026-07-19 |
+| [0002](0002-separate-price-and-metadata-concerns.md) | Prices and recipe/metadata are separate concerns | Accepted | 2026-07-19 |
+| [0003](0003-transforms-must-be-grounded.md) | Transforms must be grounded, never fabricated | Accepted | 2026-07-19 |
+| [0004](0004-scanner-surfaces-candidates.md) | The scanner surfaces candidates for human judgment, not exact EV | Accepted | 2026-07-19 |
